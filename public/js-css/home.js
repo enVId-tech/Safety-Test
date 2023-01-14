@@ -20,49 +20,30 @@ window.onclick = function(event) {
 }
 
 
-//Save Username in main index.html
 function saveUser() {
-
-    let usernameinput = document.getElementById("Username").value;
-
-    //Returns error if box is empty
-    if (usernameinput == "") {
-        document.getElementById("MainHeadingBox").innerHTML = "Please enter a valid username";
-        setTimeout(function() {
-            document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
-        }, 3000);
-        //Checks if the username contains a space
-    } else if (usernameinput.includes(" ") == false) {
-        document.getElementById("MainHeadingBox").innerHTML = "You must input both your first and last names in the box";
-        setTimeout(function() {
-            document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
-        }, 3000);
-        //Checks the limit of a username
-    } else if (usernameinput.split(" ")[1].length > 20 || usernameinput.split(" ")[2] > 25) {
-        document.getElementById("MainHeadingBox").innerHTML = "Your first or last name is too long. Try again.";
-        setTimeout(function() {
-            document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
-        }, 3000);
-        //If the username is less than a regular name
-    } else if (usernameinput.split(" ")[1].length < 2 || usernameinput.split(" ")[2] < 2) {
-        document.getElementById("MainHeadingBox").innerHTML = "Your first or last name is too short. Try again.";
-        setTimeout(function() {
-            document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
-        }, 3000);
-    } else if (usernameinput.split(" ")[3] != undefined) {
-        document.getElementById("MainHeadingBox").innerHTML = "You can only have a first and last name. Try again.";
-        setTimeout(function() {
-            document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
-        }, 3000);
-        //If the username is valid
+    const usernameinput = document.getElementById("Username").value;
+    if (!usernameinput) {
+      showError("Please enter a valid username");
+    } else if (!usernameinput.includes(" ")) {
+      showError("You must input both your first and last names in the box");
+    } else if (usernameinput.split(" ")[0].length > 20 || usernameinput.split(" ")[1].length > 25) {
+      showError("Your first or last name is too long. Try again.");
+    } else if (usernameinput.split(" ")[0].length < 2 || usernameinput.split(" ")[1].length < 2) {
+      showError("Your first or last name is too short. Try again.");
+    } else if (usernameinput.split(" ")[2] != undefined) {
+      showError("You can only have a first and last name. Try again.");
     } else {
-        //Saves user in local storage for test firebase
-        username = document.getElementById("Username").value;
-        localStorage.setItem("username", username);
-
-        window.location = "test.html";
+      localStorage.setItem("username", usernameinput);
+      window.location = "test.html";
     }
-}
+  }
+  
+  function showError(message) {
+    document.getElementById("MainHeadingBox").innerHTML = message;
+    setTimeout(() => {
+      document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
+    }, 3000);
+  }
 
 //Fetching data from server function
 async function getContents() {
