@@ -21,7 +21,7 @@ app.use(express.static('public'));
 app.use(express.json({ limit: '5mb' }));
 
 let settingsOut;
-let folderSplit = "\r\n" || "\n";
+let folderSplit = "\n";
 let tempURL;
 
 //POST Request for settings

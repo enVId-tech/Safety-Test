@@ -3,7 +3,7 @@ This is a repository for an updated version of the OA Robotics Safety Test avail
 
 FULLY LICENSED UNDER THE MIT LICENSE - SEE LICENSE FILE FOR DETAILS - Erick Tran 2023
 
----MAJOR UPDATE 11.6-- 
+---MINOR UPDATE 11.61-- 
 
 Hosted on domain "oasafety.personalweb.systems"
 
@@ -15,7 +15,7 @@ Hi all, Lil Gamer Playz (Erick) here. If you are seeing this, this is a reposito
 
 This is a really complex project I had to work on and spend a lot of man-hours working on, so please don't distribute this unless it is to remake the test
 
-With over 180 releases/patches, this is the most complex project I've worked on so far (in HTML). Hope you enjoy!
+With over 190 releases/patches, this is the most complex project I've worked on so far (in HTML). Hope you enjoy!
 
 Realistically, I don't have more to say other than that, but a Q&A will be available below.
 
