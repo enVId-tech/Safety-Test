@@ -284,6 +284,8 @@ async function GeneralSettings() {
         } else {
             document.getElementById("TitleBar").innerHTML = "OA Robotics: " + possibleSettings[10] + " Test";
         }
+
+        
         document.getElementById("TopName").innerHTML = "Robotics " + possibleSettings[10] + " Test";
         document.getElementById("myRange").max = possibleSettings[2] - 1;
 
@@ -307,6 +309,7 @@ async function GeneralSettings() {
                 case agent.indexOf("safari") > -1:
                     return "Safari";
                 default:
+                    alert("Your browser may not function properly with this test. Please use a different browser for a better experience.")
                     return "other";
             }
         })

@@ -21,23 +21,28 @@ app.use(express.static('public'));
 app.use(express.json({ limit: '5mb' }));
 
 let settingsOut;
-let folderSplit = "\n";
+let folderSplit = "\r\n" || "\n";
+let tempURL;
 
+//POST Request for settings
 app.post("/settings", async (request, response) => {
     try {
         const url = JSON.stringify(request.body);
 
-        let tempURL = url.split(",")[0].split(":")[1].split('"')[1];
+        tempURL = url.split(",")[0].split(":")[1].split('"')[1];
 
+        //Reading the settings file
         fs.readFile('public' + tempURL + '/settings.yml', "utf8", (err, data) => {
             if (err) {
                 console.log(err);
                 return;
             }
 
+            //Splitting the settings into an array
             const settings = data.split(folderSplit);
             const settingsMain = settings.map(setting => setting.split(": ")[1]);
 
+            //Set the settings to the global variable
             settingsOut = settingsMain;
             response.send(settingsMain);
         });
@@ -46,6 +51,7 @@ app.post("/settings", async (request, response) => {
     }
 });
 
+//Response from await function in client
 app.get("/settings", async (request, response) => {
     try {
         response.send(settingsOut);
@@ -83,6 +89,8 @@ app.get("/folderdata", async (request, response) => {
                         resolve(subFiles);
                     });
                 });
+
+                //Checks for the files in the folder
                 let setinclude = false;
                 let txtinclude = false;
                 let htmlinclude = false;
@@ -103,15 +111,21 @@ app.get("/folderdata", async (request, response) => {
                 }
 
                 console.log("setinclude: " + setinclude + " txtinclude: " + txtinclude + " htmlinclude: " + htmlinclude)
+
+                //If the folder has all the files, add it to the array
                 if (setinclude == true && txtinclude == true && htmlinclude == true) {
+                    //If the folder is not hidden, add it to the array
                     if (!file.includes("#", 0) || !fs.readFileSync(filePath + "/" + subFiles[0], "utf8").split(folderSplit)[7].split(": ")[1] == "false") {
                         folderData.push(file);
+                        //If the folder is the safety test, remove it from the array
                         if (folderData.includes("Safety-Test")) {
                             folderData.splice(folderData.indexOf("Safety-Test"), 1);
                         }
+                    //If the folder is hidden, log it to the console
                     } else if (file.includes("#", 0)) {
                         console.log("Folder " + file + " is a hidden folder and will not be shown. If this is in error, please remove the # from the start of the folder name.");
                     }
+                //If the folder is missing a file, log it to the console
                 } else if (setinclude == false || txtinclude == false || htmlinclude == false) {
                     if (typeoftxt == undefined) {
                     } else {
@@ -125,7 +139,6 @@ app.get("/folderdata", async (request, response) => {
             folderData.splice(folderData.indexOf("Safety-Test"), 1);
         }
         //Send the folder data to the client
-        //console.log(folderData);
         response.send(folderData);
 
     } catch (err) {
@@ -133,98 +146,62 @@ app.get("/folderdata", async (request, response) => {
     }
 });
 
-
+//POST Request for questions
 app.post("/questions", async (request, response) => {
-    //console.log("Questions requested: " + request.body);
     try {
+        //Getting the questions from the file
+        const questions = await fs.promises.readFile("public" + tempURL + "/" + settingsOut[6], "utf8");
 
-        const tempURL = JSON.stringify(request.body);
-        //console.log(tempURL);
+        //Splitting the questions
+        const questionList = questions.split(":").slice(1);
 
-        const url = tempURL.split(",")[0].split(":")[1].split('"')[1];
+        //Data to be sent to the client
+        const data = { PossibleQuestions: [] };
 
+        for (let i = 0; i < questionList.length; i++) {
 
-        let datajson = {};
-        datajson.PossibleQuestions = [];
+            //Splitting the question and answers
+            const [question, ...answers] = questionList[i].split(folderSplit);
+            //If the question has a # at the start, skip it
+            if (question.startsWith("#")) {
+                continue;
+            }
+            const questionData = {
+                id: `Q${i + 1}`,
+                Question: question,
+                Answers: []
+            };
 
-        //console.log("public" + url + "/" + settingsOut[6]);
-        fs.readFile("public" + url + "/" + settingsOut[6], "utf8", async (err, data2) => {
-            //console.log(data2);
-
-            const tempQuestions = data2.toString();
-            //If there is a toString error, there is mostly an issue with the file path or the async function
-
-            //For loop for sending each question to the variable
-            for (let i = 0; i < tempQuestions.split("Question ").length - 1; i++) {
-                let data1 = {
-                    "id": "Q" + (i + 1),
-                    "Question": tempQuestions.split("Question ")[i + 1].split(folderSplit)[0].split(": ")[1],
-                    "Answers": []
+            for (let j = 0; j < answers.length; j++) {
+                if (answers[j].startsWith("#")) {
+                    continue;
                 }
-                //console.log(datajson.PossibleQuestions);
+                
+                //If the answer has a + at the start, it is correct
+                const isCorrect = /\+/.test(answers[j]) ? true : false;
 
-                //if (tempQuestions.split("Question ")[i + 1].split(folderSplit)[0].includes("#")) {
-                //data1.Question = undefined;
-                //console.log("Question " + (i + 1) + " is a hidden question and will not be shown");
-                //} else if (!tempQuestions.split("Question ")[i + 1].split(folderSplit)[0].includes("#")){
-                //Send data to the variable
-                datajson.PossibleQuestions.push(data1);
-
-
-                let Answers = tempQuestions.split("Question ")[i + 1].split(": ")[1].split(folderSplit);
-                Answers.shift();
-                //console.log(Answers);
-                let AnswersData = [];
-
-
-                let removeAmount = 0;
-                if (Answers[Answers.length - 1] == "") {
-                    Answers.pop();
-                    removeAmount++;
+                //Answers variables
+                const answer = answers[j].split(/[+-]/)[1];
+                
+                //If the answer is empty, skip it
+                if (answer === "" || answer === "undefined" || answer === undefined || answer === null) {
+                    continue;
                 }
 
-                for (let j = 0; j < Answers.length - removeAmount; j++) {
-                    let bool = false;
-                    if (Answers[j].includes("+")) {
-                        bool = true;
-                        Answers[j] = Answers[j].split("+")[1];
-                    } else if (Answers[j].includes("-")) {
-                        bool = false;
-                        Answers[j] = Answers[j].split("-")[1];
-                    }
-
-                    AnswersData.push({
-                        "id": "Q" + (i + 1) + "_a" + (j + 1),
-                        "Answer": Answers[j],
-                        "IsCorrect": bool
-                    });
-
-                    //console.log(data1.Answers + " --data1.answers");
-                }
-                //console.log(JSON.stringify(AnswersData) + " --AnswersData");
-                data1.Answers = AnswersData;
-                //console.log(JSON.stringify(data1) + " --data1.answers");
-                //} else {
-
-                //}
-                if (response.statusCode == 200) {
-                    //console.log("Questions sent to client");
-                } else {
-                    console.log(err)
-                }
+                //Push the answer to the question
+                questionData.Answers.push({
+                    id: `Q${i + 1}_a${j + 1}`,
+                    Answer: answer,
+                    IsCorrect: isCorrect
+                });
             }
 
-            //for (let i=0; i<Answers.length; i++) {
-
-            //}
-            //console.log(JSON.stringify(datajson) + " --datajson");
-
-            //console.log(datajson)
-            response.send(JSON.stringify(datajson));
-        });
-
+            data.PossibleQuestions.push(questionData);
+        }
+        response.send(JSON.stringify(data));
     } catch (err) {
         console.log(err);
+        response.status(500).send("Error occured while processing the data");
     }
 });
 
@@ -295,14 +272,7 @@ app.post("/api", async (request, response1) => {
             }
         });
 
-        //Checks the current status of the server and sends a success/fail response
         response1.send({ status: response.status });
-        /*
-        if (response1.status === 200) {
-            
-        } else {
-            return response1.status(500).send("Error writing to sheet");
-        }*/
 
     } catch (error) {
         console.log(error, "There was an error updating the spreadsheet", error.message);
