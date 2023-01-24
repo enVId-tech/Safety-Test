@@ -285,7 +285,7 @@ async function GeneralSettings() {
             document.getElementById("TitleBar").innerHTML = "OA Robotics: " + possibleSettings[10] + " Test";
         }
 
-        
+
         document.getElementById("TopName").innerHTML = "Robotics " + possibleSettings[10] + " Test";
         document.getElementById("myRange").max = possibleSettings[2] - 1;
 
@@ -329,6 +329,7 @@ async function PassValues() {
     let TeamLocal = localStorage.getItem("Team");
     let CategoryLocal = localStorage.getItem("Category");
     let TypeofTestLocal = localStorage.getItem("Test") + " Test";
+    let AbbreviatedLocal = localStorage.getItem("Abbreviated");
 
     //Checks if some of the values are null
     if (localStorage.getItem("username") == null) {
@@ -348,7 +349,8 @@ async function PassValues() {
         "Category": CategoryLocal,
         "Pass": Pass,
         "Score": Score,
-        "Type": TypeofTestLocal
+        "Type": TypeofTestLocal,
+        "Abbreviated": AbbreviatedLocal
     };
 
 

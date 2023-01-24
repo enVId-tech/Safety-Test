@@ -3,10 +3,9 @@ This is a repository for an updated version of the OA Robotics Safety Test avail
 
 FULLY LICENSED UNDER THE MIT LICENSE - SEE LICENSE FILE FOR DETAILS - Erick Tran 2023
 
----MINOR UPDATE 11.61-- 
+--MINOR UPDATE 11.62-- 
 
-Hosted on domain "oasafety.personalweb.systems"
-
+Hosted on ("safetytest.frc4079.org")
 
 Required: NodeJS (https://nodejs.org/en/download/)
 
@@ -41,7 +40,7 @@ make different types of safety tests compared to the standard ones found at the 
         
 A: It started as a fun project. I was bored one day so I couldn't help myself not to do something productive, as well as to advance my HTML skills.
 It was only when I showed it to the rest of cabinet and the leads that I thought that this might have been a real thing that we could have done.
-I believe, so far on the day that I am making this (1/15/23), this took a cumulative 10 days of time, spread over about 4-5 months. It was mainly because I was bored,
+I believe, so far on the day that I am making this (1/24/23), this took a cumulative 10 days of time, spread over about 4-5 months. It was mainly because I was bored,
 but it did become a real thing that did happen.
 
 

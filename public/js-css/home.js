@@ -23,27 +23,36 @@ window.onclick = function(event) {
 function saveUser() {
     const usernameinput = document.getElementById("Username").value;
     if (!usernameinput) {
-      showError("Please enter a valid username");
+        showError("Please enter a valid username");
     } else if (!usernameinput.includes(" ")) {
-      showError("You must input both your first and last names in the box");
+        showError("You must input both your first and last names in the box");
     } else if (usernameinput.split(" ")[0].length > 20 || usernameinput.split(" ")[1].length > 25) {
-      showError("Your first or last name is too long. Try again.");
+        showError("Your first or last name is too long. Try again.");
     } else if (usernameinput.split(" ")[0].length < 2 || usernameinput.split(" ")[1].length < 2) {
-      showError("Your first or last name is too short. Try again.");
+        showError("Your first or last name is too short. Try again.");
     } else if (usernameinput.split(" ")[2] != undefined) {
-      showError("You can only have a first and last name. Try again.");
+        showError("You can only have a first and last name. Try again.");
+    } else if (usernameinput.split(" ")[0][0] !== usernameinput.split(" ")[0][0].toUpperCase() || usernameinput.split(" ")[1][0] !== usernameinput.split(" ")[1][0].toUpperCase()) {
+        showError("The first letter of your first and last name should be uppercase. Try again.");
     } else {
-      localStorage.setItem("username", usernameinput);
-      window.location = "test.html";
+        let abbreviation = false;
+        if (usernameinput.split(" ")[1][1] === ".") {
+            abbreviation = true;
+        }
+        localStorage.setItem("username", usernameinput);
+        localStorage.setItem("Abbreviated", abbreviation);
+        window.location = "test.html";
     }
-  }
-  
-  function showError(message) {
+
+
+}
+
+function showError(message) {
     document.getElementById("MainHeadingBox").innerHTML = message;
     setTimeout(() => {
-      document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
+        document.getElementById("MainHeadingBox").innerHTML = "Enter First and Last Names in Input Box";
     }, 3000);
-  }
+}
 
 //Fetching data from server function
 async function getContents() {

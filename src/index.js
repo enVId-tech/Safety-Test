@@ -25,7 +25,7 @@ let folderSplit = "\n";
 let tempURL;
 
 //POST Request for settings
-app.post("/settings", async (request, response) => {
+app.post("/settings", async(request, response) => {
     try {
         const url = JSON.stringify(request.body);
 
@@ -52,7 +52,7 @@ app.post("/settings", async (request, response) => {
 });
 
 //Response from await function in client
-app.get("/settings", async (request, response) => {
+app.get("/settings", async(request, response) => {
     try {
         response.send(settingsOut);
     } catch (err) {
@@ -60,7 +60,7 @@ app.get("/settings", async (request, response) => {
     }
 });
 
-app.get("/folderdata", async (request, response) => {
+app.get("/folderdata", async(request, response) => {
     try {
         let folderData = [];
         //The folder path
@@ -121,14 +121,13 @@ app.get("/folderdata", async (request, response) => {
                         if (folderData.includes("Safety-Test")) {
                             folderData.splice(folderData.indexOf("Safety-Test"), 1);
                         }
-                    //If the folder is hidden, log it to the console
+                        //If the folder is hidden, log it to the console
                     } else if (file.includes("#", 0)) {
                         console.log("Folder " + file + " is a hidden folder and will not be shown. If this is in error, please remove the # from the start of the folder name.");
                     }
-                //If the folder is missing a file, log it to the console
+                    //If the folder is missing a file, log it to the console
                 } else if (setinclude == false || txtinclude == false || htmlinclude == false) {
-                    if (typeoftxt == undefined) {
-                    } else {
+                    if (typeoftxt == undefined) {} else {
                         console.log("Folder " + file + " is missing a file and will not be shown. It is missing file(s): " + (setinclude == false ? "settings.yml, " : "") + (txtinclude == false ? "Missing Answers File" + ", " : "") + (htmlinclude == false ? "index.html, " : ""));
                     }
                 }
@@ -147,7 +146,7 @@ app.get("/folderdata", async (request, response) => {
 });
 
 //POST Request for questions
-app.post("/questions", async (request, response) => {
+app.post("/questions", async(request, response) => {
     try {
         //Getting the questions from the file
         const questions = await fs.promises.readFile("public" + tempURL + "/" + settingsOut[6], "utf8");
@@ -176,13 +175,13 @@ app.post("/questions", async (request, response) => {
                 if (answers[j].startsWith("#")) {
                     continue;
                 }
-                
+
                 //If the answer has a + at the start, it is correct
                 const isCorrect = /\+/.test(answers[j]) ? true : false;
 
                 //Answers variables
                 const answer = answers[j].split(/[+-]/)[1];
-                
+
                 //If the answer is empty, skip it
                 if (answer === "" || answer === "undefined" || answer === undefined || answer === null) {
                     continue;
@@ -208,13 +207,13 @@ app.post("/questions", async (request, response) => {
 
 
 //The authentication for the google API
-const authentication = async () => {
+const authentication = async() => {
     //The credentials for the google API
     const auth = new google.auth.GoogleAuth({
-        keyFile: "src/credentials.json",
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
-    //The client for the google API, waiting for the authentication to get the credentials
+            keyFile: "src/credentials.json",
+            scopes: "https://www.googleapis.com/auth/spreadsheets"
+        })
+        //The client for the google API, waiting for the authentication to get the credentials
     const client = await auth.getClient();
     //The google API
     const googleAPI = google.sheets({
@@ -229,7 +228,7 @@ const authentication = async () => {
 const id = "1WyTjyGrxWOyzYaWiOUkYICdnMXZvJJAZgS5P5tUd6dk";
 
 //The function that will be called to add the data to the google sheet
-app.get("/api", async (request, res1) => {
+app.get("/api", async(request, res1) => {
     try {
         //Waiting for the authentication to get the credentials
         const { googleAPI } = await authentication();
@@ -249,10 +248,10 @@ app.get("/api", async (request, res1) => {
 
 
 //Sending data to the sheet
-app.post("/api", async (request, response1) => {
+app.post("/api", async(request, response1) => {
     try {
         //destructure 'newName' and 'newValue' from request.body
-        const { Name, Team, Category, Pass, Score, Type } = request.body;
+        const { Name, Team, Category, Pass, Score, Type, Abbreviated } = request.body;
 
         let UnStrTime = new Date();
         let Time = UnStrTime.toLocaleString("en-US", {
@@ -267,7 +266,7 @@ app.post("/api", async (request, response1) => {
             valueInputOption: "USER_ENTERED",
             resource: {
                 values: [
-                    [Name, Team, Category, Pass, Score, Type, Time]
+                    [Name, Team, Category, Pass, Score, Type, Abbreviated, Time]
                 ]
             }
         });
