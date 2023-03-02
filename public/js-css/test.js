@@ -766,7 +766,7 @@ function QuestionCor() {
     //Checks if score is equal to possible settings passing rating and sets the status of passing
     if (Score == possibleSettings[2]) {
         Pass = true;
-        didpass.innerHTML = "You Passed!";
+        didpass.innerHTML = "You Passed!      Date of Test: " + Date();
         scoredivid.appendChild(didpass);
         PassValues();
 
@@ -777,7 +777,7 @@ function QuestionCor() {
         document.getElementById("Submit").remove();
     } else {
         Pass = false;
-        didpass.innerHTML = "You did not pass, please try again.";
+        didpass.innerHTML = "You did not pass, please try again.       Date of Test: " + Date();
         scoredivid.appendChild(didpass);
         PassValues();
     }

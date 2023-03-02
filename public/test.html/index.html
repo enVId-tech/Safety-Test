@@ -12,9 +12,11 @@
 </head>
 
 <body onload="QuestionCreate()">
+    <!--
     <nav class="navbar1">
         <input class="slider" id="myRange" type="range" min="0" value="0" step="0.01" style="width: 99%">
     </nav>
+    -->
     <center id="center">
         <h1 class="header" style="font-family:Arial,Helvetica,sans-serif" id="TitleBar">OA Robotics: Safety Test</h1>
         <br>
@@ -44,26 +46,27 @@
         <div class="end" id="end"></div>
     </center>
     <script>
-        document.getElementById("myRange").onchange = function() {
-            sliderScroll();
-        };
+        /*
+                                        document.getElementById("myRange").onchange = function() {
+                                            sliderScroll();
+                                        };
 
-        //Scrolls to question
-        function sliderScroll() {
-            let SliderValue1 = Math.round(document.getElementById("myRange").value);
-            document.addEventListener("click", handler, true);
+                                        //Scrolls to question
+                                        function sliderScroll() {
+                                            let SliderValue1 = Math.round(document.getElementById("myRange").value);
+                                            document.addEventListener("click", handler, true);
 
-            function handler(e) {
-                e.stopPropagation();
-                e.stopImmediatePropagation();
-                e.preventDefault();
-                setTimeout(function() {
-                    document.removeEventListener("click", handler, true);
-                }, 1000);
-            }
-            location.href = "#Question_" + SliderValue1 + "1";
-        }
-
+                                            function handler(e) {
+                                                e.stopPropagation();
+                                                e.stopImmediatePropagation();
+                                                e.preventDefault();
+                                                setTimeout(function() {
+                                                    document.removeEventListener("click", handler, true);
+                                                }, 1000);
+                                            }
+                                            location.href = "#Question_" + SliderValue1 + "1";
+                                        }
+                                    */
         setTimeout(function() {
             if (document.getElementById("Compendium1").innerHTML == "If you see this text, please wait for the test to load or refresh the page. EC: NoLo") {
                 window.location.reload();
