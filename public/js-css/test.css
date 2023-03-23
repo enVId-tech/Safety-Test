@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: linear-gradient(to left, red, black, rgb(0, 191, 255));
+    background: linear-gradient(to left, rgb(0, 191, 255), black, red);
 }
 /*
 #leftHalf {

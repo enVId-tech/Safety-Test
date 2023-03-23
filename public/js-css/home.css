@@ -8,15 +8,16 @@ html {
 
 body {
     font-family: Arial, Helvetica, sans-serif;
+    background: linear-gradient(to left, rgb(0, 191, 255), black, red);
 }
 
+/*
 #leftHalf {
     background-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url("/items/FRC.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     overflow: visible;
     width: 50%;
-    height: 130vh;
     position: absolute;
     left: 0px;
     top: 0px;
@@ -32,7 +33,6 @@ body {
     background-size: cover;
     overflow: visible;
     width: 50%;
-    height: 130vh;
     position: absolute;
     right: 0px;
     top: 0px;
@@ -41,6 +41,7 @@ body {
     align-items: center;
     z-index: -1;
 }
+*/
 
 .header {
     color: white;
