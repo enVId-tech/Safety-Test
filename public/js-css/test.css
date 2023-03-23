@@ -197,9 +197,6 @@ body {
 }
 
 @media(max-width:719px) {
-    body {
-        background-image: linear-gradient(to right top, #3a4146, #171a1c, #282b2c, #363a39, #434752);
-    }
     #Compendium1 {
         font-size: 30px;
     }

@@ -3,7 +3,7 @@ This is a repository for an updated version of the OA Robotics Safety Test avail
 
 FULLY LICENSED UNDER THE MIT LICENSE - SEE LICENSE FILE FOR DETAILS - Erick Tran 2023
 
---RELEASE 12.00--
+--Minor Update 12.02--
 
 Hosted on ("safetytest.frc4079.org")
 
