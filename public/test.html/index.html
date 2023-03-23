@@ -17,20 +17,22 @@
         <input class="slider" id="myRange" type="range" min="0" value="0" step="0.01" style="width: 99%">
     </nav>
     -->
+
     <center id="center">
         <h1 class="header" style="font-family:Arial,Helvetica,sans-serif" id="TitleBar">OA Robotics: Safety Test</h1>
         <br>
-        <h2 id="Compendium1" class="header" style="font-family:Arial,Helvetica,sans-serif">If you see this text, please wait for the test to load or refresh the page. EC: NoLo</h2>
+        <h2 id="Compendium1" class="header" style="font-family:Arial,Helvetica,sans-serif">If you see this text, please
+            wait for the test to load or refresh the page. EC: NoLo</h2>
         <br>
         <h2 id="NAS" class="header" style="font-family:Arial,Helvetica,sans-serif">Some questions may not have answers
         </h2>
         <img id="logo" src="/items/4079.png">
         <br id="UniqueID1"><br>
         <span id="SafetyLinks"></span>
-        <br><br>
-        <span id="RoboticsSelection"></span>
+        <div id="Questions1" class="container">
 
-        <div id="Questions1">
+            <br><br>
+            <span id="RoboticsSelection"></span>
             <br><br>
         </div>
         <br><br><br><br><br><br><br>
@@ -39,12 +41,19 @@
             <span id="ClearDiv1"></span>
         </div>
         <br><br><br><br><br><br><br>
-        <h1 id="BottomThing">If you have any inquiries about robotics, you can email <a id="Email" href="https://mail.google.com/mail/u/0/" target="_blank">studentcabinet@frc4079.org.</a>
+        <h1 id="BottomThing">If you have any inquiries about robotics, you can email <a id="Email"
+                href="https://mail.google.com/mail/u/0/" target="_blank">student.cabinet@frc4079.org.</a>
         </h1>
         <br><br><br><br><br>
         <div id="scoringdiv" style="background-color: transparent; position:absolute; bottom:1000px;"></div>
         <div class="end" id="end"></div>
     </center>
+
+    <!-- Background -->
+    <div id="leftHalf"></div>
+    <div id="rightHalf"></div>
+
+
     <script>
         /*
                                         document.getElementById("myRange").onchange = function() {
@@ -67,7 +76,7 @@
                                             location.href = "#Question_" + SliderValue1 + "1";
                                         }
                                     */
-        setTimeout(function() {
+        setTimeout(function () {
             if (document.getElementById("Compendium1").innerHTML == "If you see this text, please wait for the test to load or refresh the page. EC: NoLo") {
                 window.location.reload();
             }

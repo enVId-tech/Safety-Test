@@ -3,9 +3,41 @@ html {
 }
 
 body {
-    background-image: linear-gradient(to right top, #3e3e3e, #2b2e30, #151918, #949c9a, #353537);
+    background: linear-gradient(to left, red, black, rgb(0, 191, 255));
+}
+/*
+#leftHalf {
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url("/items/FRC.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: visible;
+    width: 50%;
+    height: 130vh;
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
 }
 
+#rightHalf {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url("/items/FTC.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    overflow: visible;
+    width: 50%;
+    height: 130vh;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: -1;
+}
+*/
 .slider {
     -webkit-appearance: none;
     appearance: none;
@@ -160,6 +192,8 @@ body {
     width: 200px;
     border-radius: 15px;
     border-spacing: 10px;
+    border-style: solid;
+    border-color: white;
 }
 
 @media(max-width:719px) {

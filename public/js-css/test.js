@@ -287,7 +287,7 @@ async function GeneralSettings() {
 
 
         document.getElementById("TopName").innerHTML = "Robotics " + possibleSettings[10] + " Test";
-        document.getElementById("myRange").max = possibleSettings[2] - 1;
+        //document.getElementById("myRange").max = possibleSettings[2] - 1;
 
         //Use this variable to determine if the browser is compatible with the test
         let browserName = (function(agent) {
