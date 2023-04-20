@@ -3,41 +3,11 @@ html {
 }
 
 body {
-    background: linear-gradient(to left, rgb(0, 191, 255), black, red);
-}
-/*
-#leftHalf {
-    background-image: linear-gradient(to left, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url("/items/FRC.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: visible;
-    width: 50%;
-    height: 130vh;
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: -1;
+    /*background: linear-gradient(to left, rgb(0, 191, 255), black, red);*/
+    font-family: "Segoe UI",Arial,sans-serif;
+    background: linear-gradient(to left, rgb(0, 157, 255), rgb(0, 0, 0), rgb(255, 94, 0));
 }
 
-#rightHalf {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 1), rgba(0, 0, 0, 0)), url("/items/FTC.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    overflow: visible;
-    width: 50%;
-    height: 130vh;
-    position: absolute;
-    right: 0px;
-    top: 0px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: -1;
-}
-*/
 .slider {
     -webkit-appearance: none;
     appearance: none;
@@ -60,7 +30,6 @@ body {
 
 .header:not(#NAS) {
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 35px;
     letter-spacing: 5px;
     margin-top: 80px
@@ -68,7 +37,6 @@ body {
 
 #NAS {
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 500%;
     letter-spacing: 5px;
     margin-top: 80px
@@ -79,10 +47,14 @@ body {
     margin-left: -15px
 }
 
+.qanswer {
+    border-radius: 10px;
+    border-width: 5px;
+}
+
 #Questions1 div:not(#scoringdiv),
 #TeamChoose,
 #PathChoose {
-    font-family: Arial, Helvetica, sans-serif;
     background: rgba(255, 255, 255, 0.5);
     float: none;
     border-radius: 5px;
@@ -90,12 +62,15 @@ body {
     width: 550px;
     position: relative;
     left: 10px;
-    line-height: 20px;
     font-size: 13px;
+}
+#Questions1 label {
+    border: 1px;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
 
 #scoringdiv {
-    font-family: Arial, Helvetica, sans-serif;
     background: rgba(255, 255, 255, 0.5);
     float: none;
     border-radius: 5px;
@@ -120,56 +95,27 @@ body {
     border-radius: 100px;
     font-size: 25px;
     background: rgba(255, 255, 255, 0.75);
-    font-family: Arial, Helvetica, sans-serif;
 }
 
-#FRC,
-#FTC {
+.team {
     height: 150px;
     width: 175px;
     border-radius: 35px;
     font-size: 70px;
-    font-family: Arial, Helvetica, sans-serif;
+    border-color: black;
+    padding-left: 10;
+    padding-right: 10;
 }
 
-#FRC {
-    background-image: linear-gradient(to right top, #a92d2d, #ec5c5c, #9a2622, #740c0c, #ff0000);
-}
-
-#FTC {
-    background-image: linear-gradient(to right top, #48c8cc, #559fd4, #26c8c2, #1c7a74, #35ba96);
-}
-
-#Leadership,
-#Mechanical,
-#Electrical,
-#Software {
+.category {
     height: 125px;
     width: 125px;
     border-radius: 35px;
     font-size: 20px;
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-#Leadership {
-    background-image: linear-gradient(to right top, #969fa5, #76838c, #7e8789, #a5aeab, #b6bac2);
-}
-
-#Mechanical {
-    background-image: linear-gradient(to right top, #a92d2d, #ec5c5c, #9a2622, #740c0c, #ff0000);
-}
-
-#Electrical {
-    background-image: linear-gradient(to right top, #4da9e6, #1c73b1, #4259ad, #525dd6, #3f41c3);
-}
-
-#Software {
-    background-image: linear-gradient(to right top, #49c518, #15c04e, #4ce785, #328815, #136a14);
 }
 
 #BottomThing {
     color: rgba(255, 255, 255, 0.75);
-    font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 2px;
 }
 
@@ -186,7 +132,6 @@ body {
 #Submit {
     background: transparent;
     color: white;
-    font-family: Arial, Helvetica, sans-serif;
     font-size: 50px;
     height: 100px;
     width: 200px;
@@ -196,16 +141,53 @@ body {
     border-color: white;
 }
 
+
+[data-animate] {
+    animation-name: slide-up;
+    animation-duration: 0.5s;
+    animation-fill-mode: both;
+}
+
+@keyframes slide-up {
+    from {
+        transform: translateY(50px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
 @media(max-width:719px) {
     #Compendium1 {
         font-size: 30px;
     }
+
+    .team {
+        height: 100px;
+        width: auto;
+        border-radius: 35px;
+        font-size: 70px;
+        border-color: black;
+        padding-left: 10;
+        padding-right: 10;
+    }
+    
+    .category {
+        height: 100px;
+        width: auto;
+        border-radius: 35px;
+        font-size: 20px;
+    }
+
     #logo {
         width: 50px;
         margin-top: 30px;
         width: 50%;
         border-radius: 15px
     }
+
     #QuestionBox,
     #Scorebox {
         background: rgba(255, 255, 255, 0.5);
@@ -218,14 +200,15 @@ body {
         left: 10px;
         line-height: 20px
     }
+
     #FunctionalButtons {
         height: 50px;
         width: 100px;
         border-radius: 100px;
         font-size: 25px;
         background: rgba(255, 255, 255, 0.75);
-        font-family: Arial, Helvetica, sans-serif;
     }
+
     #Questions1 div:not(#scoringdiv),
     #TeamChoose,
     #PathChoose {
@@ -238,6 +221,7 @@ body {
         position: relative;
         line-height: 35px;
     }
+
     #scoringdiv {
         background: rgba(255, 255, 255, 0.5);
         float: none;
@@ -245,17 +229,18 @@ body {
         height: 500px;
         width: 90%;
         position: relative;
-        font-family: Arial, Helvetica, sans-serif;
     }
+
     #scoreh1 {
         font-size: 20px;
     }
+
     #BottomThing {
         font-size: 15px;
     }
+
     #NAS {
         color: white;
-        font-family: Arial, Helvetica, sans-serif;
         font-size: 300%;
         letter-spacing: 5px;
         margin-top: 80px

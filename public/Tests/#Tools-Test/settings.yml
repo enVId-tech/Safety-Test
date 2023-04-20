@@ -5,8 +5,12 @@ AnswersPerQuestion: 6
 TeamGUI: true
 CategoryGUI: false
 Questionfilename: ToolsTest.txt
-Accessable: false
+Accessable: true
 SafetyTestGuides: true
 RequiresUsername: true
 TypeofTest: Tooling
 SetCategory: true
+OPTIONAL-CategoriesAvailable:
+OPTIONAL-CategoryColors:
+OPTIONAL-TeamsAvailable:
+OPTIONAL-TeamsColors:

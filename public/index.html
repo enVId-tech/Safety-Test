@@ -30,23 +30,23 @@
 
     <!-- Positions the page in the center -->
     <center>
-        <h1 class="header" style="font-family: Arial, Helvetica, sans-serif" id="FrontHeader">
+        <h1 class="header" data-animate style="animation-delay:0.1s;" id="FrontHeader">
             OA Robotics Test
         </h1>
 
         <!-- The white box and it's contents are here up until </div> -->
         <div id="MainDiv1" class="col-lg-4 col-md-3 col-sm-4 col-xs-1 Start_Div">
             <br><br>
-            <img src="items/4079.png" class="logo">
+            <img data-animate style="animation-delay: 0.2s;" src="items/4079.png" class="logo">
 
-            <h3 id="QuestionAmountH3">Chosen Test: </h3>
+            <h3 id="QuestionAmountH3" data-animate style="animation-delay:0.3s">Chosen Test: </h3>
 
             <!-- NOTE: Make contents inside of dropdown dynamic-->
             <div id="dynamicdrop1">
                 <br>
                 <div id="Dropdown1" class="dropdown">
                     <br>
-                    <button onclick="Dropdown()" id="BtnDropdown1" class="dropbtn">Looking for a different
+                    <button onclick="Dropdown()" id="BtnDropdown1" class="dropbtn" data-animate style="animation-delay:0.3s">Looking for a different
                         test?</button>
                     <div id="Dropcont" class="dropdown-content">
                         <a id="SafetyTest" href="Tests/Safety-Test/"
@@ -56,24 +56,23 @@
             </div>
 
             <!-- Updates -->
-            <h4 id="Heading2">Last Updated on 3-23-2023</h4>
+            <h4 id="Heading2" data-animate style="animation-delay:0.4s">Last Updated on 4-19-2023</h4>
             <div class="form-group" id="Naming">
                 <br>
-                <h1 id="Warning"
-                    style="font-family: Arial, Helvetica, sans-serif; font-size: larger; font-weight: bold;"></h1><br>
-                <label id="MainHeadingBox">Enter First and Last Names in Input Box</label>
+                <h1 id="Warning"></h1><br>
+                <label id="MainHeadingBox" data-animate style="animation-delay:0.5s">Enter First and Last Names in Input Box</label>
 
                 <!-- Username Input -->
-                <input type="text" id="Username" class="form-control" placeholder="Erick Tran">
+                <input type="text" id="Username" class="form-control" placeholder="Erick Tran" data-animate style="animation-delay:0.6s">
             </div>
 
             <!-- Name Save button -->
-            <button id="Start_Button" class="btn btn-primary" onclick="saveUser()">Start</button>
+            <button id="Start_Button" class="btn btn-primary" onclick="saveUser()" data-animate style="animation-delay:0.7s">Start</button>
             <br><br>
         </div>
 
         <br><br><br><br><br>
-        <h1 id="BottomThing">If you have any inquiries about robotics, you can email <a id="Email"
+        <h1 id="BottomThing" data-animate style="animation-delay:0.8s">If you have any inquiries about robotics, you can email <a id="Email"
                 href="https://mail.google.com/mail/u/0/" target="_blank">student.cabinet@frc4079.org.
             </a>
         </h1> <br><br><br><br><br>

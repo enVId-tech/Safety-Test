@@ -96,19 +96,19 @@ async function GeneralSettings() {
             team.appendChild(br);
             team.appendChild(br);
 
-            //FRC Button
-            const FRCbutton = document.createElement("button");
-            FRCbutton.innerHTML = "FRC";
-            FRCbutton.onclick = FRC;
-            FRCbutton.id = "FRC";
-            team.appendChild(FRCbutton);
+            let buttonValues = possibleSettings[14].split(";");
 
-            //FTC Button
-            const FTCButton = document.createElement("button");
-            FTCButton.innerHTML = "FTC";
-            FTCButton.onclick = FTC;
-            FTCButton.id = "FTC";
-            team.appendChild(FTCButton);
+            //Button Create
+            for (l = 0; l < possibleSettings[14].split(";").length; l++) {
+                const TeamButton = document.createElement("button");
+                TeamButton.innerHTML = buttonValues[l];
+                TeamButton.setAttribute("onclick", "setTeam(this.innerHTML);");
+                TeamButton.setAttribute("data-animate", "");
+                TeamButton.id = buttonValues;
+                TeamButton.className = "team";
+                TeamButton.style = "animation-delay:0.6s; background-color: " + possibleSettings[15].split(";")[l];
+                team.appendChild(TeamButton)
+            }
 
             //Spacing
             team.appendChild(br);
@@ -137,33 +137,20 @@ async function GeneralSettings() {
             category.appendChild(br);
             category.appendChild(br);
 
-            //Mechanical Button
-            const MechanicalButton = document.createElement("button");
-            MechanicalButton.innerHTML = "Mechanical";
-            MechanicalButton.onclick = Mechanical;
-            MechanicalButton.id = "Mechanical";
-            category.appendChild(MechanicalButton);
+            //Button Create
+            let buttonValues = possibleSettings[12].split(";");
 
-            //Electrical Button
-            const ElectricalButton = document.createElement("button");
-            ElectricalButton.innerHTML = "Electrical";
-            ElectricalButton.onclick = Electrical;
-            ElectricalButton.id = "Electrical";
-            category.appendChild(ElectricalButton);
-
-            //Software Button
-            const SoftwareButton = document.createElement("button");
-            SoftwareButton.innerHTML = "Software";
-            SoftwareButton.onclick = Software;
-            SoftwareButton.id = "Software";
-            category.appendChild(SoftwareButton);
-
-            //Leadership Button
-            const LeadershipButton = document.createElement("button");
-            LeadershipButton.innerHTML = "Leadership";
-            LeadershipButton.onclick = Leadership;
-            LeadershipButton.id = "Leadership";
-            category.appendChild(LeadershipButton);
+            for (l = 0; l < possibleSettings[12].split(";").length; l++) {
+                //console.log(buttonValues[l]);
+                const Button = document.createElement("button");
+                Button.innerHTML = buttonValues[l];
+                Button.setAttribute("onclick", "setCategory(this.innerHTML);");
+                Button.setAttribute("data-animate", "");
+                Button.id = buttonValues[l];
+                Button.style = "animation-delay:0.7s; background-color: " + possibleSettings[13].split(";")[l];
+                Button.className = "category";
+                category.appendChild(Button);
+            }
 
             //Spacing
             category.appendChild(br);
@@ -290,7 +277,7 @@ async function GeneralSettings() {
         //document.getElementById("myRange").max = possibleSettings[2] - 1;
 
         //Use this variable to determine if the browser is compatible with the test
-        let browserName = (function(agent) {
+        let browserName = (function (agent) {
             switch (true) {
                 case agent.indexOf("edge") > -1:
                     return "MS Edge";
@@ -366,91 +353,34 @@ async function PassValues() {
     return reponse;
 }
 
-
-
 //Sets team and category
-//FRC Function
-function FRC() {
+
+//Set Team Function
+function setTeam(html) {
     if (document.getElementById("h1team")) {
         document.getElementById("h1team").remove();
     }
-    const a = document.getElementById("TeamChoose");
-    let h1team = document.createElement("h1");
-    h1team.id = "h1team";
-    h1team.innerHTML = "You have chosen FRC as your team";
-    h1team.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1team);
-    localStorage.setItem("Team", "FRC");
+    const teamChoose = document.getElementById("TeamChoose");
+    let teamChosenAdd = document.createElement("h1");
+    teamChosenAdd.id = "h1team";
+    teamChosenAdd.innerHTML = "You have chosen " + html + " as your team";
+    teamChosenAdd.style = "bottom-padding:10px;";
+    teamChoose.appendChild(teamChosenAdd);
+    localStorage.setItem("Team", html);
 }
 
-//FTC Function  
-function FTC() {
-    if (document.getElementById("h1team")) {
-        document.getElementById("h1team").remove();
-    }
-    const a = document.getElementById("TeamChoose");
-    let h1team = document.createElement("h1");
-    h1team.id = "h1team";
-    h1team.innerHTML = "You have chosen FTC as your team";
-    h1team.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1team);
-    localStorage.setItem("Team", "FTC");
-}
-
-//Mechanical Function
-function Mechanical() {
+//Set Category Function
+function setCategory(html) {
     if (document.getElementById("h1category")) {
         document.getElementById("h1category").remove();
     }
-    const a = document.getElementById("PathChoose");
-    let h1mechanical = document.createElement("h1");
-    h1mechanical.id = "h1category";
-    h1mechanical.innerHTML = "You have chosen Mechanical as your category";
-    h1mechanical.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1mechanical);
-    localStorage.setItem("Category", "Mechanical");
-}
-
-//Electrical Function
-function Electrical() {
-    if (document.getElementById("h1category")) {
-        document.getElementById("h1category").remove();
-    }
-    const a = document.getElementById("PathChoose");
-    let h1electrical = document.createElement("h1");
-    h1electrical.id = "h1category";
-    h1electrical.innerHTML = "You have chosen Electrical as your category";
-    h1electrical.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1electrical);
-    localStorage.setItem("Category", "Electrical");
-}
-
-//Software Function
-function Software() {
-    if (document.getElementById("h1category")) {
-        document.getElementById("h1category").remove();
-    }
-    const a = document.getElementById("PathChoose");
-    let h1software = document.createElement("h1");
-    h1software.id = "h1category";
-    h1software.innerHTML = "You have chosen Software as your category";
-    h1software.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1software);
-    localStorage.setItem("Category", "Software");
-}
-
-//Leadership Function
-function Leadership() {
-    if (document.getElementById("h1category")) {
-        document.getElementById("h1category").remove();
-    }
-    const a = document.getElementById("PathChoose");
-    let h1leadership = document.createElement("h1");
-    h1leadership.id = "h1category";
-    h1leadership.innerHTML = "You have chosen Leadership as your category";
-    h1leadership.style = "font-family:Arial,Helvetica,sans-serif";
-    a.appendChild(h1leadership);
-    localStorage.setItem("Category", "Leadership");
+    const pathChoose = document.getElementById("PathChoose");
+    let categoryChosenAdd = document.createElement("h1");
+    categoryChosenAdd.id = "h1category";
+    categoryChosenAdd.innerHTML = "You have chosen " + html + " as your category";
+    categoryChosenAdd.style = "bottom-padding:10px;";
+    pathChoose.appendChild(categoryChosenAdd);
+    localStorage.setItem("Category", html);
 }
 
 //Question Creation Function
@@ -548,6 +478,8 @@ async function QuestionCreate() {
             //Creates a new div for each question
             let AddQuestionsDiv = document.createElement("div");
             AddQuestionsDiv.className = "form-group col-lg-4 col-md-3 col-sm-4 col-xs-1 q_div";
+            AddQuestionsDiv.setAttribute("data-animate", "");
+            AddQuestionsDiv.style = "animation-delay:" + (i + 0.6);
             AddQuestionsDiv.id = divid;
 
             AddQuestions.appendChild(AddQuestionsDiv);
@@ -560,7 +492,7 @@ async function QuestionCreate() {
             AddQuestions.appendChild(br);
             AddQuestions.appendChild(br);
 
-            let H1Num = document.createElement("h1");
+            let H1Num = document.createElement("h2");
             H1Num.innerHTML = i + 1 + ". " + PossibleQuestions[i + 1];
             H1Num.style = "color: black; font-size: 20px; font-weight: 300; text-align: left;";
             AddQuestionsDiv1.appendChild(H1Num);
@@ -574,7 +506,6 @@ async function QuestionCreate() {
 
             //Runs a for loop to create the answer choices
             for (let k = 0; k < possibleSettings[3]; k++) {
-
                 answernum.push(Math.floor(Math.random() * Object.keys(questiondata.find(x => x.Question === PossibleQuestions[i + 1]).Answers).length));
             }
 
@@ -616,7 +547,7 @@ async function QuestionCreate() {
                 AddLabel.id = "Label_" + QuestionArrayAt + "_" + j;
                 AddLabel.className = "form-check-label";
                 AddLabel.for = "PQ" + QuestionArrayAt + "_" + j;
-                AddLabel.style = "color: black; font-weight: 300; text-align: center;";
+                AddLabel.style = "color: black; text-align: center;";
                 AddSpanId.appendChild(AddLabel);
 
                 //Checkboxes
@@ -633,12 +564,11 @@ async function QuestionCreate() {
                     h1a.id = questiondata.find(x => x.Question === PossibleQuestions[i + 1]).Answers[answernum[j]].id;
                     //For Answers[]: Answers[Math.floor(Math.random()*answerslength)]
                     h1a.innerHTML = questiondata.find(x => x.Question === PossibleQuestions[i + 1]).Answers[answernum[j]].Answer;
-                    h1a.style = "color:black;"
+                    h1a.className = "qanswer"
                     AddLabel.appendChild(h1a);
                 } else {
                     h1a.id = "NoQId";
                     h1a.innerHTML = "No Question Response Available";
-                    h1a.style = "color:black;"
                     AddLabel.appendChild(h1a);
                 }
 

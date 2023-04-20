@@ -10,3 +10,7 @@ SafetyTestGuides: true
 RequiresUsername: true
 TypeofTest: Electrical
 SetCategory: true
+OPTIONAL-CategoriesAvailable:
+OPTIONAL-CategoryColors:
+OPTIONAL-TeamsAvailable:
+OPTIONAL-TeamsColors:

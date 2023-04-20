@@ -10,3 +10,7 @@ SafetyTestGuides: true
 RequiresUsername: true
 TypeofTest: Mechanical
 SetCategory: true
+OPTIONAL-CategoriesAvailable:
+OPTIONAL-CategoryColors:
+OPTIONAL-TeamsAvailable:
+OPTIONAL-TeamsColors:

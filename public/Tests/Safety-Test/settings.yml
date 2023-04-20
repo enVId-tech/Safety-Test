@@ -1,5 +1,5 @@
-# Settings folder, controlling functions of the test
-# DO NOT RENAME FOLDER OR REMOVE THESE FIRST TWO LINES - DO NOT GO OVER THE MINIMUM AMOUNT OF ANSWERS OVER ALL QUESTIONS (in this case, 6 answers is the minimum across all questions)
+# Settings folder, controlling functions of the test, do NOT use the colon to split words, use semicolons
+# DO NOT RENAME FOLDER OR REMOVE THESE FIRST TWO LINES - DO NOT GO OVER THE MINIMUM AMOUNT OF ANSWERS OVER ALL QUESTIONS
 Questions: 16
 AnswersPerQuestion: 4
 TeamGUI: true
@@ -10,3 +10,7 @@ SafetyTestGuides: true
 RequiresUsername: true
 TypeofTest: Safety
 SetCategory: false
+OPTIONAL-CategoriesAvailable: Mechanical; Electrical; Software; Leadership
+OPTIONAL-CategoryColors: red; blue; green; gray
+OPTIONAL-TeamsAvailable: FRC; FTC
+OPTIONAL-TeamsColors: red; blue
