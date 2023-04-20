@@ -1,2 +1,5 @@
 src/credentials.json
 public/Tests/Safety-Test/SafetyTest.txt
+public/Tests/#Electrical-Test/ElectricalTest.txt
+public/Tests/#Mechanical-Test/MechanicalTest.txt
+public/Tests/#Tools-Test/ToolsTest.txt
