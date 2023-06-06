@@ -12,5 +12,5 @@ TypeofTest: Safety
 SetCategory: false
 OPTIONAL-CategoriesAvailable: Mechanical; Electrical; Software; Leadership
 OPTIONAL-CategoryColors: red; blue; green; gray
-OPTIONAL-TeamsAvailable: FRC; FTC
-OPTIONAL-TeamsColors: red; blue
+OPTIONAL-TeamsAvailable: FRC; FTC; VEX
+OPTIONAL-TeamsColors: red; blue; gray
