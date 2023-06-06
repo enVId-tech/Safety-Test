@@ -162,7 +162,7 @@ Question 14: What items should go in the Safety Binder?
   + Incident Reports
   + Audit Results
   - Build Schedules
-  - Safety Test Results
+  + Training Records
   - Instruction Manuals (for tools)
   - Materials
   - Inventory
