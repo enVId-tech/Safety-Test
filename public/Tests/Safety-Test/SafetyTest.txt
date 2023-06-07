@@ -32,7 +32,7 @@ Question 4: In what situations do you need to wear a filter mask?
   + When working with chemicals
   - When soldering
   - When bolting metal parts
-  - When welding
+  + When welding
   + When using a miter saw
   - When walking outside
   + When sanding
