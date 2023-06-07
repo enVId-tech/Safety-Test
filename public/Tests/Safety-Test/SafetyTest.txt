@@ -24,7 +24,7 @@ Question 3: In what situations do you need proper ventilation?
   - When bolting metal parts
   + When welding
   - When eating
-  + While sanding
+  + While power sanding
   + While sawing wood/metal
   - While using your phone
 
@@ -35,7 +35,7 @@ Question 4: In what situations do you need to wear a filter mask?
   + When welding
   + When using a miter saw
   - When walking outside
-  + When sanding
+  + When power sanding
   + When painting
 
 Question 5: What are the most important attributes for safety?
