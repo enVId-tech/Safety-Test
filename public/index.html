@@ -1,172 +1,47 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <!-- Page Title -->
-    <meta charset="UTF-8" />
-    <title id="Title">OA Robotics Testing</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- Page Icon -->
-    <link rel="shortcut icon" href="/items/4079-transparent.png" type="image/x-icon">
+  <meta charset="utf-8" />
+  <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Web site created using create-react-app" />
+  <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+  <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+  <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
 
-    <!-- Libaries -->
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+  <title>OA Robotics</title>
 
-    <!-- External CSS -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Yeon+Sung&display=swap">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="js-css/home.css">
-
-    <!-- External JS -->
-    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-    <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js-css/home.js"></script>
+  <!-- External CSS -->
+  <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:wght@100&display=swap' rel='stylesheet'
+    type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&display=swap" rel="stylesheet"
+    type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap" rel="stylesheet"
+    type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet" type='text/css'>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
 </head>
 
-<!-- Main Program -->
-
 <body>
+  <div id="root">
 
-    <!-- Positions the page in the center -->
-    <center>
-        <h1 class="header" data-animate style="animation-delay:0.1s;" id="FrontHeader">
-            OA Robotics Test
-        </h1>
-
-        <!-- The white box and it's contents are here up until </div> -->
-        <div id="MainDiv1" class="col-lg-4 col-md-3 col-sm-4 col-xs-1 Start_Div">
-            <br><br>
-            <img data-animate style="animation-delay: 0.2s;" src="items/4079.png" class="logo">
-
-            <h3 id="QuestionAmountH3" data-animate style="animation-delay:0.3s">Chosen Test: </h3>
-
-            <!-- NOTE: Make contents inside of dropdown dynamic-->
-            <div id="dynamicdrop1">
-                <br>
-                <div id="Dropdown1" class="dropdown">
-                    <br>
-                    <button onclick="Dropdown()" id="BtnDropdown1" class="dropbtn" data-animate style="animation-delay:0.3s">Looking for a different
-                        test?</button>
-                    <div id="Dropcont" class="dropdown-content">
-                        <a id="SafetyTest" href="Tests/Safety-Test/"
-                            style="animation: growDown 300ms ease-in-out forwards">Safety Test</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Updates -->
-            <h4 id="Heading2" data-animate style="animation-delay:0.4s">Last Updated on 6-5-2023</h4>
-            <div class="form-group" id="Naming">
-                <br>
-                <h1 id="Warning"></h1><br>
-                <label id="MainHeadingBox" data-animate style="animation-delay:0.5s">Enter First and Last Names in Input Box</label>
-
-                <!-- Username Input -->
-                <input type="text" id="Username" class="form-control" placeholder="Erick Tran" data-animate style="animation-delay:0.6s">
-            </div>
-
-            <!-- Name Save button -->
-            <button id="Start_Button" class="btn btn-primary" onclick="saveUser()" data-animate style="animation-delay:0.7s">Start</button>
-            <br><br>
-        </div>
-
-        <br><br><br><br><br>
-        <h1 id="BottomThing" data-animate style="animation-delay:0.8s">If you have any inquiries about robotics, you can email <a id="Email"
-                href="https://mail.google.com/mail/u/0/" target="_blank">student.cabinet@frc4079.org.
-            </a>
-        </h1> <br><br><br><br><br>
-    </center>
-
-    <!-- Background -->
-    <!--<div id="leftHalf"></div>
-    <div id="rightHalf"></div>-->
-
-
-    <script>
-        let selection;
-
-        //Checks if selector exists
-        if (document.getElementById("BtnDropdown1")) {
-
-            //Gets folder name from Node.JS
-            fetch("/folderdata")
-                .then(response => response.json())
-                .then(data => {
-                    const folderdata = data;
-                    selection = data;
-
-                    if (localStorage.getItem("testPath")) {
-                        if (folderdata.includes(localStorage.getItem("testPath").split("/")[2]) == false) {
-                            if (localStorage.getItem("testPath") != "/Tests/Safety-Test") {
-                                console.log("Test does not exist, therefore will be defaulted to main");
-                                localStorage.removeItem("testPath");
-                                localStorage.setItem("testPath", "/Tests/Safety-Test");
-                                window.location.reload();
-                            }
-                        }
-                    }
-
-                    const SafetyTest = document.getElementById("SafetyTest").style.animation;
-                    //console.log(SafetyTest);
-
-                    const animationtime = parseInt(SafetyTest.split(" ")[0].split("ms")[0]);
-                    //console.log(animationtime);
-
-                    if (folderdata.length <= 0) {
-                        document.getElementById("Dropdown1").style.display = "none";
-                        return;
-                    }
-
-                    for (i = 0; i < folderdata.length; i++) {
-                        //Replaces - with space
-                        const foldername = folderdata[i].split("-")[0] + " " + folderdata[i].split("-")[1];
-                        //console.log(foldername);
-                        //console.log("growDown " + (animationtime + ((animationtime/2)*(i+1))) + " ease-in-out forwards");
-                        let btn = document.createElement("a");
-                        btn.innerHTML = foldername;
-                        btn.href = "/Tests/" + folderdata[i] + "/";
-                        btn.style.animation = "growDown " + (animationtime + (animationtime / 2) * (i + 1)) + "ms ease-in-out forwards";
-                        btn.className = "typeselection";
-                        document.getElementById("Dropcont").appendChild(btn);
-                    }
-                });
-
-
-        }
-
-        //If username exists, remove in local storage
-        if (localStorage.getItem("username")) {
-            localStorage.removeItem("username");
-        }
-
-        //If team exists, remove in local storage
-        if (localStorage.getItem("Team")) {
-            localStorage.removeItem("Team");
-        }
-
-        //If category exists, remove in local storage
-        if (localStorage.getItem("Category")) {
-            localStorage.removeItem("Category");
-        }
-
-        //Sets the test
-        if (localStorage.getItem("testPath")) {
-            //Do nothing
-        } else {
-            localStorage.setItem("testPath", "/Tests/Safety-Test");
-        }
-
-        //Key press enter
-        function checkKeyPressed(e) {
-            if (e.keyCode == "13") {
-                saveUser();
-            }
-        }
-
-        //Enter key press
-        window.addEventListener("keypress", checkKeyPressed, false);
-    </script>
+  </div>
 </body>
 
 </html>
