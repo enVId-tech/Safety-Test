@@ -1,12 +1,15 @@
-$slideAnim: slideAndShrink 2s 1s ease-in-out forwards;
-$slideIntoFrame: slideIntoFrame 2s 1s ease-in-out forwards;
-$appearIntoFrame: appearIntoFrame 0.5s 3s ease-in-out forwards;
+$slideAnim: slideAndShrink;
+$slideIntoFrame: slideIntoFrame;
+$appearIntoFrame: appearIntoFrame;
+$disappearOutOfFrame: disappearOutOfFrame;
+$loginSlideAnim: loginAnimationSlideShrink;
+$loginSlideIntoFrame: loginAnimationAppearIntoFrame;
 
 body {
-    background-color: rgb(255, 255, 255);
     font-family: "Segoe UI", Arial, sans-serif;
     color: black;
     overflow: hidden;
+    scroll-behavior: none;
 }
 
 .main {
@@ -14,43 +17,63 @@ body {
     width: 100%;
     background-color: rgb(255, 255, 255);
     margin: 0 auto;
-    padding-top: 75px;
+    display: inline-flex;
 }
 
-.LoginTop {
+#LoginTop {
+    position: absolute;
+    right: 0;
     font-family: "Open Sans", sans-serif;
     text-shadow: 0px 1px 1px rgb(116, 116, 116);
     margin: auto;
     color: white;
-    background: linear-gradient( rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../components/FRC.jpg');    background-size: cover;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../components/FRC.jpg');
+    background-size: cover;
     width: 100%;
     height: 100vh;
-    float: right;
     display: grid;
     align-items: center;
     align-content: center;
     justify-content: center;
     justify-items: center;
-    animation: $slideAnim;
+    z-index: 500;
+    animation: $slideAnim 2s 1s ease-in-out forwards;
+
+    &.slideOffPage {
+        width: 70%;
+        animation: $loginSlideAnim 2s 0.1s ease-in-out forwards;
+    }
+
     & #Login {
         padding-top: 35px;
         font-size: 100px;
+
+        &.removeOffPage {
+            animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
+        }
     }
 
     & #Test {
         padding-top: 35px;
         font-size: 60px;
-        font-weight: lighter;
+
+        &.removeOffPage {
+            animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
+        }
     }
 
-    & .mainimg {
+    & #MainImg {
         height: 200px;
         width: auto;
         border-radius: 35px;
+
+        &.removeOffPage {
+            animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
+        }
     }
 }
 
-.LoginDetails {
+#LoginDetails {
     background-color: rgb(0, 162, 255);
     font-family: "Source Sans", sans-serif;
     background-size: cover;
@@ -63,9 +86,15 @@ body {
     align-content: center;
     justify-content: center;
     justify-items: center;
-    animation: $slideIntoFrame;
+    z-index: 500;
+    animation: $slideIntoFrame 2s 1s ease-in-out forwards;
+
+    &.slideOnPage {
+        background-color: rgb(0, 162, 255);
+        animation: $loginSlideIntoFrame 2s 0.1s ease-in-out forwards;
+    }
+
     & #LoginArea {
-        border-image: linear-gradient(to left, rgb(0, 157, 255), rgb(0, 0, 0), rgb(255, 94, 0));
         display: grid;
         align-items: center;
         align-content: center;
@@ -75,7 +104,15 @@ body {
         width: 175%;
         height: 400px;
         opacity: 0;
-        animation: $appearIntoFrame;
+        animation: $appearIntoFrame 0.5s 3s ease-in-out forwards;
+
+        &.removeOffPage {
+            background-color: rgb(0, 162, 255);
+            opacity: 1;
+            width: 30%;
+            animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
+        }
+
         & #Selection {
             font-weight: lighter;
             font-family: "Open Sans", sans-serif;
@@ -92,16 +129,6 @@ body {
             border-radius: 20px;
             width: 100%;
             height: 100%;
-
-            & #Login {
-                padding-top: 35px;
-                font-size: 100px;
-            }
-
-            & #Test {
-                padding-top: 35px;
-                font-size: 60px;
-            }
 
             & .mainimg {
                 height: 200px;
@@ -125,9 +152,9 @@ body {
                 }
 
                 &:-webkit-autofill,
-                &:-webkit-autofill:hover, 
-                &:-webkit-autofill:focus, 
-                &:-webkit-autofill:active{
+                &:-webkit-autofill:hover,
+                &:-webkit-autofill:focus,
+                &:-webkit-autofill:active {
                     -webkit-background-clip: text;
                     -webkit-text-fill-color: black;
                     transition: background-color 5000s ease-in-out 0s;
@@ -209,10 +236,16 @@ body {
     }
 }
 
-.footer {
+#footer {
     padding-top: 10px;
     opacity: 0;
-    animation: $appearIntoFrame;
+    animation: $appearIntoFrame 0.5s 3s ease-in-out forwards;
+
+    &.removeOffPage {
+        opacity: 1;
+        animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
+    }
+
     & .footerimg {
         width: 20px;
         margin-left: 0px;
@@ -222,7 +255,6 @@ body {
 #RoboticsFooter {
     color: black;
     text-decoration: none;
-    
 }
 
 #Error {
@@ -230,6 +262,69 @@ body {
     font-size: 15px;
     font-weight: lighter;
     margin-top: 10px;
+}
+
+hr {
+    border: 0;
+    height: 10px;
+    background-color: transparent;
+    background-image: linear-gradient(to right, #fd7a00, black, #00aeff);
+}
+
+.categorymain {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+
+    & .CategorySelections {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        line-height: 50px;
+    }
+}
+
+#SafetySlidesLink, #CategoryChooseLink {
+    color: rgba(0, 26, 255, 0.75);
+    font-family: "Open Sans", sans-serif;
+    text-decoration: none;
+}
+
+#SafetyLink, #CategoryChoose {
+    width: 50%;
+    height: 30%;
+    border-radius: 200px;
+    &:hover {
+        background-color: rgba(25, 129, 25, 0.5);
+        width: 50%;
+        height: 30%;
+        border-radius: 200px;
+    }
+}
+
+#FRC, #FTC, #VEX {
+    width: 300px;
+    height: 75px;
+    font-size: 50px;
+    border-radius: 200px;
+    border-style: none;
+    :active {
+        background-color: rgba(25, 129, 25, 0.5);
+        width: 300px;
+        height: 75px;
+        font-size: 50px;
+        border-radius: 200px;
+        border-style: none;
+    }
+}
+
+#FRCOptions, #FTCOptions, #VEXOptions {
+    display: none;
+    input {
+        width: 200px;
+    }
+    grid-template-columns: 1fr 1fr;
+    line-height: 50px;
 }
 
 @keyframes slideAndShrink {
@@ -270,30 +365,25 @@ body {
 
 @keyframes disappearOutOfFrame {
     0% {
-        opacity: 0;
         transform: translateY(0);
+        opacity: 1;
     }
 
     100% {
-        opacity: 1;
-        transform: translateY(15px);
+        transform: translateY(-30px);
+        opacity: 0;
+        display: none;
+        visibility: hidden;
     }
 }
 
 @keyframes loginAnimationSlideShrink {
     0% {
-        width: 70%;
-        height: 100vh;
-        opacity: 1;
-    }
-
-    5% {
-        opacity: 0;
+        transform: translateX(0);
     }
 
     100% {
-        width: 0%;
-        height: 100vh;
+        transform: translateX(100%);
     }
 }
 
@@ -313,9 +403,11 @@ body {
     0% {
         width: 30%;
         height: 100vh;
+        background-color: rgb(0, 162, 255);
     }
 
     100% {
+        background-color: rgb(0, 162, 255);
         width: 100%;
         height: 100vh;
     }

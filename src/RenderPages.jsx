@@ -9,6 +9,9 @@ import TestPage from './pages/test.jsx';
 // Bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+// Global SCSS
+import './Assets/scss/global.scss'
+
 const Render = () => {
   return (
     <BrowserRouter>

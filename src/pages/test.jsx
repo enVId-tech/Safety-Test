@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import '../Assets/css/test.css';
 
 const TestPage = () => {
     const [test, setTest] = useState("");

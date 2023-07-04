@@ -1,7 +1,5 @@
 import React from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
-import "../Assets/css/home.css";
-import "../Assets/scss/home.scss";
 
 //img: https://frc4079.org/assets/img/logo/logo.svg
 const HomePage = () => {
@@ -24,10 +22,18 @@ const HomePage = () => {
         ) {
             showError("The first letter of your first and last name should be uppercase. Try again.");
         } else {
-            document.getElementById("LoginArea").style.transition = "disappearOutOfFrame 0.5s ease-in-out forwards";
+            document.getElementById("LoginArea").classList.add("removeOffPage");
+            document.getElementById("footer").classList.add("removeOffPage");
+            document.getElementById("Login").classList.add("removeOffPage");
+            document.getElementById("Test").classList.add("removeOffPage");
+            document.getElementById("MainImg").classList.add("removeOffPage");
             setTimeout(() => {
-            window.location.href = "/category";
+                document.getElementById("LoginTop").classList.add("slideOffPage");
+                document.getElementById("LoginDetails").classList.add("slideOnPage");
             }, 1000);
+            setTimeout(() => {
+                window.location.href = "/category";
+            }, 3000)
         }
 
         function showError(error) {
@@ -51,12 +57,7 @@ const HomePage = () => {
             </Helmet>
             <center>
                 <span className="main">
-                    <div className="LoginTop">
-                        <h1 id="Login">Oxford Academy Robotics</h1>
-                        <h2 id="Test">Performance and Testing</h2>
-                        <img className="mainimg" src="4079-transparent.png" alt="4079" />
-                    </div>
-                    <div className="LoginDetails">
+                    <div id="LoginDetails">
                         <div id="LoginArea">
                             <h1 id="Selection">Test Selection</h1>
                             <form id="LoginForm">
@@ -68,21 +69,26 @@ const HomePage = () => {
                                     </option>
                                 </select>
                                 <br />
-                                <h1 id="Error"></h1>
+                                <h1 id="Error"> </h1>
                                 <button id="submit" onClick={start}>
                                     Start
                                 </button>
                             </form>
                         </div>
-                        <footer className="footer">
+                        <footer id="footer">
                             <p className="OARobotics">
                                 <a id="RoboticsFooter" href="https://frc4079.org/">
                                     OA Robotics
                                 </a>
-                                <img src="4079-transparent.png" className="footerimg" />
+                                <img src="4079-transparent.png" className="footerimg" alt="4079" />
                             </p>
-                            <p>Revision 14.00; 7-2-2023 11:59:00 PT</p>
+                            <p>Revision 14.10; 7-3-2023 22:19:45 PT</p>
                         </footer>
+                    </div>
+                    <div id="LoginTop">
+                        <h1 id="Login">Oxford Academy Robotics</h1>
+                        <h2 id="Test">Performance and Testing</h2>
+                        <img id="MainImg" src="4079-transparent.png" alt="4079" />
                     </div>
                 </span>
             </center>
