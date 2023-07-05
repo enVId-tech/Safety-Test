@@ -12,6 +12,12 @@ const CategoryPage = () => {
         document.getElementById(`${id}`).style.transition = "green linear 1s";
     };
 
+    const Next = () => {
+        setTimeout(() => {
+            window.location.href = "/test";
+        }, 1000);
+    };
+
     return (
         <HelmetProvider>
             <Helmet>
@@ -25,7 +31,7 @@ const CategoryPage = () => {
                         <p id="CategoryLabel">
                             This page has available resources and options for taking this test. The test will allow you to go back to this page and save your answers.
                         </p>
-                        <button id="Next">Next</button>
+                        <button id="CategoryNext" onClick={Next}>Next</button>
                     </div>
                     <hr />
                     <br />

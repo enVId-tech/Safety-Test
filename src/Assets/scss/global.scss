@@ -1,3 +1,5 @@
+// Home Page
+
 $slideAnim: slideAndShrink;
 $slideIntoFrame: slideIntoFrame;
 $appearIntoFrame: appearIntoFrame;
@@ -271,29 +273,45 @@ hr {
     background-image: linear-gradient(to right, #fd7a00, black, #00aeff);
 }
 
+// Category Selection
+
 .categorymain {
     height: 100%;
     width: 100%;
     background-color: rgb(255, 255, 255);
     margin: 0 auto;
+    line-height: 50px;
+    font-family: Nanum Gothic, sans-serif;
 
     & .CategorySelections {
         display: grid;
         grid-template-columns: 1fr 1fr;
         line-height: 50px;
     }
+
+    & .CategoryContent {
+        padding-top: 2%;
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        align-items: center;
+        justify-items: center;
+        background-color: rgb(0, 162, 255);
+    }
 }
 
-#SafetySlidesLink, #CategoryChooseLink {
+#SafetySlidesLink,
+#CategoryChooseLink {
     color: rgba(0, 26, 255, 0.75);
     font-family: "Open Sans", sans-serif;
     text-decoration: none;
 }
 
-#SafetyLink, #CategoryChoose {
+#SafetyLink,
+#CategoryChoose {
     width: 50%;
     height: 30%;
     border-radius: 200px;
+
     &:hover {
         background-color: rgba(25, 129, 25, 0.5);
         width: 50%;
@@ -302,12 +320,15 @@ hr {
     }
 }
 
-#FRC, #FTC, #VEX {
+#FRC,
+#FTC,
+#VEX {
     width: 300px;
     height: 75px;
     font-size: 50px;
     border-radius: 200px;
     border-style: none;
+
     :active {
         background-color: rgba(25, 129, 25, 0.5);
         width: 300px;
@@ -318,14 +339,207 @@ hr {
     }
 }
 
-#FRCOptions, #FTCOptions, #VEXOptions {
+#FRCOptions,
+#FTCOptions,
+#VEXOptions {
     display: none;
+
     input {
         width: 200px;
     }
+
     grid-template-columns: 1fr 1fr;
     line-height: 50px;
 }
+
+#CategoryNext {
+    width: 300px;
+    height: 75px;
+    font-size: 50px;
+    border-radius: 200px;
+    border-style: none;
+}
+
+// Main Test
+
+.testmain {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    margin: 0 auto;
+    display: inline-flex;
+
+    #image {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 600%;
+        height: 600%;
+        transform: rotate(15deg);
+        z-index: 3;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../components/4079.png");
+        background-size: 0.75%;
+        background-position: center;
+        background-repeat: repeat;
+        animation: slowlyMoveBackground 480s linear infinite;
+
+        @keyframes slowlyMoveBackground {
+            0% {
+                background-position: 0% 0%;
+            }
+
+            100% {
+                background-position: 100% 100%;
+            }
+        }
+    }
+
+    .QuestionContent {
+        position: relative;
+        width: 60%;
+        height: 100vh;
+        display: grid;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        z-index: 3;
+
+        .QuestionContainer {
+            z-index: 4;
+
+            #QuestionTitle {
+                padding-top: 20px;
+                font-family: 'Jost', sans-serif;
+                font-size: 50px;
+                font-weight: lighter;
+                padding-left: 10px;
+                padding-bottom: 10px;
+                display: grid;
+                justify-content: start;
+
+            }
+
+            #ContentDiv {
+                width: 1000px;
+                height: 600px;
+                background-color: rgba(124, 124, 124, 1);
+                z-index: 1;
+                border-radius: 20px;
+                display: block;
+                padding-left: 20px;
+                align-items: center;
+                align-content: center;
+            }
+
+            #QuestionContainerContent {
+                width: 90%;
+                height: 70%;
+                color: white;
+                font-weight: bold;
+                letter-spacing: 2px;
+                background-color: rgba(41, 41, 41, 0.7);
+                display: grid;
+                align-items: center;
+                align-content: center;
+                justify-content: center;
+                justify-items: center;
+                border-radius: 20px;
+                font-size: 35px;
+                z-index: 100;
+            }
+
+            #QuestionLabel {
+                font-family: 'Barlow', sans-serif;
+                margin-left: 10px;
+                margin-right: 10px;
+                ;
+            }
+        }
+    }
+
+    .QuestionSelections {
+        width: 45%;
+        height: 100vh;
+        background-color: rgb(0, 162, 255);
+        display: grid;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        z-index: 1000;
+
+        .choices {
+            display: grid;
+            justify-content: space-around;
+            justify-self: center;
+            justify-items: center;
+        }
+
+        #Apply {
+            font-family: Nanum Gothic, sans-serif;
+            font-size: 60px;
+        }
+
+        .QuestionOption {
+            font-family: 'Jost', sans-serif;
+            border-width: 4px;
+            border-style: solid;
+            border-color: black;
+            width: 700px;
+            height: 100px;
+            background-color: rgba(124, 124, 124, 0);
+            border-radius: 20px;
+            display: grid;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            font-size: 35px;
+            font-weight: bold;
+            margin-top: 10px;
+            margin-bottom: 10px;
+
+            &:hover {
+                background-color: rgba(0, 255, 0, 0.6);
+                transition: background-color linear 0.1s;
+            }
+
+            &.active {
+                background-color: rgba(0, 255, 0, 0.8);
+                transition: background-color linear 0.1s;
+
+                &:hover {
+                    background-color: rgba(255, 0, 0, 0.8);
+                }
+            }
+
+        }
+    }
+}
+
+.QuestionOption {
+    background-color: rgba(124, 124, 124, 0.7);
+}
+
+.ProgressionButtons {
+    width: 100%;
+    display:flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    .Progression {
+        width: 22.5%;
+        height: 25%;
+        font-size: 25px;
+        border-style: solid;
+        border-width: 2px;
+        border-radius: 10px;
+        border-color: black;
+        background-color: transparent;
+    }
+}
+
+// Animations
 
 @keyframes slideAndShrink {
     0% {
