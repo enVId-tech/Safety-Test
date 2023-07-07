@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 //Pages
 import HomePage from './pages/home.jsx';
-import CategoryPage from './pages/category.jsx';
+import CategoryPage from './pages/selection.jsx';
 import TestPage from './pages/test.jsx';
 
 // Bootstrap
@@ -18,11 +18,11 @@ const Render = () => {
       <Routes>
         {/* Redirects */}
         <Route path='/*' element={<Navigate to="/"/>}/>
-        <Route path='/category/*' element={<Navigate to="/category"/>}/>
+        <Route path='/selection/*' element={<Navigate to="/selection"/>}/>
         <Route path='/test/*' element={<Navigate to="/test"/>}/>
 
         <Route path="/" element={<HomePage />} />
-        <Route path="/category" element={<CategoryPage />} />
+        <Route path="/selection" element={<CategoryPage />} />
         <Route path="/test" element={<TestPage />} />
       </Routes>
     </BrowserRouter>

@@ -13,8 +13,16 @@ const CategoryPage = () => {
     };
 
     const Next = () => {
+        document.getElementsByClassName("CategoryContent")[0].classList.add("CategoryContentNext");
         setTimeout(() => {
             window.location.href = "/test";
+        }, 1000);
+    };
+
+    const Back = () => {
+        
+        setTimeout(() => {
+            window.location.href = "/";
         }, 1000);
     };
 
@@ -31,10 +39,11 @@ const CategoryPage = () => {
                         <p id="CategoryLabel">
                             This page has available resources and options for taking this test. The test will allow you to go back to this page and save your answers.
                         </p>
-                        <button id="CategoryNext" onClick={Next}>Next</button>
+                        <div id="Buttons">
+                            <button id="CategoryBack" onClick={Back}>Back</button>
+                            <button id="CategoryNext" onClick={Next}>Next</button>
+                        </div>
                     </div>
-                    <hr />
-                    <br />
                     <span className="CategorySelections">
                         <div className="Resources">
                             <h2 className="ResourcesTitle">Resources</h2>
@@ -62,7 +71,7 @@ const CategoryPage = () => {
                             <p className="CategoriesLabel">
                                 This section contains the categories that you can choose for the test.
                             </p>
-                            <div id="CategorySelection">
+                            <span id="CategorySelection">
                                 <br />
                                 <div id="FRCDiv">
                                     <input
@@ -132,6 +141,13 @@ const CategoryPage = () => {
                                             value="Software"
                                             className="CategoryButton"
                                         />
+                                        <br />
+                                        <input
+                                            type="button"
+                                            id="LeadershipOption"
+                                            value="Leadership"
+                                            className="CategoryButton"
+                                        />
                                     </div>
                                 </div>
                                 <br />
@@ -175,7 +191,7 @@ const CategoryPage = () => {
                                 </div>
                                 <br />
                                 <br />
-                            </div>
+                            </span>
                         </div>
                     </span>
                 </div>

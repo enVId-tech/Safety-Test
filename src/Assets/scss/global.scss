@@ -12,6 +12,14 @@ body {
     color: black;
     overflow: hidden;
     scroll-behavior: none;
+    -webkit-user-select: none;
+    /* Chrome, Safari, Opera */
+    -moz-user-select: none;
+    /* Firefox */
+    -ms-user-select: none;
+    /* IE 10+ */
+    user-select: none;
+    /* Standard syntax */
 }
 
 .main {
@@ -287,6 +295,9 @@ hr {
         display: grid;
         grid-template-columns: 1fr 1fr;
         line-height: 50px;
+        padding-top: 50px;
+        opacity: 0;
+        animation: appearIntoFrame 0.5s 1s ease-in-out forwards;
     }
 
     & .CategoryContent {
@@ -296,7 +307,35 @@ hr {
         align-items: center;
         justify-items: center;
         background-color: rgb(0, 162, 255);
+        padding-bottom: 40px;
+        animation: shrinkToSize 1s ease-in-out forwards;
+
+        & #CategoryTitle,
+        #CategoryLabel,
+        #Buttons {
+            opacity: 0;
+            animation: appearIntoFrame 0.5s 0.9s ease-in-out forwards;
+        }
     }
+
+    & .CategoryContentNext {
+        animation: growToSize 1s ease-in-out forwards;
+
+        #CategoryTitle,
+        #CategoryLabel,
+        #Buttons {
+            opacity: 1;
+            animation: disappearOutOfFrame 0.25s ease-in-out forwards;
+        }
+    }
+}
+
+#CategorySelection {
+    display: inline-flex;
+    width: 700px;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-start;
 }
 
 #SafetySlidesLink,
@@ -323,41 +362,58 @@ hr {
 #FRC,
 #FTC,
 #VEX {
-    width: 300px;
+    width: 175px;
     height: 75px;
     font-size: 50px;
-    border-radius: 200px;
+    letter-spacing: 1px;
+    border-radius: 10px;
     border-style: none;
-
-    :active {
-        background-color: rgba(25, 129, 25, 0.5);
-        width: 300px;
-        height: 75px;
-        font-size: 50px;
-        border-radius: 200px;
-        border-style: none;
-    }
+    font-weight: 500;
 }
 
 #FRCOptions,
 #FTCOptions,
 #VEXOptions {
     display: none;
+    height: 400px;
+    padding-top: 2px;
 
     input {
-        width: 200px;
+        width: 150px;
+        height: 50px;
+        font-size: 20px;
+        border-radius: 10px;
+        border-style: none;
     }
-
-    grid-template-columns: 1fr 1fr;
-    line-height: 50px;
 }
 
-#CategoryNext {
+#CategoryNext,
+#CategoryBack {
+    padding: 1px;
     width: 300px;
     height: 75px;
     font-size: 50px;
     border-radius: 200px;
     border-style: none;
+}
+
+#Buttons {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-start;
+    height: 175px;
+
+    #CategoryNext,
+    #CategoryBack {
+        :hover {
+            background-color: rgba(25, 129, 25, 0.5);
+            width: 300px;
+            height: 75px;
+            border-radius: 200px;
+        }
+    }
 }
 
 // Main Test
@@ -375,23 +431,13 @@ hr {
         left: -50%;
         width: 600%;
         height: 600%;
-        transform: rotate(15deg);
+        transform: rotate(10deg);
         z-index: 3;
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../components/4079.png");
         background-size: 0.75%;
         background-position: center;
         background-repeat: repeat;
-        animation: slowlyMoveBackground 480s linear infinite;
-
-        @keyframes slowlyMoveBackground {
-            0% {
-                background-position: 0% 0%;
-            }
-
-            100% {
-                background-position: 100% 100%;
-            }
-        }
+        animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
     }
 
     .QuestionContent {
@@ -404,6 +450,20 @@ hr {
         justify-content: center;
         justify-items: center;
         z-index: 3;
+        animation: growQuestions 2s ease-in-out forwards;
+
+        >* {
+            opacity: 0;
+            animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+        }
+
+        &.hidden {
+            animation: shrinkQuestions 1s ease-in-out forwards;
+            > * {
+                opacity: 1;
+                animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+            }
+        }
 
         .QuestionContainer {
             z-index: 4;
@@ -459,7 +519,7 @@ hr {
     }
 
     .QuestionSelections {
-        width: 45%;
+        width: 100%;
         height: 100vh;
         background-color: rgb(0, 162, 255);
         display: grid;
@@ -468,6 +528,20 @@ hr {
         justify-content: center;
         justify-items: center;
         z-index: 1000;
+        animation: shrinkAnswers 2s ease-in-out forwards;
+
+        >* {
+            opacity: 0;
+            animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+        }
+
+        &.hidden {
+            animation: growAnswers 1s ease-in-out forwards;
+            > * {
+                opacity: 1;
+                animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+            }
+        }
 
         .choices {
             display: grid;
@@ -524,9 +598,10 @@ hr {
 
 .ProgressionButtons {
     width: 100%;
-    display:flex;
+    display: flex;
     justify-content: space-between;
     padding-top: 50px;
+
     .Progression {
         width: 22.5%;
         height: 25%;
@@ -624,5 +699,117 @@ hr {
         background-color: rgb(0, 162, 255);
         width: 100%;
         height: 100vh;
+    }
+}
+
+// Categories Page
+
+@keyframes shrinkToSize {
+    0% {
+        width: 100%;
+        height: 100vh;
+    }
+
+    100% {
+        width: 100%;
+        height: 28vh;
+    }
+}
+
+@keyframes growToSize {
+    0% {
+        width: 100%;
+        height: 28vh;
+    }
+
+    100% {
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+// Main Test
+
+@keyframes shrinkAnswers {
+    0% {
+        width: 100%;
+        height: 100vh;
+    }
+
+    100% {
+        width: 45%;
+        height: 100vh;
+    }
+}
+
+@keyframes growQuestions {
+    0% {
+        width: 0%;
+        height: 100vh;
+    }
+
+    100% {
+        width: 55%;
+        height: 100vh;
+    }
+}
+
+@keyframes growAnswers {
+    0% {
+        width: 45%;
+        height: 100vh;
+    }
+
+    100% {
+        width: 100%;
+        height: 100vh;
+    }
+}
+
+@keyframes shrinkQuestions {
+    0% {
+        width: 55%;
+        height: 100vh;
+    }
+
+    100% {
+        width: 0%;
+        height: 100vh;
+    }
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+
+    25% {
+        background-position: 100% 100%;
+        animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        /* ease-out */
+    }
+
+    40% {
+        background-position: 50% 50%;
+        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        /* ease-in */
+    }
+
+    100% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+}
+
+@keyframes slowlyMoveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
     }
 }
