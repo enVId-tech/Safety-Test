@@ -1,7 +1,9 @@
-import React from "react";
+import React, { useRef } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
 const CategoryPage = () => {
+    const CATEGORYCONTENT = useRef(null);
+
     const Appear = (id) => {
         if (document.getElementById(`${id}Options`).style.display === "block") {
             document.getElementById(`${id}Options`).style.display = "none";
@@ -13,7 +15,7 @@ const CategoryPage = () => {
     };
 
     const Next = () => {
-        document.getElementsByClassName("CategoryContent")[0].classList.add("CategoryContentNext");
+        CATEGORYCONTENT.current.classList.add("CategoryContentNext");
         setTimeout(() => {
             window.location.href = "/test";
         }, 1000);
@@ -34,7 +36,7 @@ const CategoryPage = () => {
             </Helmet>
             <center>
                 <div className="categorymain">
-                    <div className="CategoryContent">
+                    <div className="CategoryContent" ref={CATEGORYCONTENT}>
                         <h1 id="CategoryTitle">Prerequisites</h1>
                         <p id="CategoryLabel">
                             This page has available resources and options for taking this test. The test will allow you to go back to this page and save your answers.

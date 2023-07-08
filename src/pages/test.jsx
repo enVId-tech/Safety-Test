@@ -206,7 +206,13 @@ const TestPage = () => {
                     <div className="QuestionContainer"></div>
                     <div className="QuestionContainer">
                         <div id="ContentDiv">
-                            <h1 id="QuestionTitle">Question {questionOn + 1} / {QUESTIONLENGTH}</h1>
+                            <span id="QuestionDetails">
+                                <h1 id="QuestionTitle">Question {questionOn + 1} / {QUESTIONLENGTH}</h1>
+                                <span id="Switch">
+                                    <img alt="4079" id="Switch1" src="4079-transparent.png"></img>
+                                    <img alt="4079" id="Switch2" src="4079-transparent.png"></img>
+                                </span>
+                            </span>
                             <br />
                             <div id="QuestionContainerContent">
                                 <p id="QuestionLabel">{questions[questionOn]}</p>
