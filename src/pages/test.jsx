@@ -1,247 +1,188 @@
 import React, { useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
 
-/* eslint-disable */
 const TestPage = () => {
     const [questions, setQuestions] = useState([]);
     const [answers, setAnswers] = useState([]);
-    const [activeOptions, setActiveOptions] = useState([]);
+    const [responses, setResponses] = useState([]);
+    const [qLength, setQLength] = useState(0);
     const [questionOn, setQuestionOn] = useState(0);
-    const [responses, setResponses] = useState({});
-
-    const TEMPANSWERLENGTH = 5;
-    const QUESTIONLENGTH = 16;
+    const [settings, setSettings] = useState({});
+    const [currentUI, setCurrentUI] = useState("default");
+    const [loaded, setLoaded] = useState(false);
 
     useEffect(() => {
-        setAnswers([
-            [
-                "A1",
-                "A2",
-                "A3",
-                "A4",
-                "A5"
-            ],
-            [
-                "B1",
-                "B2",
-                "B3",
-                "B4",
-                "B5"
-            ],
-            [
-                "C1",
-                "C2",
-                "C3",
-                "C4",
-                "C5"
-            ],
-            [
-                "D1",
-                "D2",
-                "D3",
-                "D4",
-                "D5"
-            ],
-            [
-                "E1",
-                "E2",
-                "E3",
-                "E4",
-                "E5"
-            ],
-            [
-                "F1",
-                "F2",
-                "F3",
-                "F4",
-                "F5"
-            ],
-            [
-                "G1",
-                "G2",
-                "G3",
-                "G4",
-                "G5"
-            ],
-            [
-                "H1",
-                "H2",
-                "H3",
-                "H4",
-                "H5"
-            ],
-            [
-                "I1",
-                "I2",
-                "I3",
-                "I4",
-                "I5"
-            ],
-            [
-                "J1",
-                "J2",
-                "J3",
-                "J4",
-                "J5"
-            ],
-            [
-                "K1",
-                "K2",
-                "K3",
-                "K4",
-                "K5"
-            ],
-            [
-                "L1",
-                "L2",
-                "L3",
-                "L4",
-                "L5"
-            ],
-            [
-                "M1",
-                "M2",
-                "M3",
-                "M4",
-                "M5"
-            ],
-            [
-                "N1",
-                "N2",
-                "N3",
-                "N4",
-                "N5"
-            ],
-            [
-                "O1",
-                "O2",
-                "O3",
-                "O4",
-                "O5"
-            ],
-            [
-                "P1",
-                "P2",
-                "P3",
-                "P4",
-                "P5"
-            ]
-        ])
+        const fetchData = async () => {
+            const data = await getDataFromServer();
 
-        setQuestions([
-            "What type of things are MSDSs used for?",
-            "What is the unabbreviated form of PPE?",
-            "In what situations do you need proper ventilation?",
-            "In what situations do you need to wear a filter mask?",
-            "What are the most important attributes for safety?",
-            "Which of the following should always be available?",
-            "What is the unabbreviated form of MSDS?",
-            "When do you have to be wearing safety glasses?",
-            "What are inherit risks of lead-acid batteries?",
-            "What is the job of the Safety Captain?",
-            "When do you NOT use a potentially dangerous tool?",
-            "Which of the following are proper PPE for usage of an angle grinder?",
-            "Which of the following are adequate PPE for normal robot assembly?",
-            "What items should go in the Safety Binder?",
-            "What SHOULDN'T be done for proper electricity use?",
-            "What do you do if a battery explodes?"
-        ])
+            setQuestions(data[0]);
+            setAnswers(data[1]);
+            setQLength(data[2]);
+
+            //console.log(data[0]);
+            //console.log(data[1]);
+
+            const initialResponses = Array.from({ length: data[2] }, () => Array(data[1][0].length).fill(false));
+
+            await setResponses(initialResponses);
+        };
+
+        fetchData();
     }, []);
 
-    const handleClick = (id) => {
-        setActiveOptions((prevActiveOptions) => {
-            if (prevActiveOptions.includes(id)) {
-                setResponses((prevResponses) => ({
-                    ...prevResponses,
-                    [questionOn]: prevActiveOptions.filter((option) => option !== id)
-                }));
-                return prevActiveOptions.filter((option) => option !== id);
-            } else {
-                setResponses((prevResponses) => ({
-                    ...prevResponses,
-                    [questionOn]: [...prevActiveOptions, id]
-                }));
-                return [...prevActiveOptions, id];
-            }
-        });
+    const getDataFromServer = async () => {
+        const response = await fetch("/test/get/data");
+        const data = await response.json();
+
+        if (data.error) {
+            window.location.href = "/";
+        }
+
+        //console.log(data);
+
+        return [data.questions, data.answers, data.QUESTION_LENGTH];
+    };
+
+    const handleClick = (elementindex) => {
+        if (responses[questionOn][elementindex] === false) {
+            setResponses((prevResponses) => {
+                const updatedResponses = [...prevResponses];
+                updatedResponses[questionOn][elementindex] = true;
+                return updatedResponses;
+            });
+        } else {
+            setResponses((prevResponses) => {
+                const updatedResponses = [...prevResponses];
+                updatedResponses[questionOn][elementindex] = false;
+                return updatedResponses;
+            });
+        }
     };
 
     const nextQuestion = () => {
-        if (questionOn < QUESTIONLENGTH - 1) {
-            setResponses((prevResponses) => ({
-                ...prevResponses,
-                [questionOn]: activeOptions
-            }));
-            setQuestionOn((prevQuestionOn) => prevQuestionOn + 1);
-            // Set answers for next question if answers are available
-            setActiveOptions(responses[questionOn + 1] || []);
-        } else if (questionOn === QUESTIONLENGTH - 1) {
-            setResponses((prevResponses) => ({
-                ...prevResponses,
-                [questionOn]: activeOptions
-            }));
-            console.log(responses);
+        if (questionOn < qLength - 1) {
+            setQuestionOn((questionOn) => questionOn + 1);
+        } else if (questionOn === qLength - 1) {
+            // Send responses to server
+            const sendResponses = async () => {
+
+                const newResponses = [...responses];
+
+                console.log(newResponses);
+
+                const response = await fetch("/test/post/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ responses: newResponses })
+                });
+                const data = await response.json();
+
+                if (data.error) {
+                    window.location.href = "/";
+                }
+
+                console.log(data);
+            };
+
+            sendResponses();
         }
     };
 
     const previousQuestion = () => {
         if (questionOn > 0) {
-            setQuestionOn((prevQuestionOn) => prevQuestionOn - 1);
-            setActiveOptions(responses[questionOn - 1] || []);
+            setQuestionOn((questionOn) => questionOn - 1)
         } else if (questionOn === 0) {
-            document.getElementsByClassName("QuestionContent")[0].classList.add("hidden");
-            document.getElementsByClassName("QuestionSelections")[0].classList.add("hidden");
-            setTimeout(() => {
-                window.location.href = '/selection';
-            }, 1000);
+            document.getElementsByClassName("BackConfirmation")[0].classList.add("active");
+            document.getElementsByClassName("BackConfirmationContent")[0].classList.add("active");
+
+            const button = document.getElementById("BackConfirmationYes");
+
+            button.addEventListener("click", () => {
+                document.getElementsByClassName("BackConfirmation")[0].classList.remove("active");
+                document.getElementsByClassName("BackConfirmationContent")[0].classList.remove("active");
+                document.getElementsByClassName("QuestionContent")[0].classList.add("hidden");
+                document.getElementsByClassName("QuestionSelections")[0].classList.add("hidden");
+                setTimeout(() => {
+                    window.location.href = "/selection";
+                }, 1000);
+            });
+
+            const button2 = document.getElementById("BackConfirmationNo");
+
+            button2.addEventListener("click", () => {
+                document.getElementsByClassName("BackConfirmation")[0].classList.remove("active");
+            });
         }
     };
 
+    const createQuestions = (num) => {
+        if (num === 1) {
+            setCurrentUI('default');
+            setLoaded(true);
+        } else if (num === 2) {
+            setCurrentUI('alternate1');
+            setLoaded(true);
+        }
+    }
 
     const createQuestion = () => {
         return (
             <span className="testmain">
                 <img alt="4079" id="image"></img>
-                <div className="QuestionContent">
-                    <div className="QuestionContainer"></div>
-                    <div className="QuestionContainer">
-                        <div id="ContentDiv">
-                            <span id="QuestionDetails">
-                                <h1 id="QuestionTitle">Question {questionOn + 1} / {QUESTIONLENGTH}</h1>
-                                <span id="Switch">
-                                    <img alt="4079" id="Switch1" src="4079-transparent.png"></img>
-                                    <img alt="4079" id="Switch2" src="4079-transparent.png"></img>
-                                </span>
-                            </span>
-                            <br />
-                            <div id="QuestionContainerContent">
-                                <p id="QuestionLabel">{questions[questionOn]}</p>
-                            </div>
+                <div className="BackConfirmation">
+                    <div className="BackConfirmationContent">
+                        <h1 id="BackConfirmationTitle">Are you sure you want to go back?</h1>
+                        <br />
+                        <div className="BackConfirmationButtons">
+                            <button id="BackConfirmationYes" className="BackConfirmationButton">Yes</button>
+                            <button id="BackConfirmationNo" className="BackConfirmationButton">No</button>
                         </div>
                     </div>
                 </div>
-                <div className="QuestionSelections">
-                    <nav id="QuestionPages">
-
-                    </nav>
-                    <h1 id="Apply">Choose <strong><em>all</em></strong> that apply</h1>
-                    <br />
-                    <div className="QuestionOptions">
-                        <div className="choices">
-                            {
-                                answers.map((answer, aindex) => {
+                {currentUI === 'default' ? (
+                    <div className={`QuestionContent ${!loaded ? 'active' : loaded ? 'passive' : ''}`}>
+                        <div className="QuestionContainer">
+                            <div id="ContentDiv">
+                                <span id="QuestionDetails">
+                                    <h1 id="QuestionTitle">Question {questionOn + 1} / {qLength}</h1>
+                                    <span id="Switch">
+                                        <img alt="4079" id="Switch1" src="4079-transparent.png" onClick={() => createQuestions(1)} />
+                                        <img alt="4079" id="Switch2" src="4079-transparent.png" onClick={() => createQuestions(2)} />
+                                    </span>
+                                </span>
+                                <br />
+                                <div id="QuestionContainerContent">
+                                    <p id="QuestionLabel">{questions[questionOn]}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                ) : "alternate1" ? (
+                    <nav id="QuestionPages"></nav>
+                ) : null
+                }
+                {currentUI === 'default' ? (
+                    <div className={`QuestionSelections ${!loaded ? 'active' : loaded ? 'passive' : ''}`}>
+                        <nav id="QuestionPages"></nav>
+                        <h1 id="Apply">Choose <strong><em>all</em></strong> that apply</h1>
+                        <br />
+                        <div className="QuestionOptions">
+                            <div className="choices">
+                                {answers.map((answer, aindex) => {
                                     if (aindex === questionOn) {
                                         return answer.map((answeri, index) => (
                                             <div
-                                                className={`choice ${activeOptions.includes(answeri) ? 'active' : ''}`}
+                                                className={`QuestionOption ${responses[questionOn][index] ? 'active' : ''}`}
                                                 key={index}
                                                 id={answeri}
-                                                onClick={() => handleClick(answeri)}
+                                                onClick={() => handleClick(index)}
                                             >
                                                 <div
                                                     id={`QuestionOption${index}`}
-                                                    className={`QuestionOption ${activeOptions.includes(`QuestionOption${index}`) ? 'active' : ''}`}
-                                                    onClick={() => handleClick(`QuestionOption${index}`)}
+                                                    className={`QuestionOption ${responses[questionOn][index] ? 'active' : ''}`}
+                                                    onClick={() => handleClick(index)}
                                                 >
                                                     <h1 id="QuestionOptionLabel">{answeri}</h1>
                                                 </div>
@@ -249,27 +190,35 @@ const TestPage = () => {
                                         ));
                                     }
                                     return null; // Return null for other indices if needed
-                                })
-
-                            }
-
+                                })}
+                            </div>
+                            <span className="ProgressionButtons">
+                                {questionOn > 0 ? (
+                                    <button id="PreviousQuestion" className="Progression" onClick={previousQuestion}>
+                                        Previous
+                                    </button>
+                                ) : (
+                                    <button id="PreviousQuestion" className="Progression" onClick={previousQuestion}>
+                                        Back
+                                    </button>
+                                )}
+                                {questionOn < qLength - 1 ? (
+                                    <button id="NextQuestion" className="Progression" onClick={nextQuestion}>
+                                        Next
+                                    </button>
+                                ) : (
+                                    <button id="NextQuestion" className="Progression" onClick={nextQuestion}>
+                                        Done
+                                    </button>
+                                )}
+                            </span>
                         </div>
-                        <span className="ProgressionButtons">
-                            {
-                                <button id="PreviousQuestion" className="Progression" onClick={previousQuestion}>
-                                    {questionOn > 0 ? 'Previous' : 'Back'}
-                                </button>
-                            }
-                            {
-                                <button id="NextQuestion" className="Progression" onClick={nextQuestion}>
-                                    {questionOn < QUESTIONLENGTH - 1 ? 'Next' : 'Done'}
-                                </button>
-                            }
-                        </span>
                     </div>
-                </div>
+                ) : "alternate1" ? (
+                    <nav id="QuestionPages"></nav>
+                ) : null}
             </span>
-        )
+        );
     };
 
     return (
@@ -278,11 +227,9 @@ const TestPage = () => {
                 <title>OA Robotics - Safety Test</title>
                 <link rel="icon" href="4079-transparent.png" alt="4079"></link>
             </Helmet>
-            <center>
-                {createQuestion()}
-            </center>
+            <center>{createQuestion()}</center>
         </HelmetProvider>
-    )
-}
+    );
+};
 
 export default TestPage;

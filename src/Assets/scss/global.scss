@@ -82,7 +82,9 @@ body {
         }
     }
 
-    & #Login, #Test, #MainImg {
+    & #Login,
+    #Test,
+    #MainImg {
         opacity: 0;
         animation: $appearIntoFrame 0.75s 0.5s ease-in-out forwards;
     }
@@ -254,7 +256,7 @@ body {
 #footer {
     padding-top: 10px;
     opacity: 0;
-    animation: $appearIntoFrame 0.5s s ease-in-out forwards;
+    animation: $appearIntoFrame 0.5s 4s ease-in-out forwards;
 
     &.removeOffPage {
         opacity: 1;
@@ -335,6 +337,16 @@ hr {
     }
 }
 
+.SelectedButton {
+    background-color: lightgreen;
+}
+
+.CategoriesSelected {
+    color: black;
+    opacity: 0;
+    animation: appearIntoFrame 0.5s 1s ease-in-out forwards;
+}
+
 #CategorySelection {
     display: inline-flex;
     width: 700px;
@@ -382,6 +394,10 @@ hr {
     display: none;
     height: 400px;
     padding-top: 2px;
+
+    &.show {
+        display: block;
+    }
 
     input {
         width: 150px;
@@ -445,6 +461,80 @@ hr {
         animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
     }
 
+    .BackConfirmation {
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(39, 39, 39, 0.7);
+        position: absolute;
+        display: none;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        z-index: 10000;
+        opacity: 1;
+
+        &.active {
+            display: grid;
+        }
+
+        & .BackConfirmationContent {
+            background-color: rgba(124, 124, 124, 1);
+            width: 900px;
+            height: 600px;
+            border-radius: 25px;
+            animation: testDownUp 1s ease-in-out forwards;
+
+            &.active {
+                animation: testUpDown 1s ease-in-out forwards;
+            }
+
+            & #BackConfirmationTitle {
+                background-color: rgb(51, 51, 51);
+                padding: 20px;
+                color: white;
+                width: fit-content;
+                border-radius: 20px;
+                font-family: 'Jost', sans-serif;
+                font-size: 50px;
+                font-weight: lighter;
+                margin-top: 100px;
+                display: grid;
+            }
+
+            & .BackConfirmationButtons {
+                width: 50%;
+                height: 50%;
+                display: inline-grid;
+                grid-template-columns: 1fr 1fr;
+                justify-content: space-around;
+                align-items: center;
+                align-content: center;
+                justify-items: center;
+
+                & #BackConfirmationYes,
+                #BackConfirmationNo {
+                    width: 300px;
+                    height: 175px;
+                    font-family: 'Jost', sans-serif;
+                    font-size: 100px;
+                    border-radius: 25px;
+                    border-style: none;
+                    background-color: white;
+                    margin: 25px;
+
+                    &#BackConfirmationNo:hover {
+                        background-color: red;
+                    }
+
+                    &#BackConfirmationYes:hover {
+                        background-color: lightgreen;
+                    }
+                }
+            }
+        }
+    }
+
     .QuestionContent {
         position: relative;
         width: 60%;
@@ -457,14 +547,22 @@ hr {
         z-index: 3;
         animation: growQuestions 2s ease-in-out forwards;
 
-        >* {
-            opacity: 0;
-            animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+        &.passive {
+            width: 55%;
+        }
+
+        &.active {
+            width: 55%;
+            >* {
+                opacity: 0;
+                animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+            }
         }
 
         &.hidden {
             animation: shrinkQuestions 1s ease-in-out forwards;
-            > * {
+
+            >* {
                 opacity: 1;
                 animation: disappearOutOfFrame 0.1s ease-in-out forwards;
             }
@@ -495,10 +593,12 @@ hr {
                 padding-left: 20px;
                 align-items: center;
                 align-content: center;
+
                 & #QuestionDetails {
                     display: inline-flex;
                     width: 100%;
                     justify-content: space-between;
+
                     & #Switch {
                         display: inline-flex;
                         float: right;
@@ -506,8 +606,8 @@ hr {
                         height: 100px;
                         padding-top: 12.5px;
 
-                        & #Switch1, #Switch2 {
-                            background-size: cover;
+                        & #Switch1,
+                        #Switch2 {
                             width: 75px;
                             height: 75px;
                         }
@@ -517,6 +617,7 @@ hr {
                             border-bottom-left-radius: 20px;
                             border: rgb(41, 41, 41) 2px solid;
                             background-color: rgb(31, 31, 31);
+
                             &.active {
                                 background-color: rgb(43, 153, 0);
                             }
@@ -568,16 +669,23 @@ hr {
         justify-content: center;
         justify-items: center;
         z-index: 1000;
-        animation: shrinkAnswers 2s ease-in-out forwards;
 
-        >* {
-            opacity: 0;
-            animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+        &.active {
+            animation: shrinkAnswers 2s ease-in-out forwards;
+            >* {
+                opacity: 0;
+                animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+            }
+        }
+
+        &.passive {
+            width: 45%;
         }
 
         &.hidden {
             animation: growAnswers 1s ease-in-out forwards;
-            > * {
+
+            >* {
                 opacity: 1;
                 animation: disappearOutOfFrame 0.1s ease-in-out forwards;
             }
@@ -769,6 +877,26 @@ hr {
 }
 
 // Main Test
+
+@keyframes testUpDown {
+    0% {
+        transform: translateY(-200%);
+    }
+
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes testDownUp {
+    0% {
+        transform: translateY(0);
+    }
+
+    100% {
+        transform: translateY(200%);
+    }
+}
 
 @keyframes shrinkAnswers {
     0% {
