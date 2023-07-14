@@ -7,6 +7,7 @@ const TestPage = () => {
     const [responses, setResponses] = useState([]);
     const [qLength, setQLength] = useState(0);
     const [questionOn, setQuestionOn] = useState(0);
+    const [score, setScore] = useState(0);
     const [settings, setSettings] = useState({});
     const [currentUI, setCurrentUI] = useState("default");
     const [loaded, setLoaded] = useState(false);
@@ -65,7 +66,6 @@ const TestPage = () => {
         } else if (questionOn === qLength - 1) {
             // Send responses to server
             const sendResponses = async () => {
-
                 const newResponses = [...responses];
 
                 console.log(newResponses);
@@ -84,6 +84,15 @@ const TestPage = () => {
                 }
 
                 console.log(data);
+                setScore(data.score);
+                //setScore(16)
+
+                if (data.score.toString() === qLength.toString()) {
+                //if (score.toString() === qLength.toString()) {
+                    document.getElementsByClassName("QuestionContent")[0].classList.add("hidden");
+                    document.getElementsByClassName("QuestionSelections")[0].classList.add("hidden");
+                    document.getElementsByClassName("ScoreContent")[0].classList.add("active");
+                }
             };
 
             sendResponses();
@@ -122,8 +131,14 @@ const TestPage = () => {
             setCurrentUI('default');
             setLoaded(true);
         } else if (num === 2) {
-            setCurrentUI('alternate1');
-            setLoaded(true);
+            if (document.getElementById("QuestionLabel")) {
+                document.getElementById("QuestionLabel").style.animation = "disappearOutOfFrame 1s forwards";
+                document.getElementById("QuestionTitle").style.animation = "disappearOutOfFrame 1s forwards";
+            }
+            setTimeout(() => {
+                setCurrentUI('alternate1');
+                setLoaded(true);
+            }, 1000);
         }
     }
 
@@ -160,13 +175,57 @@ const TestPage = () => {
                         </div>
                     </div>
                 ) : "alternate1" ? (
-                    <nav id="QuestionPages"></nav>
+                    <div className={`QuestionContent2 whole`}>
+                        <div className="QuestionContainer2 whole">
+                            <div id="ContentDiv">
+                                <span id="QuestionDetails">
+                                    <span id="Switch">
+                                        <img alt="4079" id="Switch1" src="4079-transparent.png" onClick={() => createQuestions(1)} />
+                                        <img alt="4079" id="Switch2" src="4079-transparent.png" onClick={() => createQuestions(2)} />
+                                    </span>
+                                </span>
+                                <div id="QuestionContainerContent">
+                                    {
+                                        questions.map((question, index) => {
+                                            return (
+                                                <span className={`QuestionContent2 ${questionOn === index ? 'active' : score === questions.length ? 'finished' : ''}}`} key={index}>
+                                                    <p id="QuestionLabel">{index + 1 + ". " + question}</p>
+                                                    {
+                                                        answers.map((answer, aindex) => {
+                                                            if (aindex === index) {
+                                                                return answer.map((answeri, index) => (
+                                                                    <div
+                                                                        className={`QuestionOptions ${responses[index][index] ? 'active' : ''}`}
+                                                                        key={index}
+                                                                        id={answeri}
+                                                                        onClick={() => handleClick(index)}
+                                                                    >
+                                                                        <div
+                                                                            id={`QuestionOptions${index}`}
+                                                                            className={`QuestionOptions2 ${responses[index][index] ? 'active' : ''}`}
+                                                                            onClick={() => handleClick(index)}
+                                                                        >
+                                                                            <h1 id="QuestionOptionLabel">{answeri}</h1>
+                                                                        </div>
+                                                                    </div>
+                                                                ));
+                                                            }
+                                                            return null; // Return null for other indices if needed
+                                                        })
+                                                    }
+                                                </span>
+                                            )
+                                        })
+                                    }
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 ) : null
                 }
                 {currentUI === 'default' ? (
-                    <div className={`QuestionSelections ${!loaded ? 'active' : loaded ? 'passive' : ''}`}>
-                        <nav id="QuestionPages"></nav>
-                        <h1 id="Apply">Choose <strong><em>all</em></strong> that apply</h1>
+                    <div className={`QuestionSelections ${!loaded ? 'active' : loaded ? 'passive' : score === questions.length ? 'finished' : ''}`}>
+                        <h1 className="Apply">Choose <strong className="Apply"><em className="Apply">all</em></strong> that apply</h1>
                         <br />
                         <div className="QuestionOptions">
                             <div className="choices">
@@ -202,6 +261,18 @@ const TestPage = () => {
                                         Back
                                     </button>
                                 )}
+                                {
+                                    <h1 id="Score" className="ScoreContent">Score: {
+                                        score
+                                    } / {
+                                            qLength
+                                        }
+                                        <br/>
+                                        Taken at: {
+                                            new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
+                                        }
+                                    </h1>
+                                }
                                 {questionOn < qLength - 1 ? (
                                     <button id="NextQuestion" className="Progression" onClick={nextQuestion}>
                                         Next

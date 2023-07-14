@@ -547,12 +547,24 @@ hr {
         z-index: 3;
         animation: growQuestions 2s ease-in-out forwards;
 
+        &2.whole {
+            width: 100%;
+            height: 100vh;
+            display: grid;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            z-index: 3;
+        }
+
         &.passive {
             width: 55%;
         }
 
         &.active {
             width: 55%;
+
             >* {
                 opacity: 0;
                 animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
@@ -635,7 +647,7 @@ hr {
 
             #QuestionContainerContent {
                 width: 90%;
-                height: 70%;
+                height: 71%;
                 color: white;
                 font-weight: bold;
                 letter-spacing: 2px;
@@ -659,6 +671,99 @@ hr {
         }
     }
 
+
+    .QuestionContainer2 {
+        z-index: 4;
+
+        #QuestionTitle {
+            padding-top: 20px;
+            font-family: 'Jost', sans-serif;
+            font-size: 50px;
+            font-weight: lighter;
+            padding-left: 10px;
+            padding-bottom: 10px;
+            display: grid;
+            justify-content: start;
+
+        }
+
+        #ContentDiv {
+            width: 1000px;
+            height: 600px;
+            background-color: rgba(124, 124, 124, 1);
+            z-index: 1;
+            border-radius: 20px;
+            display: block;
+            padding-left: 20px;
+            align-items: center;
+            align-content: center;
+            animation: expandQuestionBox 1s ease-in-out forwards;
+
+            & #QuestionDetails {
+                display: inline-flex;
+                width: 100%;
+                justify-content: flex-end;
+
+                & #Switch {
+                    display: inline-flex;
+                    float: right;
+                    justify-self: flex-end;
+                    width: 200px;
+                    height: 100px;
+                    padding-top: 12.5px;
+
+                    & #Switch1,
+                    #Switch2 {
+                        width: 75px;
+                        height: 75px;
+                    }
+
+                    & #Switch1 {
+                        border-top-left-radius: 20px;
+                        border-bottom-left-radius: 20px;
+                        border: rgb(41, 41, 41) 2px solid;
+                        background-color: rgb(31, 31, 31);
+
+                        &.active {
+                            background-color: rgb(43, 153, 0);
+                        }
+                    }
+
+                    & #Switch2 {
+                        border-top-right-radius: 20px;
+                        border-bottom-right-radius: 20px;
+                        background-color: rgb(31, 31, 31);
+                        border: rgb(41, 41, 41) 2px solid;
+                    }
+                }
+            }
+        }
+
+        #QuestionContainerContent {
+            width: 90%;
+            height: 75%;
+            color: white;
+            font-weight: bold;
+            letter-spacing: 2px;
+            background-color: rgba(41, 41, 41, 0.7);
+            display: grid;
+
+            border-radius: 20px;
+            font-size: 35px;
+            z-index: 100;
+            overflow-y: auto;
+            overflow-x: hidden;
+            animation: expand 1s ease-in-out forwards;
+        }
+
+        #QuestionLabel {
+            font-family: 'Barlow', sans-serif;
+            margin-left: 10px;
+            margin-right: 10px;
+            ;
+        }
+    }
+
     .QuestionSelections {
         width: 100%;
         height: 100vh;
@@ -672,23 +777,59 @@ hr {
 
         &.active {
             animation: shrinkAnswers 2s ease-in-out forwards;
-            >* {
-                opacity: 0;
-                animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+
+            &.hidden {
+                animation: growAnswers 1s ease-in-out forwards;
+                & .Apply {
+                    animation: testDownUp 0.1s ease-in-out forwards;
+                }
+                >* {
+                    & .choices {
+                        animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+                    }
+    
+                    & #PreviousQuestion, #NextQuestion {
+                    animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+                    }
+    
+                    & .ScoreContent {
+                        color: black;
+                        z-index: 10000;
+                        &.active {
+                            font-family: 'Jost', sans-serif;
+                            opacity: 1;
+                            position:fixed;
+                            display: grid;
+                            visibility: visible;
+                            width: 100%;
+                            height: 100;
+                            animation: expandToFillScreen 0.5s 1s ease-in-out forwards;
+                        }
+                    }
+    
+                    @keyframes expandToFillScreen {
+                        0% {
+                            transform: translateX(0);
+                            transform: translateY(0);
+                        }
+    
+                        100% {
+                            transform: translateX(100%);
+                            transform: translateY(-150%);
+                            font-size: 100px;
+                        }
+                    }
+                }
+
+                >* {
+                    opacity: 0;
+                    animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+                }
             }
         }
 
         &.passive {
             width: 45%;
-        }
-
-        &.hidden {
-            animation: growAnswers 1s ease-in-out forwards;
-
-            >* {
-                opacity: 1;
-                animation: disappearOutOfFrame 0.1s ease-in-out forwards;
-            }
         }
 
         .choices {
@@ -698,7 +839,7 @@ hr {
             justify-items: center;
         }
 
-        #Apply {
+        .Apply {
             font-family: Nanum Gothic, sans-serif;
             font-size: 60px;
         }
@@ -740,8 +881,52 @@ hr {
     }
 }
 
+.QuestionContent2 {
+    display: flex;
+    vertical-align: middle;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+    justify-items: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+
+    #QuestionLabel {
+        font-family: 'Barlow', sans-serif;
+        margin-left: 10px;
+        margin-right: 10px;
+
+    }
+
+    .QuestionOptions {
+        background-color: rgba(48, 48, 48, 1);
+        width: 55%;
+        height: 200px;
+        display: flex;
+        vertical-align: middle;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        #QuestionOptionLabel {
+            width: 95%;
+            font-family: 'Jost', sans-serif;
+            background-color: rgba(124, 124, 124, 0.7);
+            display: grid;
+            font-family: 'Jost', sans-serif;
+            font-weight: 100;
+            font-size: 25px;
+            border-radius: 20px;
+            padding: 25px;
+        }
+
+
+    }
+}
+
 .QuestionOption {
     background-color: rgba(124, 124, 124, 0.7);
+    width: 75%;
 }
 
 .ProgressionButtons {
@@ -761,6 +946,8 @@ hr {
         background-color: transparent;
     }
 }
+
+
 
 // Animations
 
@@ -979,5 +1166,31 @@ hr {
 
     100% {
         background-position: 100% 100%;
+    }
+}
+
+@keyframes expandQuestionBox {
+    0% {
+        transform: translateX(-45%);
+        margin-left: 3%;
+    }
+
+    85% {
+        transform: translateX(0);
+    }
+
+    100% {
+        width: 1800px;
+        height: 900px;
+    }
+}
+
+@keyframes expand {
+    0% {
+        height: 71%;
+    }
+
+    100% {
+        height: 77%;
     }
 }

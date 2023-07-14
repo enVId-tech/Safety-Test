@@ -174,6 +174,9 @@ app.get('/test/get/data', async (req, res) => {
             if (answers.length > QUESTION_LENGTH) {
                 answers.pop();
             }
+            if (questions.length > QUESTION_LENGTH) {
+                questions.pop();
+            }
         }
 
         res.json({ questions, answers, QUESTION_LENGTH });
