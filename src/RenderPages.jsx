@@ -1,7 +1,7 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 
-//Pages
+// Pages
 import HomePage from './pages/home.jsx';
 import CategoryPage from './pages/selection.jsx';
 import TestPage from './pages/test.jsx';
@@ -10,23 +10,23 @@ import TestPage from './pages/test.jsx';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Global SCSS
-import './Assets/scss/global.scss'
+import './Assets/scss/global.scss';
 
 const Render = () => {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         {/* Redirects */}
-        <Route path='/*' element={<Navigate to="/"/>}/>
-        <Route path='/selection/*' element={<Navigate to="/selection"/>}/>
-        <Route path='/test/*' element={<Navigate to="/test"/>}/>
+        <Route path="/selection/*" element={<Navigate to="selection" />} />
+        <Route path="/test/*" element={<Navigate to="test" />} />
 
-        <Route path="/" element={<HomePage />} />
+        {/* Routes */}
         <Route path="/selection" element={<CategoryPage />} />
         <Route path="/test" element={<TestPage />} />
+        <Route path="/" element={<HomePage />} />
       </Routes>
-    </BrowserRouter>
-  )
+    </Router>
+  );
 };
 
 export default Render;

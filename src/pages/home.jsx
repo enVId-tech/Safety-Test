@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Link } from "react-router-dom";
 
 const HomePage = () => {
     const LOGINDETAILS = useRef(null);
@@ -10,9 +11,10 @@ const HomePage = () => {
     const TEST = useRef(null);
     const MAINIMG = useRef(null);
     const USER = useRef(null);
-    const ERROR = useRef(null);
     const TYPEOFTEST = useRef(null);
+    const ERROR = useRef(null);
 
+    const [error, setError] = useState(null);
     const [folders, setFolders] = useState([]);
     const [SelectedValue, setSelectedValue] = useState("");
     const [User, setUser] = useState("");
@@ -20,9 +22,10 @@ const HomePage = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const folders = await fetch("/home/get/folders");
-                const foldersJson = await folders.json();
-                const foldersWithoutDashes = foldersJson.map(folder =>
+                const getFolders = await fetch("/home/get/folders");
+                const foldersJson = await getFolders.json();
+                const folders = foldersJson.fileNames;
+                const foldersWithoutDashes = folders.map(folder =>
                     folder.replace("-", " ")
                 );
                 setFolders(foldersWithoutDashes);
@@ -33,7 +36,17 @@ const HomePage = () => {
 
         setSelectedValue("Safety-Test");
         fetchData();
+
     }, []);
+
+    const showError = (errorMessage) => {
+        setError(errorMessage);
+    };
+
+    const hideError = () => {
+        setError(null);
+    };
+
 
     const handleSelectChange = (event) => {
         setUser(event.target.value);
@@ -48,19 +61,49 @@ const HomePage = () => {
 
         if (!user) {
             showError("Please enter a valid username");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else if (!user.includes(" ")) {
             showError("You must input both your first and last names in the box");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else if (user.split(" ")[0].length > 20 || user.split(" ")[1].length > 25) {
             showError("Your first or last name is too long. Try again.");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else if (user.split(" ")[0].length < 2 || user.split(" ")[1].length < 2) {
             showError("Your first or last name is too short. Try again.");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else if (user.split(" ")[2] !== undefined) {
             showError("You can only have a first and last name. Try again.");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else if (
             user.split(" ")[0][0] !== user.split(" ")[0][0].toUpperCase() ||
             user.split(" ")[1][0] !== user.split(" ")[1][0].toUpperCase()
         ) {
             showError("The first letter of your first and last name should be uppercase. Try again.");
+            // Hide error message after 3 seconds
+            const timer = setTimeout(hideError, 3000);
+
+            // Cleanup the timer on unmount
+            return () => clearTimeout(timer);
         } else {
             LOGINAREA.current.classList.add("removeOffPage");
             FOOTER.current.classList.add("removeOffPage");
@@ -94,12 +137,6 @@ const HomePage = () => {
             }
         }
 
-        function showError(error) {
-            ERROR.current.innerHTML = error;
-            setTimeout(() => {
-                ERROR.current.innerHTML = "";
-            }, 3000);
-        }
     };
 
     const start = event => {
@@ -147,7 +184,7 @@ const HomePage = () => {
                                     </select>
                                 )}
                                 <br />
-                                <h1 id="Error" ref={ERROR}></h1>
+                                {error && <h1 id="Error">{error}</h1>}
                                 <button id="submit" onClick={start}>
                                     Start
                                 </button>
@@ -155,12 +192,10 @@ const HomePage = () => {
                         </div>
                         <footer id="footer" ref={FOOTER}>
                             <p className="OARobotics">
-                                <a id="RoboticsFooter" href="https://frc4079.org/">
-                                    OA Robotics
-                                </a>
+                                <Link id="RoboticsFooter" to="https://frc4079.org/">OA Robotics</Link>
                                 <img src="4079-transparent.png" className="footerimg" alt="4079" />
                             </p>
-                            <p>Revision 15.10; 7-13-2023 20:55:17 PT</p>
+                            <p>Revision 16.00; 7-15-2023 00:14:12 PT</p>
                         </footer>
                     </div>
                     <div id="LoginTop" ref={LOGINTOP}>

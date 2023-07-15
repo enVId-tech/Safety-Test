@@ -775,11 +775,17 @@ hr {
         justify-items: center;
         z-index: 1000;
 
+        >* {
+            opacity: 0;
+            animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+        }
+
         &.active {
             animation: shrinkAnswers 2s ease-in-out forwards;
 
             &.hidden {
-                animation: growAnswers 1s ease-in-out forwards;
+                animation: growAnswers 0.5s ease-in-out forwards;
+
                 & .Apply {
                     animation: testDownUp 0.1s ease-in-out forwards;
                 }

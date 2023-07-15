@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Helmet, HelmetProvider } from "react-helmet-async";
+import { Navigate } from "react-router-dom";
+
 
 const TestPage = () => {
     const [questions, setQuestions] = useState([]);
@@ -14,18 +16,23 @@ const TestPage = () => {
 
     useEffect(() => {
         const fetchData = async () => {
-            const data = await getDataFromServer();
+            try {
+                const data = await getDataFromServer();
 
-            setQuestions(data[0]);
-            setAnswers(data[1]);
-            setQLength(data[2]);
+                if (data.error) {
+                    return <Navigate to="/" />;
+                }
 
-            //console.log(data[0]);
-            //console.log(data[1]);
+                setQuestions(data[0]);
+                setAnswers(data[1]);
+                setQLength(data[2]);
 
-            const initialResponses = Array.from({ length: data[2] }, () => Array(data[1][0].length).fill(false));
+                const initialResponses = Array.from({ length: data[2] }, () => Array(data[1][0].length).fill(false));
 
-            await setResponses(initialResponses);
+                await setResponses(initialResponses);
+            } catch (error) {
+                console.error(error);
+            }
         };
 
         fetchData();
@@ -36,10 +43,8 @@ const TestPage = () => {
         const data = await response.json();
 
         if (data.error) {
-            window.location.href = "/";
+            return <Navigate to="/" />;
         }
-
-        //console.log(data);
 
         return [data.questions, data.answers, data.QUESTION_LENGTH];
     };
@@ -68,8 +73,6 @@ const TestPage = () => {
             const sendResponses = async () => {
                 const newResponses = [...responses];
 
-                console.log(newResponses);
-
                 const response = await fetch("/test/post/submit", {
                     method: "POST",
                     headers: {
@@ -80,15 +83,23 @@ const TestPage = () => {
                 const data = await response.json();
 
                 if (data.error) {
-                    window.location.href = "/";
+                    return data.error;
                 }
 
-                console.log(data);
                 setScore(data.score);
-                //setScore(16)
+                //let testingVar = 16;
+                //setScore(testingVar)
+
+                await fetch("/api", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({ score: data.score, pass: data.score.toString() === qLength.toString() })
+                });
 
                 if (data.score.toString() === qLength.toString()) {
-                //if (score.toString() === qLength.toString()) {
+                    //if (score.toString() === qLength.toString()) {
                     document.getElementsByClassName("QuestionContent")[0].classList.add("hidden");
                     document.getElementsByClassName("QuestionSelections")[0].classList.add("hidden");
                     document.getElementsByClassName("ScoreContent")[0].classList.add("active");
@@ -267,9 +278,13 @@ const TestPage = () => {
                                     } / {
                                             qLength
                                         }
-                                        <br/>
+                                        <br />
                                         Taken at: {
-                                            new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate() + " " + new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
+                                            new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate()
+                                        }
+                                        <br />
+                                        {
+                                            new Date().getHours() + ":" + new Date().getMinutes() + ":" + new Date().getSeconds()
                                         }
                                     </h1>
                                 }
@@ -287,8 +302,9 @@ const TestPage = () => {
                     </div>
                 ) : "alternate1" ? (
                     <nav id="QuestionPages"></nav>
-                ) : null}
-            </span>
+                ) : null
+                }
+            </span >
         );
     };
 
