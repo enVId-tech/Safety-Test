@@ -1,3 +1,30 @@
+# OA-Robotics-Safety-Test
+This is a repository for an updated version of the OA Robotics Safety Test available.
+
+--Minor Update 20.01--
+
+Hosted on and available at http://frc4079.org/safetytest or http://safetytest.csproject.org
+
+Required: NodeJS (https://nodejs.org/en/download/)
+
+
+
+Q&A avilable here:
+
+      Q: What are the functions of this safety test?
+      
+A: There is quite an exhaustive list of functions that this safety test can do, as outlined in both the test creation folder as well as what you can see inside of the directory itself, but the primary objective was to create a test that functioned the same as the original test located at this link: https://tests.frc4079.org/SafetyTest/test.php. It's general purpose is to provide a location to provide a test while being able to randomize it and give feedback on what is wrong and what is right, based on a scoring system.
+
+    Q: How does this work?
+
+A: Generally, there are three pages to this test, the first is the homepage, the second is an optional selection page, and the third is the actual test page. You can create a test based on the guide available in the main directory, and selection is available on the main screen. The user will have to enter their name and the test that they want to take (default is the safety test) and move on to the next page. If chosen, they will go to selection where they will be asked to make a selection on their team name, or else they will go directly to the test. Then on the final page, the user will finally take the test.
+
+    Q: Can I make my own custom tests?
+
+A: Yes! A full length document available at the main path of this repository can be used as an example on how to create a test, and subsequently adjust any parameters of the test as necessary.
+
+-- Default ReactJS Text --
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

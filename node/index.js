@@ -19,6 +19,7 @@ app.use(express.json({ limit: '5mb' }));
 
 // Globals
 let settings;
+const folderPath = 'Tests';
 const folderSplit = '\r\n';
 let folderGet = "";
 let selection = [];
@@ -61,8 +62,6 @@ const getOneSetting = (settingIndex, splitIndex) => {
 
 // Send Valid Folder Responses
 app.get('/home/get/folders', async (req, res) => {
-    const folderPath = 'node/Tests';
-
     try {
         const files = await fs.promises.readdir(folderPath);
 
@@ -128,7 +127,7 @@ app.post('/home/post/folders/dir', async (req, res) => {
         folderGet = req.body.SelectedValue;
         User = req.body.User;
 
-        fs.promises.readFile(`node/Tests/${folderGet}/settings.yml`, 'utf8')
+        fs.promises.readFile(`${folderPath}/${folderGet}/settings.yml`, 'utf8')
             .then(data => {
                 settings = data.split(folderSplit);
             })
@@ -165,7 +164,7 @@ app.get('/test/get/data', async (req, res) => {
         const ANSWER_LENGTH = getOneSetting(3);
         const QUESTION_LENGTH = getOneSetting(2);
 
-        const getTestFileData = await fs.promises.readFile(`node/Tests/${folderGet}/test.txt`, 'utf8');
+        const getTestFileData = await fs.promises.readFile(`${folderPath}/${folderGet}/test.txt`, 'utf8');
 
         const testFileData = getTestFileData.split("Question");
 

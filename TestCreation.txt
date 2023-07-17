@@ -1,0 +1,55 @@
+This is full length documentation on how to create a test inside of this repo.
+
+You want to start off by going to the 'Tests' folder available in the main path in this repo.
+Afterwards, create a folder with the format of '[One Word]-Test'. If you wish to move this folder, make sure to modify the constant inside of node/index.js called 'folderPath'.
+
+After creating this folder, make two files named test.txt (default file name) or whatever you want and settings.yml (required)
+
+In settings.yml, you must have this format:
+
+```
+# Settings folder, controlling functions of the test, do NOT use the colon to split words, use semicolons
+# DO NOT RENAME FOLDER OR REMOVE THESE FIRST TWO LINES - DO NOT GO OVER THE MINIMUM AMOUNT OF ANSWERS OVER ALL QUESTIONS
+Accessable: true #
+Questions: 16 #
+AnswersPerQuestion: 4 #
+SelectionAvailable: true # If this is false, only test specific settings will be available
+TeamSelectionRequired: true #
+TextTestFileName: default # Assumed default if not specified, but can be changed, default path is test.txt
+SafetyTestGuides: true #
+RequiresUsername: true #
+TypeofTestToSendToSheet: Safety #
+CategoriesAvailable: Mechanical; Electrical; Software; Leadership # If TeamSelectionRequired is false, this is ignored
+TeamsAvailable: FRC; FTC; VEX # If TeamSelectionRequired is false, this is ignored
+```
+
+Let's go through a run through of what these mean:
+
+Accessable - true/false: User is able to select it in the main tab to take
+Questions - [number value]: The amount of questions the user will have
+AnswersPerQuestion - [number value]: The amount of answers each question has
+SelectionAvailable - true/false: Whether to show the selection screen to the user
+TeamSelectionRequired - true/false: Whether to require team selection
+TextTestFileName - [word value].txt/default: What the file name to access the test will be. Default is test.txt
+SafetyTestGuides - true/false: Whether to provide guides for the safety test
+RequiresUsername - true/false: Whether to allow the user to pass without username, will return Anonyomous if submitted
+TypeofTestToSendToSheet - [word value]: What type of test will show up when the user submits to google sheets
+CategoriesAvailable: [Array of values separated by '; ']: What categories will be shown if selection required is true
+TeamsAvailable: [Array of values separated by '; ']: What teams will be shown if selection required is true
+
+
+This is it for the settings file, you may add more if you desire, but you will have to code in the functionality on the server and client, generally not recommended that you do this unless you know what you are doing.
+In test.txt (or equivalent), this is generally recommended:
+
+Question 1: Placeholder...?
+ + Placeholder answer 1
+ - Placeholder answer 2
+ - Placeholder answer 3
+ - Placeholder answer 4
+
+Question 2: Placeholder2...?
+ + Placeholder answer 1
+ + Placeholder answer 2
+ + Placeholder answer 3
+ - Placeholder answer 4
+ - Placeholder answer 5
