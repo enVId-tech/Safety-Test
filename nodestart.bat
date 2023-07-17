@@ -1,2 +1,2 @@
-node src/index.js
+nodemon node/index.js
 PAUSE
