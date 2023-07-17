@@ -55,8 +55,8 @@ body {
     }
 
     & #Login {
-        padding-top: 35px;
-        font-size: 100px;
+        padding-top: 3.2vh;
+        font-size: 5.2vw;
 
         &.removeOffPage {
             animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
@@ -64,8 +64,8 @@ body {
     }
 
     & #Test {
-        padding-top: 35px;
-        font-size: 60px;
+        padding-top: 3.2vh;
+        font-size: 3.1vw;
 
         &.removeOffPage {
             animation: $disappearOutOfFrame 0.5s ease-in-out forwards;
@@ -73,7 +73,7 @@ body {
     }
 
     & #MainImg {
-        height: 200px;
+        height: 18.5vh;
         width: auto;
         border-radius: 35px;
 
@@ -119,7 +119,7 @@ body {
         justify-items: center;
         border-radius: 20px;
         width: 175%;
-        height: 400px;
+        height: 37vh;
         opacity: 0;
         animation: $appearIntoFrame 0.5s 4s ease-in-out forwards;
 
@@ -133,8 +133,8 @@ body {
         & #Selection {
             font-weight: lighter;
             font-family: "Open Sans", sans-serif;
-            font-size: 40px;
-            padding-bottom: 50px;
+            font-size: 2vw;
+            padding-bottom: 4.6vh;
         }
 
         & #LoginForm {
@@ -148,21 +148,21 @@ body {
             height: 100%;
 
             & .mainimg {
-                height: 200px;
+                height: 18.5vh;
                 width: auto;
                 border-radius: 35px;
             }
 
             & #user {
-                width: 350px;
-                height: 50px;
+                width: 18.2vw;
+                height: 4.6vh;
                 border: none;
                 background-color: transparent;
                 border-bottom: 2px solid rgba(0, 0, 0, 0.75);
                 color: black;
-                font-size: 17.5px;
-                padding-left: 10px;
-                margin-bottom: 10px;
+                font-size: 0.9vw;
+                padding-left: 0.5vw;
+                margin-bottom: 0.9vh;
 
                 &:focus {
                     outline: none;
@@ -180,16 +180,16 @@ body {
             }
 
             & #typeoftest {
-                width: 350px;
-                height: 50px;
+                width: 18.2vw;
+                height: 4.6vh;
                 border: none;
                 border-radius: 0;
                 background-color: transparent;
                 border-bottom: 2px solid rgba(0, 0, 0, 0.75);
                 color: white;
-                font-size: 17.5px;
-                padding-left: 10px;
-                margin-bottom: 10px;
+                font-size: 0.9vw;
+                padding-left: 0.5vw;
+                margin-bottom: 0.9vh;
 
                 &:disabled {
                     cursor: not-allowed;
@@ -213,17 +213,17 @@ body {
             }
 
             & .typeoftest {
-                width: 175px;
-                height: 50px;
+                width: 9.1vw;
+                height: 4.6vh;
                 border: none;
                 border-radius: 0px;
                 background-color: transparent;
                 border-bottom: 2px solid rgba(0, 0, 0, 0.75);
                 background-color: black;
                 color: white;
-                font-size: 17.5px;
-                padding-left: 10px;
-                margin-bottom: 10px;
+                font-size: 9.1vw;
+                padding-left: 0.5vw;
+                margin-bottom: 0.9vh;
 
                 &:focus {
                     outline: none;
@@ -231,19 +231,19 @@ body {
             }
 
             & #submit {
-                width: 300px;
-                height: 50px;
+                width: 15.6vw;
+                height: 4.6vh;
                 border: none;
                 border-radius: 100px;
-                margin: 10px;
+                margin: 0.5vw 0.9vh;
                 background-color: transparent;
                 border-bottom: 2px solid rgba(0, 0, 0, 0.75);
                 background-color: black;
                 color: white;
-                font-size: 17.5px;
+                font-size: 0.9vw;
                 font-weight: lighter;
-                padding-left: 10px;
-                margin-bottom: 10px;
+                padding-left: 0.5vw;
+                margin-bottom: 0.9vh;
 
                 &:focus {
                     outline: none;
@@ -254,7 +254,7 @@ body {
 }
 
 #footer {
-    padding-top: 10px;
+    padding-top: 0.9vh;
     opacity: 0;
     animation: $appearIntoFrame 0.5s 4s ease-in-out forwards;
 
@@ -264,8 +264,8 @@ body {
     }
 
     & .footerimg {
-        width: 20px;
-        margin-left: 0px;
+        width: 1vw;
+        margin-left: 0;
     }
 }
 
@@ -276,16 +276,158 @@ body {
 
 #Error {
     color: red;
-    font-size: 15px;
+    font-size: 0.7vw;
     font-weight: lighter;
-    margin-top: 10px;
+    margin-top: 0.9vh;
 }
 
 hr {
     border: 0;
-    height: 10px;
+    height: 0.9vh;
     background-color: transparent;
     background-image: linear-gradient(to right, #fd7a00, black, #00aeff);
+}
+
+@media (max-width: 719px) {
+    .main {
+        display: inline-flex;
+        grid-template-rows: 1fr 1fr;
+
+        width: 100%;
+        height: auto;
+
+        & #LoginTop {
+            position: fixed;
+            top: 0;
+            animation: shrinkDown 4s 0.5s ease-in-out forwards;
+            display: flex;
+            flex-wrap: wrap;
+            align-content: flex-end;
+
+            &.slideOffPage {
+                animation: reverseShrinkUp 1s 0.5s ease-in-out forwards;
+            }
+
+            & #Login {
+                animation: $appearIntoFrame 0.1s ease-in-out forwards, fontResize 4s 0.5s ease-in-out forwards;
+                margin-bottom: 2.9vh;
+            }
+
+            & #Test {
+                animation: $appearIntoFrame 0.1s ease-in-out forwards, fontResize 4s 0.5s ease-in-out forwards;
+            }
+
+            & #MainImg {
+                opacity: 0;
+                display: none;
+                visibility: hidden;
+            }
+
+            @keyframes fontResize {
+                0% {
+                    margin-top: 0;
+                    opacity: 1;
+                    font-size: 20vw;
+                }
+
+                100% {
+                    margin-top: 1.2vh;
+                    font-size: 10.0vw;
+                }
+            }
+        }
+
+        & #LoginDetails {
+            position: fixed;
+            bottom: 0;
+            z-index: 10000;
+            animation: shrinkUp 4s 0.5s ease-in-out forwards;
+
+            &.slideOnPage {
+                animation: reverseShrinkDown 1s 0.5s ease-in-out forwards;
+            }
+
+            & #LoginArea {
+                & #Selection {
+                    font-size: 7vw;
+                }
+
+                & #LoginForm {
+                    width: 90vw;
+
+                    & #user {
+                        width: 75vw;
+                        height: 6vh;
+                        font-size: 4vw;
+                    }
+
+                    & #typeoftest {
+                        width: 75vw;
+                        height: 6vh;
+                        font-size: 4vw;
+                    }
+
+                    & #submit {
+                        width: 80.5vw;
+                        height: 6vh;
+                        font-size: 4vw;
+                    }
+                }
+            }
+
+            & #footer {
+                display: none;
+            }
+        }
+
+        @keyframes shrinkDown {
+            0% {
+                width: 100%;
+                height: 100vh;
+            }
+
+            100% {
+                width: 100%;
+                height: 35vh;
+            }
+        }
+
+        @keyframes shrinkUp {
+            0% {
+                width: 100%;
+                height: 0vh;
+            }
+
+            100% {
+                width: 100%;
+                height: 65vh;
+            }
+        }
+
+        @keyframes reverseShrinkUp {
+            0% {
+                width: 100%;
+                height: 65vh;
+            }
+
+            100% {
+                width: 100%;
+                height: 0vh;
+            }
+        }
+
+        @keyframes reverseShrinkDown {
+            0% {
+                width: 100%;
+                height: 35vh;
+            }
+
+            100% {
+                width: 100%;
+                height: 100vh;
+            }
+        }
+    }
 }
 
 // Category Selection
@@ -433,6 +575,146 @@ hr {
             width: 300px;
             height: 75px;
             border-radius: 200px;
+        }
+    }
+}
+
+@media (max-width: 719px) {
+    #root {
+        height: 100%;
+        width: 100%;
+        background-color: rgb(255, 255, 255);
+        margin: 0 auto;
+        line-height: 50px;
+        font-family: Nanum Gothic, sans-serif;
+
+        & .CategoryContent {
+            width: 100%;
+            height: 100%;
+            display: inline-grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            align-items: end;
+            background-color: rgb(0, 162, 255);
+
+            &.CategoryContentNext {
+
+                #CategoryTitle,
+                #CategoryLabel,
+                #Buttons {
+                    opacity: 1;
+                    animation: disappearOutOfFrame 0.25s ease-in-out forwards;
+                }
+            }
+
+            & #CategoryTitle,
+            #CategoryLabel,
+            #Buttons {
+                position: fixed;
+                top: 5;
+                opacity: 0;
+                animation: appearIntoFrame 0.5s 0.9s ease-in-out forwards;
+            }
+
+            & #CategoryTitle {
+                font-size: 10vw;
+                position: fixed;
+                top: 0;
+                margin-top: 2vh;
+            }
+
+            #Buttons {
+                display: grid;
+                width: 100vw;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr;
+                justify-content: space-around;
+                align-items: center;
+                align-items: flex-start;
+                justify-items: center;
+                height: 3vh;
+            }
+
+            & #CategoryLabel {
+                font-size: 3vw;
+                position: fixed;
+                top: 10;
+            }
+
+            #Buttons {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                grid-template-rows: 1fr;
+                justify-content: space-around;
+                align-items: center;
+                align-items: flex-start;
+                height: 5%;
+            }
+
+            #CategoryBack,
+            #CategoryNext {
+                width: 40vw;
+                height: 7vh;
+                margin-top: 3.5vh;
+                font-size: 7vw;
+                border-radius: 20px;
+                border-style: none;
+            }
+        }
+
+        & .CategorySelections {
+            display: grid;
+            grid-template-rows: 1fr 1fr;
+            grid-template-columns: 1fr;
+            justify-content: space-around;
+            height: fit-content;
+            line-height: 15px;
+
+            & .Categories {
+                & .CategoriesLabel {
+                    font-size: 3vw;
+                }
+
+                & #CategorySelection {
+                    display: inline-flex;
+                    justify-content: center;
+
+                    & div {
+                        margin: 2.5px;
+
+                        & input {
+                            font-size: 25px;
+                            width: 100px;
+                            padding: 15px;
+                            height: auto;
+                        }
+
+                        & div {
+                            height: fit-content;
+
+                            &.show {
+                                line-height: 15px;
+                            }
+
+                            & div {
+                                margin: 1px;
+
+                                & input {
+                                    font-size: 15px;
+                                    width: 100px;
+                                    padding: 5px;
+                                    height: 30px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            & .Resources {
+                & .ResourcesLabel {
+                    font-size: 3vw;
+                }
+            }
         }
     }
 }
@@ -780,8 +1062,11 @@ hr {
             animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
         }
 
+
         &.active {
-            animation: shrinkAnswers 2s ease-in-out forwards;
+            @media (min-width: 720px) {
+                animation: shrinkAnswers 2s ease-in-out forwards;
+            }
 
             &.hidden {
                 animation: growAnswers 0.5s ease-in-out forwards;
@@ -789,22 +1074,25 @@ hr {
                 & .Apply {
                     animation: testDownUp 0.1s ease-in-out forwards;
                 }
+
                 >* {
                     & .choices {
                         animation: disappearOutOfFrame 0.1s ease-in-out forwards;
                     }
-    
-                    & #PreviousQuestion, #NextQuestion {
-                    animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+
+                    & #PreviousQuestion,
+                    #NextQuestion {
+                        animation: disappearOutOfFrame 0.1s ease-in-out forwards;
                     }
-    
+
                     & .ScoreContent {
                         color: black;
                         z-index: 10000;
+
                         &.active {
                             font-family: 'Jost', sans-serif;
                             opacity: 1;
-                            position:fixed;
+                            position: fixed;
                             display: grid;
                             visibility: visible;
                             width: 100%;
@@ -812,13 +1100,13 @@ hr {
                             animation: expandToFillScreen 0.5s 1s ease-in-out forwards;
                         }
                     }
-    
+
                     @keyframes expandToFillScreen {
                         0% {
                             transform: translateX(0);
                             transform: translateY(0);
                         }
-    
+
                         100% {
                             transform: translateX(100%);
                             transform: translateY(-150%);
@@ -914,6 +1202,7 @@ hr {
         align-content: center;
         justify-content: center;
         justify-items: center;
+
         #QuestionOptionLabel {
             width: 95%;
             font-family: 'Jost', sans-serif;
@@ -953,7 +1242,168 @@ hr {
     }
 }
 
+@media (max-width: 719px) {
+    .testmain {
+        flex-direction: column;
 
+        & #image {
+            width: 200vh;
+            height: 200vh;
+            transform: rotate(10deg);
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../components/4079.png");
+            background-size: 10%;
+            animation: moveBackground 2s linear, slowlyMoveBackground 180s 2s linear infinite;
+        }
+
+        & .BackConfirmation.active {
+            & .BackConfirmationContent.active {
+                width: 90vw;
+
+                & #BackConfirmationTitle {
+                    font-size: 10vw;
+                    width: 80vw;
+                }
+
+                & .BackConfirmationButtons {
+                    width: 90vw;
+
+                    & #BackConfirmationYes,
+                    #BackConfirmationNo {
+                        width: 35vw;
+                        font-size: 17.5vw;
+                    }
+                }
+            }
+        }
+
+        & .QuestionContent {
+            animation: growQuestionsMobile 1s ease-in-out forwards;
+            height: 0;
+
+            &.hidden {
+                animation: shrinkQuestionsMobile 1s ease-in-out forwards;
+            }
+
+            & .QuestionContainer {
+                & #ContentDiv {
+                    width: 95vw;
+                    height: 35vh;
+
+                    & #QuestionDetails {
+                        & #QuestionTitle {
+                            font-size: 7vw;
+                        }
+
+                        & #Switch {
+                            width: 32.5vw;
+                            display: none;
+
+                            & #Switch1,
+                            #Switch2 {
+                                width: 15vw;
+                                height: 15vw;
+                            }
+                        }
+                    }
+
+                    & #QuestionContainerContent {
+                        width: 70vw;
+                        height: 20vh;
+                        font-size: 5vw;
+                    }
+                }
+            }
+        }
+
+        & .QuestionSelections {
+            animation: shrinkAnswersMobile 1s ease-in-out forwards;
+            height: 100vh;
+
+            &.hidden {
+                animation: growAnswersMobile 1s ease-in-out forwards;
+            }
+
+            & .Apply {
+                display: none;
+            }
+
+            & .QuestionOptions {
+                & .choices {
+                    & .QuestionOption {
+                        width: 85vw;
+                        height: 8vh;
+
+                        & #QuestionOptionLabel {
+                            font-size: 5vw;
+                        }
+                    }
+                }
+
+                & .ProgressionButtons {
+                    & #Score {
+                        font-size: 4vw;
+                        margin-bottom: 10vh;
+                    }
+
+                    & #PreviousQuestion,
+                    #NextQuestion {
+                        width: 25vw;
+                        height: 8vh;
+                        font-size: 5vw;
+                    }
+                }
+            }
+        }
+
+        @keyframes shrinkAnswersMobile {
+            0% {
+                width: 100vw;
+                height: 100vh;
+            }
+
+            100% {
+                width: 100vw;
+                height: 60vh;
+            }
+        }
+
+        @keyframes growAnswersMobile {
+            0% {
+                width: 100vw;
+                height: 60vh;
+            }
+
+            100% {
+                width: 100vw;
+                height: 100vh;
+            }
+        }
+
+        @keyframes shrinkQuestionsMobile {
+            0% {
+                width: 100vw;
+                height: 40vh;
+            }
+
+            100% {
+                width: 100vw;
+                height: 0vh;
+            }
+        }
+
+        @keyframes growQuestionsMobile {
+            0% {
+                width: 100vw;
+                height: 0vh;
+            }
+
+            100% {
+                width: 100vw;
+                height: 40vh;
+            }
+        }
+    }
+}
 
 // Animations
 

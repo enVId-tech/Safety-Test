@@ -24,6 +24,9 @@ const Render = () => {
         <Route path="/selection" element={<CategoryPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/" element={<HomePage />} />
+
+        {/* Fallback */}
+        <Route path="/*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
   );

@@ -195,7 +195,7 @@ const HomePage = () => {
                                 <Link id="RoboticsFooter" to="https://frc4079.org/">OA Robotics</Link>
                                 <img src="4079-transparent.png" className="footerimg" alt="4079" />
                             </p>
-                            <p>Revision 16.00; 7-15-2023 00:14:12 PT</p>
+                            <p>Revision 16.10; 7-16-2023 18:09:04 PT</p>
                         </footer>
                     </div>
                     <div id="LoginTop" ref={LOGINTOP}>
