@@ -32,7 +32,7 @@ let answersPush = [];
 const shuffle = (array) => {
     try {
         let currentIndex = array.length, randomIndex;
-        while (currentIndex != 0) {
+        while (currentIndex !== 0) {
             randomIndex = Math.floor(Math.random() * currentIndex);
             currentIndex--;
             [array[currentIndex], array[randomIndex]] = [array[randomIndex], array[currentIndex]];
@@ -90,23 +90,23 @@ app.get('/home/get/selection', async (req, res) => {
 
         let selectionSettings = [];
 
-        if (ACCESSABLE == 'false') {
+        if (ACCESSABLE === 'false') {
             res.send({ error: "Error" });
             return;
         }
 
-        if (SELECTION_AVAILABLE == 'false') {
+        if (SELECTION_AVAILABLE === 'false') {
             res.send({ send: "Test" });
             return;
         }
 
-        if (TEAM_SELECTION_REQUIRED == 'true') {
+        if (TEAM_SELECTION_REQUIRED === 'true') {
             selectionSettings.push("TS");
         } else {
             selectionSettings.push("NTS");
         }
 
-        if (SAFETY_TEST_GUIDES == 'true') {
+        if (SAFETY_TEST_GUIDES === 'true') {
             selectionSettings.push("STG");
         } else {
             selectionSettings.push("NSTG");
@@ -225,85 +225,6 @@ app.post('/test/post/submit', async (req, res) => {
     } catch (err) {
         console.error(err);
         res.send(err);
-    }
-});
-
-//The authentication for the google API
-const authentication = async () => {
-    //The credentials for the google API
-    const auth = new google.auth.GoogleAuth({
-        keyFile: "node/credentials.json",
-        scopes: "https://www.googleapis.com/auth/spreadsheets"
-    })
-    //The client for the google API, waiting for the authentication to get the credentials
-    const client = await auth.getClient();
-    //The google API
-    const googleAPI = google.sheets({
-        version: "v4",
-        auth: client
-    });
-    //Returning the google API
-    return { googleAPI };
-}
-
-//Sheets ID
-const id = "1WyTjyGrxWOyzYaWiOUkYICdnMXZvJJAZgS5P5tUd6dk";
-
-//The function that will be called to add the data to the google sheet
-app.get("/api", async (request, res1) => {
-    try {
-        //Waiting for the authentication to get the credentials
-        const { googleAPI } = await authentication();
-
-        //The data that will be added to the google sheet
-        const response = await googleAPI.spreadsheets.values.append({
-            spreadsheetId: id,
-            range: "Sheet1!A1:F1",
-        });
-        res1.send({ status: "ok" });
-        //If there is an error, it will be logged in the console
-    } catch (error) {
-        console.log(error);
-        res1.status(500).send(error.message);
-    }
-});
-
-
-//Sending data to the sheet
-app.post("/api", async (request, response1) => {
-    try {
-        //destructure 'newName' and 'newValue' from request.body
-        const Score = request.body.score;
-        const Pass = request.body.pass;
-
-        const Team = selection.split(" ")[0];
-        const Category = selection.split(" ")[1];
-
-        const Time = new Date().getFullYear() + "-" + (new Date().getMonth() + 1) + "-" + new Date().getDate() + " " + new Date().toLocaleTimeString();
-
-        const Type = folderGet.split("-")[0] + " " + folderGet.split("-")[1];
-
-        //const { Name, Team, Category, Pass, Score, Type, Abbreviated } = request.body;
-
-
-        const { googleAPI } = await authentication();
-        //add the new name and value to the sheet
-        const response = await googleAPI.spreadsheets.values.append({
-            spreadsheetId: id,
-            range: "Sheet1!A1:F1",
-            valueInputOption: "USER_ENTERED",
-            resource: {
-                values: [
-                    [User, Team, Category, Pass, Score, Type, Time]
-                ]
-            }
-        });
-
-        response1.send({ status: response.status });
-
-    } catch (error) {
-        console.log(error, "There was an error updating the spreadsheet", error.message);
-        response1.status(500).send();
     }
 });
 

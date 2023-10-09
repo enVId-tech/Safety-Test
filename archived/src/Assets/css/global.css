@@ -1,0 +1,1394 @@
+@charset "UTF-8";
+body {
+  font-family: "Segoe UI", Arial, sans-serif;
+  color: black;
+  overflow: hidden;
+  scroll-behavior: none;
+  -webkit-user-select: none;
+  /* Chrome, Safari, Opera */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* IE 10+ */
+  user-select: none;
+  /* Standard syntax */
+}
+
+.main {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  margin: 0 auto;
+  display: inline-flex;
+}
+
+#LoginTop {
+  position: absolute;
+  right: 0;
+  font-family: "Open Sans", sans-serif;
+  text-shadow: 0px 1px 1px rgb(116, 116, 116);
+  margin: auto;
+  color: white;
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url("../components/FRC.jpg");
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 500;
+  animation: slideAndShrink 2.5s 1.5s ease-in-out forwards;
+}
+#LoginTop.slideOffPage {
+  width: 70%;
+  animation: loginAnimationSlideShrink 1.5s 0.1s ease-in-out forwards;
+}
+#LoginTop #Login {
+  padding-top: 3.2vh;
+  font-size: 5.2vw;
+}
+#LoginTop #Login.removeOffPage {
+  animation: disappearOutOfFrame 0.5s ease-in-out forwards;
+}
+#LoginTop #Test {
+  padding-top: 3.2vh;
+  font-size: 3.1vw;
+}
+#LoginTop #Test.removeOffPage {
+  animation: disappearOutOfFrame 0.5s ease-in-out forwards;
+}
+#LoginTop #MainImg {
+  height: 18.5vh;
+  width: auto;
+  border-radius: 35px;
+}
+#LoginTop #MainImg.removeOffPage {
+  animation: disappearOutOfFrame 0.5s ease-in-out forwards;
+}
+#LoginTop #Login,
+#LoginTop #Test,
+#LoginTop #MainImg {
+  opacity: 0;
+  animation: appearIntoFrame 0.75s 0.5s ease-in-out forwards;
+}
+
+#LoginDetails {
+  background-color: rgb(0, 162, 255);
+  font-family: "Source Sans", sans-serif;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 30%;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 500;
+  animation: slideIntoFrame 2s 1s ease-in-out forwards;
+}
+#LoginDetails.slideOnPage {
+  background-color: rgb(0, 162, 255);
+  animation: loginAnimationAppearIntoFrame 1.5s 0.1s ease-in-out forwards;
+}
+#LoginDetails #LoginArea {
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 20px;
+  width: 175%;
+  height: 37vh;
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 4s ease-in-out forwards;
+}
+#LoginDetails #LoginArea.removeOffPage {
+  background-color: rgb(0, 162, 255);
+  opacity: 1;
+  width: 30%;
+  animation: disappearOutOfFrame 0.5s ease-in-out forwards;
+}
+#LoginDetails #LoginArea #Selection {
+  font-weight: lighter;
+  font-family: "Open Sans", sans-serif;
+  font-size: 2vw;
+  padding-bottom: 4.6vh;
+}
+#LoginDetails #LoginArea #LoginForm {
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+}
+#LoginDetails #LoginArea #LoginForm .mainimg {
+  height: 18.5vh;
+  width: auto;
+  border-radius: 35px;
+}
+#LoginDetails #LoginArea #LoginForm #user {
+  width: 18.2vw;
+  height: 4.6vh;
+  border: none;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+  color: black;
+  font-size: 0.9vw;
+  padding-left: 0.5vw;
+  margin-bottom: 0.9vh;
+}
+#LoginDetails #LoginArea #LoginForm #user:focus {
+  outline: none;
+}
+#LoginDetails #LoginArea #LoginForm #user:-webkit-autofill, #LoginDetails #LoginArea #LoginForm #user:-webkit-autofill:hover, #LoginDetails #LoginArea #LoginForm #user:-webkit-autofill:focus, #LoginDetails #LoginArea #LoginForm #user:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: black;
+  transition: background-color 5000s ease-in-out 0s;
+  box-shadow: inset 0 0 20px 20px transparent;
+}
+#LoginDetails #LoginArea #LoginForm #typeoftest {
+  width: 18.2vw;
+  height: 4.6vh;
+  border: none;
+  border-radius: 0;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+  color: white;
+  font-size: 0.9vw;
+  padding-left: 0.5vw;
+  margin-bottom: 0.9vh;
+}
+#LoginDetails #LoginArea #LoginForm #typeoftest:disabled {
+  cursor: not-allowed;
+  color: rgb(102, 102, 102);
+}
+#LoginDetails #LoginArea #LoginForm #typeoftest:focus {
+  outline: none;
+}
+#LoginDetails #LoginArea #LoginForm #typeoftest::after {
+  content: "▾";
+  /* Unicode character for down arrow */
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  pointer-events: none;
+  /* Ensure arrow doesn't interfere with select functionality */
+}
+#LoginDetails #LoginArea #LoginForm .typeoftest {
+  width: 9.1vw;
+  height: 4.6vh;
+  border: none;
+  border-radius: 0px;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+  background-color: black;
+  color: white;
+  font-size: 9.1vw;
+  padding-left: 0.5vw;
+  margin-bottom: 0.9vh;
+}
+#LoginDetails #LoginArea #LoginForm .typeoftest:focus {
+  outline: none;
+}
+#LoginDetails #LoginArea #LoginForm #submit {
+  width: 15.6vw;
+  height: 4.6vh;
+  border: none;
+  border-radius: 100px;
+  margin: 0.5vw 0.9vh;
+  background-color: transparent;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+  background-color: black;
+  color: white;
+  font-size: 0.9vw;
+  font-weight: lighter;
+  padding-left: 0.5vw;
+  margin-bottom: 0.9vh;
+}
+#LoginDetails #LoginArea #LoginForm #submit:focus {
+  outline: none;
+}
+
+#footer {
+  padding-top: 0.9vh;
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 4s ease-in-out forwards;
+}
+#footer.removeOffPage {
+  opacity: 1;
+  animation: disappearOutOfFrame 0.5s ease-in-out forwards;
+}
+#footer .footerimg {
+  width: 1vw;
+  margin-left: 0;
+}
+
+#RoboticsFooter {
+  color: black;
+  text-decoration: none;
+}
+
+#Error {
+  color: red;
+  font-size: 0.7vw;
+  font-weight: lighter;
+  margin-top: 0.9vh;
+}
+
+hr {
+  border: 0;
+  height: 0.9vh;
+  background-color: transparent;
+  background-image: linear-gradient(to right, #fd7a00, black, #00aeff);
+}
+
+@media (max-width: 719px) {
+  .main {
+    display: inline-flex;
+    grid-template-rows: 1fr 1fr;
+    width: 100%;
+    height: auto;
+  }
+  .main #LoginTop {
+    position: fixed;
+    top: 0;
+    animation: shrinkDown 4s 0.5s ease-in-out forwards;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-end;
+  }
+  .main #LoginTop.slideOffPage {
+    animation: reverseShrinkUp 1s 0.5s ease-in-out forwards;
+  }
+  .main #LoginTop #Login {
+    animation: appearIntoFrame 0.1s ease-in-out forwards, fontResize 4s 0.5s ease-in-out forwards;
+    margin-bottom: 2.9vh;
+  }
+  .main #LoginTop #Test {
+    animation: appearIntoFrame 0.1s ease-in-out forwards, fontResize 4s 0.5s ease-in-out forwards;
+  }
+  .main #LoginTop #MainImg {
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+  @keyframes fontResize {
+    0% {
+      margin-top: 0;
+      opacity: 1;
+      font-size: 20vw;
+    }
+    100% {
+      margin-top: 1.2vh;
+      font-size: 10vw;
+    }
+  }
+  .main #LoginDetails {
+    position: fixed;
+    bottom: 0;
+    z-index: 10000;
+    animation: shrinkUp 4s 0.5s ease-in-out forwards;
+  }
+  .main #LoginDetails.slideOnPage {
+    animation: reverseShrinkDown 1s 0.5s ease-in-out forwards;
+  }
+  .main #LoginDetails #LoginArea #Selection {
+    font-size: 7vw;
+  }
+  .main #LoginDetails #LoginArea #LoginForm {
+    width: 90vw;
+  }
+  .main #LoginDetails #LoginArea #LoginForm #user {
+    width: 75vw;
+    height: 6vh;
+    font-size: 4vw;
+  }
+  .main #LoginDetails #LoginArea #LoginForm #typeoftest {
+    width: 75vw;
+    height: 6vh;
+    font-size: 4vw;
+  }
+  .main #LoginDetails #LoginArea #LoginForm #submit {
+    width: 80.5vw;
+    height: 6vh;
+    font-size: 4vw;
+  }
+  .main #LoginDetails #footer {
+    display: none;
+  }
+  @keyframes shrinkDown {
+    0% {
+      width: 100%;
+      height: 100vh;
+    }
+    100% {
+      width: 100%;
+      height: 35vh;
+    }
+  }
+  @keyframes shrinkUp {
+    0% {
+      width: 100%;
+      height: 0vh;
+    }
+    100% {
+      width: 100%;
+      height: 65vh;
+    }
+  }
+  @keyframes reverseShrinkUp {
+    0% {
+      width: 100%;
+      height: 65vh;
+    }
+    100% {
+      width: 100%;
+      height: 0vh;
+    }
+  }
+  @keyframes reverseShrinkDown {
+    0% {
+      width: 100%;
+      height: 35vh;
+    }
+    100% {
+      width: 100%;
+      height: 100vh;
+    }
+  }
+}
+.categorymain {
+  height: 100%;
+  width: 100%;
+  background-color: rgb(255, 255, 255);
+  margin: 0 auto;
+  line-height: 50px;
+  font-family: Nanum Gothic, sans-serif;
+}
+.categorymain .CategorySelections {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  line-height: 50px;
+  padding-top: 50px;
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 1s ease-in-out forwards;
+}
+.categorymain .CategoryContent {
+  padding-top: 2%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  justify-items: center;
+  background-color: rgb(0, 162, 255);
+  padding-bottom: 40px;
+  animation: shrinkToSize 1s ease-in-out forwards;
+}
+.categorymain .CategoryContent #CategoryTitle,
+.categorymain .CategoryContent #CategoryLabel,
+.categorymain .CategoryContent #Buttons {
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 0.9s ease-in-out forwards;
+}
+.categorymain .CategoryContentNext {
+  animation: growToSize 1s ease-in-out forwards;
+}
+.categorymain .CategoryContentNext #CategoryTitle,
+.categorymain .CategoryContentNext #CategoryLabel,
+.categorymain .CategoryContentNext #Buttons {
+  opacity: 1;
+  animation: disappearOutOfFrame 0.25s ease-in-out forwards;
+}
+
+.SelectedButton {
+  background-color: lightgreen;
+}
+
+.CategoriesSelected {
+  color: black;
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 1s ease-in-out forwards;
+}
+
+#CategorySelection {
+  display: inline-flex;
+  width: 700px;
+  justify-content: space-around;
+  align-items: center;
+  align-items: flex-start;
+}
+
+#SafetySlidesLink,
+#CategoryChooseLink {
+  color: rgba(0, 26, 255, 0.75);
+  font-family: "Open Sans", sans-serif;
+  text-decoration: none;
+}
+
+#SafetyLink,
+#CategoryChoose {
+  width: 50%;
+  height: 30%;
+  border-radius: 200px;
+}
+#SafetyLink:hover,
+#CategoryChoose:hover {
+  background-color: rgba(25, 129, 25, 0.5);
+  width: 50%;
+  height: 30%;
+  border-radius: 200px;
+}
+
+#FRC,
+#FTC,
+#VEX {
+  width: 175px;
+  height: 75px;
+  font-size: 50px;
+  letter-spacing: 1px;
+  border-radius: 10px;
+  border-style: none;
+  font-weight: 500;
+}
+
+#FRCOptions,
+#FTCOptions,
+#VEXOptions {
+  display: none;
+  height: 400px;
+  padding-top: 2px;
+}
+#FRCOptions.show,
+#FTCOptions.show,
+#VEXOptions.show {
+  display: block;
+}
+#FRCOptions input,
+#FTCOptions input,
+#VEXOptions input {
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  border-radius: 10px;
+  border-style: none;
+}
+
+#CategoryNext,
+#CategoryBack {
+  padding: 1px;
+  width: 300px;
+  height: 75px;
+  font-size: 50px;
+  border-radius: 200px;
+  border-style: none;
+}
+
+#Buttons {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  align-items: flex-start;
+  height: 175px;
+}
+#Buttons #CategoryNext :hover,
+#Buttons #CategoryBack :hover {
+  background-color: rgba(25, 129, 25, 0.5);
+  width: 300px;
+  height: 75px;
+  border-radius: 200px;
+}
+
+@media (max-width: 719px) {
+  #root {
+    height: 100%;
+    width: 100%;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+    line-height: 50px;
+    font-family: Nanum Gothic, sans-serif;
+  }
+  #root .CategoryContent {
+    width: 100%;
+    height: 100%;
+    display: inline-grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: end;
+    background-color: rgb(0, 162, 255);
+  }
+  #root .CategoryContent.CategoryContentNext #CategoryTitle,
+  #root .CategoryContent.CategoryContentNext #CategoryLabel,
+  #root .CategoryContent.CategoryContentNext #Buttons {
+    opacity: 1;
+    animation: disappearOutOfFrame 0.25s ease-in-out forwards;
+  }
+  #root .CategoryContent #CategoryTitle,
+  #root .CategoryContent #CategoryLabel,
+  #root .CategoryContent #Buttons {
+    position: fixed;
+    top: 5;
+    opacity: 0;
+    animation: appearIntoFrame 0.5s 0.9s ease-in-out forwards;
+  }
+  #root .CategoryContent #CategoryTitle {
+    font-size: 10vw;
+    position: fixed;
+    top: 0;
+    margin-top: 2vh;
+  }
+  #root .CategoryContent #Buttons {
+    display: grid;
+    width: 100vw;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-start;
+    justify-items: center;
+    height: 3vh;
+  }
+  #root .CategoryContent #CategoryLabel {
+    font-size: 3vw;
+    position: fixed;
+    top: 10;
+  }
+  #root .CategoryContent #Buttons {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    justify-content: space-around;
+    align-items: center;
+    align-items: flex-start;
+    height: 5%;
+  }
+  #root .CategoryContent #CategoryBack,
+  #root .CategoryContent #CategoryNext {
+    width: 40vw;
+    height: 7vh;
+    margin-top: 3.5vh;
+    font-size: 7vw;
+    border-radius: 20px;
+    border-style: none;
+  }
+  #root .CategorySelections {
+    display: grid;
+    grid-template-rows: 1fr 1fr;
+    grid-template-columns: 1fr;
+    justify-content: space-around;
+    height: fit-content;
+    line-height: 15px;
+  }
+  #root .CategorySelections .Categories .CategoriesLabel {
+    font-size: 3vw;
+  }
+  #root .CategorySelections .Categories #CategorySelection {
+    display: inline-flex;
+    justify-content: center;
+  }
+  #root .CategorySelections .Categories #CategorySelection div {
+    margin: 2.5px;
+  }
+  #root .CategorySelections .Categories #CategorySelection div input {
+    font-size: 25px;
+    width: 100px;
+    padding: 15px;
+    height: auto;
+  }
+  #root .CategorySelections .Categories #CategorySelection div div {
+    height: fit-content;
+  }
+  #root .CategorySelections .Categories #CategorySelection div div.show {
+    line-height: 15px;
+  }
+  #root .CategorySelections .Categories #CategorySelection div div div {
+    margin: 1px;
+  }
+  #root .CategorySelections .Categories #CategorySelection div div div input {
+    font-size: 15px;
+    width: 100px;
+    padding: 5px;
+    height: 30px;
+  }
+  #root .CategorySelections .Resources .ResourcesLabel {
+    font-size: 3vw;
+  }
+}
+.testmain {
+  height: 100%;
+  width: 100%;
+  background-color: transparent;
+  margin: 0 auto;
+  display: inline-flex;
+}
+.testmain #image {
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 600%;
+  height: 600%;
+  transform: rotate(10deg);
+  z-index: 3;
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../components/4079.png");
+  background-size: 0.75%;
+  background-position: center;
+  background-repeat: repeat;
+  animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
+}
+.testmain .BackConfirmation {
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(39, 39, 39, 0.7);
+  position: absolute;
+  display: none;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 10000;
+  opacity: 1;
+}
+.testmain .BackConfirmation.active {
+  display: grid;
+}
+.testmain .BackConfirmation .BackConfirmationContent {
+  background-color: rgb(124, 124, 124);
+  width: 900px;
+  height: 600px;
+  border-radius: 25px;
+  animation: testDownUp 1s ease-in-out forwards;
+}
+.testmain .BackConfirmation .BackConfirmationContent.active {
+  animation: testUpDown 1s ease-in-out forwards;
+}
+.testmain .BackConfirmation .BackConfirmationContent #BackConfirmationTitle {
+  background-color: rgb(51, 51, 51);
+  padding: 20px;
+  color: white;
+  width: fit-content;
+  border-radius: 20px;
+  font-family: "Jost", sans-serif;
+  font-size: 50px;
+  font-weight: lighter;
+  margin-top: 100px;
+  display: grid;
+}
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons {
+  width: 50%;
+  height: 50%;
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  justify-items: center;
+}
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationYes,
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationNo {
+  width: 300px;
+  height: 175px;
+  font-family: "Jost", sans-serif;
+  font-size: 100px;
+  border-radius: 25px;
+  border-style: none;
+  background-color: white;
+  margin: 25px;
+}
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationYes#BackConfirmationNo:hover,
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationNo#BackConfirmationNo:hover {
+  background-color: red;
+}
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationYes#BackConfirmationYes:hover,
+.testmain .BackConfirmation .BackConfirmationContent .BackConfirmationButtons #BackConfirmationNo#BackConfirmationYes:hover {
+  background-color: lightgreen;
+}
+.testmain .QuestionContent {
+  position: relative;
+  width: 60%;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 3;
+  animation: growQuestions 2s ease-in-out forwards;
+}
+.testmain .QuestionContent2.whole {
+  width: 100%;
+  height: 100vh;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 3;
+}
+.testmain .QuestionContent.passive {
+  width: 55%;
+}
+.testmain .QuestionContent.active {
+  width: 55%;
+}
+.testmain .QuestionContent.active > * {
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+}
+.testmain .QuestionContent.hidden {
+  animation: shrinkQuestions 1s ease-in-out forwards;
+}
+.testmain .QuestionContent.hidden > * {
+  opacity: 1;
+  animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+}
+.testmain .QuestionContent .QuestionContainer {
+  z-index: 4;
+}
+.testmain .QuestionContent .QuestionContainer #QuestionTitle {
+  padding-top: 20px;
+  font-family: "Jost", sans-serif;
+  font-size: 50px;
+  font-weight: lighter;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  display: grid;
+  justify-content: start;
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv {
+  width: 1000px;
+  height: 600px;
+  background-color: rgb(124, 124, 124);
+  z-index: 1;
+  border-radius: 20px;
+  display: block;
+  padding-left: 20px;
+  align-items: center;
+  align-content: center;
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails {
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch {
+  display: inline-flex;
+  float: right;
+  width: 200px;
+  height: 100px;
+  padding-top: 12.5px;
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch1,
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch2 {
+  width: 75px;
+  height: 75px;
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch1 {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: rgb(41, 41, 41) 2px solid;
+  background-color: rgb(31, 31, 31);
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch1.active {
+  background-color: rgb(43, 153, 0);
+}
+.testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch2 {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: rgb(31, 31, 31);
+  border: rgb(41, 41, 41) 2px solid;
+}
+.testmain .QuestionContent .QuestionContainer #QuestionContainerContent {
+  width: 90%;
+  height: 71%;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background-color: rgba(41, 41, 41, 0.7);
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  border-radius: 20px;
+  font-size: 35px;
+  z-index: 100;
+}
+.testmain .QuestionContent .QuestionContainer #QuestionLabel {
+  font-family: "Barlow", sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.testmain .QuestionContainer2 {
+  z-index: 4;
+}
+.testmain .QuestionContainer2 #QuestionTitle {
+  padding-top: 20px;
+  font-family: "Jost", sans-serif;
+  font-size: 50px;
+  font-weight: lighter;
+  padding-left: 10px;
+  padding-bottom: 10px;
+  display: grid;
+  justify-content: start;
+}
+.testmain .QuestionContainer2 #ContentDiv {
+  width: 1000px;
+  height: 600px;
+  background-color: rgb(124, 124, 124);
+  z-index: 1;
+  border-radius: 20px;
+  display: block;
+  padding-left: 20px;
+  align-items: center;
+  align-content: center;
+  animation: expandQuestionBox 1s ease-in-out forwards;
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails {
+  display: inline-flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch {
+  display: inline-flex;
+  float: right;
+  justify-self: flex-end;
+  width: 200px;
+  height: 100px;
+  padding-top: 12.5px;
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch #Switch1,
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch #Switch2 {
+  width: 75px;
+  height: 75px;
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch #Switch1 {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: rgb(41, 41, 41) 2px solid;
+  background-color: rgb(31, 31, 31);
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch #Switch1.active {
+  background-color: rgb(43, 153, 0);
+}
+.testmain .QuestionContainer2 #ContentDiv #QuestionDetails #Switch #Switch2 {
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: rgb(31, 31, 31);
+  border: rgb(41, 41, 41) 2px solid;
+}
+.testmain .QuestionContainer2 #QuestionContainerContent {
+  width: 90%;
+  height: 75%;
+  color: white;
+  font-weight: bold;
+  letter-spacing: 2px;
+  background-color: rgba(41, 41, 41, 0.7);
+  display: grid;
+  border-radius: 20px;
+  font-size: 35px;
+  z-index: 100;
+  overflow-y: auto;
+  overflow-x: hidden;
+  animation: expand 1s ease-in-out forwards;
+}
+.testmain .QuestionContainer2 #QuestionLabel {
+  font-family: "Barlow", sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.testmain .QuestionSelections {
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(0, 162, 255);
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  z-index: 1000;
+}
+.testmain .QuestionSelections > * {
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+}
+@media (min-width: 720px) {
+  .testmain .QuestionSelections.active {
+    animation: shrinkAnswers 2s ease-in-out forwards;
+  }
+}
+.testmain .QuestionSelections.active.hidden {
+  animation: growAnswers 0.5s ease-in-out forwards;
+}
+.testmain .QuestionSelections.active.hidden .Apply {
+  animation: testDownUp 0.1s ease-in-out forwards;
+}
+.testmain .QuestionSelections.active.hidden > * .choices {
+  animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+}
+.testmain .QuestionSelections.active.hidden > * #PreviousQuestion,
+.testmain .QuestionSelections.active.hidden > * #NextQuestion {
+  animation: disappearOutOfFrame 0.1s ease-in-out forwards;
+}
+.testmain .QuestionSelections.active.hidden > * .ScoreContent {
+  color: black;
+  z-index: 10000;
+}
+.testmain .QuestionSelections.active.hidden > * .ScoreContent.active {
+  font-family: "Jost", sans-serif;
+  opacity: 1;
+  position: fixed;
+  display: grid;
+  visibility: visible;
+  width: 100%;
+  height: 100;
+  animation: expandToFillScreen 0.5s 1s ease-in-out forwards;
+}
+@keyframes expandToFillScreen {
+  0% {
+    transform: translateX(0);
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateX(100%);
+    transform: translateY(-150%);
+    font-size: 100px;
+  }
+}
+.testmain .QuestionSelections.active.hidden > * {
+  opacity: 0;
+  animation: appearIntoFrame 0.5s 2s ease-in-out forwards;
+}
+.testmain .QuestionSelections.passive {
+  width: 45%;
+}
+.testmain .QuestionSelections .choices {
+  display: grid;
+  justify-content: space-around;
+  justify-self: center;
+  justify-items: center;
+}
+.testmain .QuestionSelections .Apply {
+  font-family: Nanum Gothic, sans-serif;
+  font-size: 60px;
+}
+.testmain .QuestionSelections .QuestionOption {
+  font-family: "Jost", sans-serif;
+  border-width: 4px;
+  border-style: solid;
+  border-color: black;
+  width: 700px;
+  height: 100px;
+  background-color: rgba(124, 124, 124, 0);
+  border-radius: 20px;
+  display: grid;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  font-size: 35px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.testmain .QuestionSelections .QuestionOption:hover {
+  background-color: rgba(0, 255, 0, 0.6);
+  transition: background-color linear 0.1s;
+}
+.testmain .QuestionSelections .QuestionOption.active {
+  background-color: rgba(0, 255, 0, 0.8);
+  transition: background-color linear 0.1s;
+}
+.testmain .QuestionSelections .QuestionOption.active:hover {
+  background-color: rgba(255, 0, 0, 0.8);
+}
+
+.QuestionContent2 {
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.QuestionContent2 #QuestionLabel {
+  font-family: "Barlow", sans-serif;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+.QuestionContent2 .QuestionOptions {
+  background-color: rgb(48, 48, 48);
+  width: 55%;
+  height: 200px;
+  display: flex;
+  vertical-align: middle;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+}
+.QuestionContent2 .QuestionOptions #QuestionOptionLabel {
+  width: 95%;
+  font-family: "Jost", sans-serif;
+  background-color: rgba(124, 124, 124, 0.7);
+  display: grid;
+  font-family: "Jost", sans-serif;
+  font-weight: 100;
+  font-size: 25px;
+  border-radius: 20px;
+  padding: 25px;
+}
+
+.QuestionOption {
+  background-color: rgba(124, 124, 124, 0.7);
+  width: 75%;
+}
+
+.ProgressionButtons {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-top: 50px;
+}
+.ProgressionButtons .Progression {
+  width: 22.5%;
+  height: 25%;
+  font-size: 25px;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 10px;
+  border-color: black;
+  background-color: transparent;
+}
+
+@media (max-width: 719px) {
+  .testmain {
+    flex-direction: column;
+  }
+  .testmain #image {
+    width: 200vh;
+    height: 200vh;
+    transform: rotate(10deg);
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../components/4079.png");
+    background-size: 10%;
+    animation: moveBackground 2s linear, slowlyMoveBackground 180s 2s linear infinite;
+  }
+  .testmain .BackConfirmation.active .BackConfirmationContent.active {
+    width: 90vw;
+  }
+  .testmain .BackConfirmation.active .BackConfirmationContent.active #BackConfirmationTitle {
+    font-size: 10vw;
+    width: 80vw;
+  }
+  .testmain .BackConfirmation.active .BackConfirmationContent.active .BackConfirmationButtons {
+    width: 90vw;
+  }
+  .testmain .BackConfirmation.active .BackConfirmationContent.active .BackConfirmationButtons #BackConfirmationYes,
+  .testmain .BackConfirmation.active .BackConfirmationContent.active .BackConfirmationButtons #BackConfirmationNo {
+    width: 35vw;
+    font-size: 17.5vw;
+  }
+  .testmain .QuestionContent {
+    animation: growQuestionsMobile 1s ease-in-out forwards;
+    height: 0;
+  }
+  .testmain .QuestionContent.hidden {
+    animation: shrinkQuestionsMobile 1s ease-in-out forwards;
+  }
+  .testmain .QuestionContent .QuestionContainer #ContentDiv {
+    width: 95vw;
+    height: 35vh;
+  }
+  .testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #QuestionTitle {
+    font-size: 7vw;
+  }
+  .testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch {
+    width: 32.5vw;
+    display: none;
+  }
+  .testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch1,
+  .testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionDetails #Switch #Switch2 {
+    width: 15vw;
+    height: 15vw;
+  }
+  .testmain .QuestionContent .QuestionContainer #ContentDiv #QuestionContainerContent {
+    width: 70vw;
+    height: 20vh;
+    font-size: 5vw;
+  }
+  .testmain .QuestionSelections {
+    animation: shrinkAnswersMobile 1s ease-in-out forwards;
+    height: 100vh;
+  }
+  .testmain .QuestionSelections.hidden {
+    animation: growAnswersMobile 1s ease-in-out forwards;
+  }
+  .testmain .QuestionSelections .Apply {
+    display: none;
+  }
+  .testmain .QuestionSelections .QuestionOptions .choices .QuestionOption {
+    width: 85vw;
+    height: 8vh;
+  }
+  .testmain .QuestionSelections .QuestionOptions .choices .QuestionOption #QuestionOptionLabel {
+    font-size: 5vw;
+  }
+  .testmain .QuestionSelections .QuestionOptions .ProgressionButtons #Score {
+    font-size: 4vw;
+    margin-bottom: 10vh;
+  }
+  .testmain .QuestionSelections .QuestionOptions .ProgressionButtons #PreviousQuestion,
+  .testmain .QuestionSelections .QuestionOptions .ProgressionButtons #NextQuestion {
+    width: 25vw;
+    height: 8vh;
+    font-size: 5vw;
+  }
+  @keyframes shrinkAnswersMobile {
+    0% {
+      width: 100vw;
+      height: 100vh;
+    }
+    100% {
+      width: 100vw;
+      height: 60vh;
+    }
+  }
+  @keyframes growAnswersMobile {
+    0% {
+      width: 100vw;
+      height: 60vh;
+    }
+    100% {
+      width: 100vw;
+      height: 100vh;
+    }
+  }
+  @keyframes shrinkQuestionsMobile {
+    0% {
+      width: 100vw;
+      height: 40vh;
+    }
+    100% {
+      width: 100vw;
+      height: 0vh;
+    }
+  }
+  @keyframes growQuestionsMobile {
+    0% {
+      width: 100vw;
+      height: 0vh;
+    }
+    100% {
+      width: 100vw;
+      height: 40vh;
+    }
+  }
+}
+@keyframes slideAndShrink {
+  0% {
+    width: 100%;
+    height: 100vh;
+  }
+  100% {
+    width: 70%;
+    height: 100vh;
+  }
+}
+@keyframes slideIntoFrame {
+  0% {
+    width: 0%;
+    height: 100vh;
+  }
+  100% {
+    width: 30%;
+    height: 100vh;
+  }
+}
+@keyframes appearIntoFrame {
+  0% {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+@keyframes disappearOutOfFrame {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-30px);
+    opacity: 0;
+    display: none;
+    visibility: hidden;
+  }
+}
+@keyframes loginAnimationSlideShrink {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+@keyframes loginAnimationSlideIntoFrame {
+  0% {
+    width: 0%;
+    height: 100vh;
+  }
+  100% {
+    width: 70%;
+    height: 100vh;
+  }
+}
+@keyframes loginAnimationAppearIntoFrame {
+  0% {
+    width: 30%;
+    height: 100vh;
+    background-color: rgb(0, 162, 255);
+  }
+  100% {
+    background-color: rgb(0, 162, 255);
+    width: 100%;
+    height: 100vh;
+  }
+}
+@keyframes shrinkToSize {
+  0% {
+    width: 100%;
+    height: 100vh;
+  }
+  100% {
+    width: 100%;
+    height: 28vh;
+  }
+}
+@keyframes growToSize {
+  0% {
+    width: 100%;
+    height: 28vh;
+  }
+  100% {
+    width: 100%;
+    height: 100vh;
+  }
+}
+@keyframes testUpDown {
+  0% {
+    transform: translateY(-200%);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes testDownUp {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(200%);
+  }
+}
+@keyframes shrinkAnswers {
+  0% {
+    width: 100%;
+    height: 100vh;
+  }
+  100% {
+    width: 45%;
+    height: 100vh;
+  }
+}
+@keyframes growQuestions {
+  0% {
+    width: 0%;
+    height: 100vh;
+  }
+  100% {
+    width: 55%;
+    height: 100vh;
+  }
+}
+@keyframes growAnswers {
+  0% {
+    width: 45%;
+    height: 100vh;
+  }
+  100% {
+    width: 100%;
+    height: 100vh;
+  }
+}
+@keyframes shrinkQuestions {
+  0% {
+    width: 55%;
+    height: 100vh;
+  }
+  100% {
+    width: 0%;
+    height: 100vh;
+  }
+}
+@keyframes moveBackground {
+  0% {
+    background-position: 0% 0%;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    /* ease-in-out */
+  }
+  25% {
+    background-position: 100% 100%;
+    animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* ease-out */
+  }
+  40% {
+    background-position: 50% 50%;
+    animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+    /* ease-in */
+  }
+  100% {
+    background-position: 0% 0%;
+    animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    /* ease-in-out */
+  }
+}
+@keyframes slowlyMoveBackground {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 100% 100%;
+  }
+}
+@keyframes expandQuestionBox {
+  0% {
+    transform: translateX(-45%);
+    margin-left: 3%;
+  }
+  85% {
+    transform: translateX(0);
+  }
+  100% {
+    width: 1800px;
+    height: 900px;
+  }
+}
+@keyframes expand {
+  0% {
+    height: 71%;
+  }
+  100% {
+    height: 77%;
+  }
+}
+
+/*# sourceMappingURL=global.css.map */

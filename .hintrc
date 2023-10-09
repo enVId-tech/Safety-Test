@@ -3,22 +3,14 @@
     "development"
   ],
   "hints": {
-    "compat-api/html": [
+    "axe/forms": "off",
+    "axe/parsing": [
       "default",
       {
-        "ignore": [
-          "meta[name=theme-color]"
-        ]
+        "duplicate-id-active": "off"
       }
     ],
-    "apple-touch-icons": "off",
-    "compat-api/css": [
-      "default",
-      {
-        "ignore": [
-          "width: fit-content"
-        ]
-      }
-    ]
+    "disown-opener": "off",
+    "no-inline-styles": "off"
   }
 }

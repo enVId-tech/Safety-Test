@@ -1,0 +1,200 @@
+#Home {
+    #mainElements {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+
+        #left {
+            display: flex;
+            width: 30%;
+            height: 100vh;
+            background-color: rgb(0, 162, 255);
+
+            #leftContent {
+                height: 100vh;
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Work Sans', sans-serif;
+
+                #SelectionTitle {
+                    font-size: 3em;
+                    font-weight: 300;
+                    margin-bottom: 0.5em;
+                }
+
+                #LoginForm {
+                    width: 80%;
+                    height: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    justify-content: space-evenly;
+
+                    #username {
+                        width: 18.2vw;
+                        height: 4.6vh;
+                        border: none;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        color: bclak;
+                        font-size: 0.9vw;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active {
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: black;
+                            transition: background-color 5000s ease-in-out 0s;
+                            box-shadow: inset 0 0 20px 20px transparent;
+                        }
+                    }
+
+                    #typeOfTest {
+                        width: 18.2vw;
+                        height: 4.6vh;
+                        border: none;
+                        border-radius: 0;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        color: white;
+                        font-size: 0.9vw;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+
+                        &:disabled {
+                            cursor: not-allowed;
+                            color: rgb(102, 102, 102);
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::after {
+                            content: "\25BE";
+                            /* Unicode character for down arrow */
+                            position: absolute;
+                            top: 50%;
+                            right: 10px;
+                            transform: translateY(-50%);
+                            pointer-events: none;
+                            /* Ensure arrow doesn't interfere with select functionality */
+                        }
+
+                        .typeOfTest {
+                            width: 9.1vw;
+                            height: 4.6vh;
+                            border: none;
+                            border-radius: 0px;
+                            background-color: transparent;
+                            border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                            background-color: black;
+                            color: white;
+                            font-size: 9.1vw;
+                            padding-left: 0.5vw;
+                            margin-bottom: 0.9vh;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+
+                    #submit {
+                        width: 15.6vw;
+                        height: 4.6vh;
+                        border: none;
+                        border-radius: 100px;
+                        margin: 0.5vw 0.9vh;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        background-color: black;
+                        color: white;
+                        font-size: 0.9vw;
+                        font-weight: lighter;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+
+                #footer {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    font-size: 1.1vw;
+                    font-weight: 300;
+                    .OARobotics {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        .footerimg {
+                            width: 8vh;
+                            height: 8vh;
+                            background-image: url('../images/4079-transparent.png');
+                            z-index: 100;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+                    }
+                    #Revision {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+
+        #right {
+            display: flex;
+            background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../images/FRC.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 70%;
+            height: 100vh;
+
+            #rightContent {
+                width: 100%;
+                height: 100vh;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Work Sans', sans-serif;
+                color: white;
+
+                #PageName {
+                    font-size: 5vw;
+                    font-weight: 300;
+                    margin-bottom: 0.5em;
+                }
+
+                #Test {
+                    font-size: 2.5vw;
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}

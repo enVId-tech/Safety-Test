@@ -24,6 +24,7 @@ const Render = () => {
         <Route path="/selection" element={<CategoryPage />} />
         <Route path="/test" element={<TestPage />} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/admin/panel/results/answers" element={<HomePage />} />
 
         {/* Fallback */}
         <Route path="/*" element={<Navigate to="/" />} />
