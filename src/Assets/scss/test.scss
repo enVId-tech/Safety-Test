@@ -1,0 +1,94 @@
+body {
+    overflow: hidden;
+}
+
+#Test {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    margin: 0 auto;
+    display: flex;
+    font-family: 'Work Sans', sans-serif;
+    #backgroundImage {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 600%;
+        height: 600%;
+        transform: rotate(10deg);
+        z-index: 3;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/4079.png");
+        background-size: 0.75%;
+        background-position: center;
+        background-repeat: repeat;
+        animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
+    }
+
+    .QuestionContent {
+        width: 60%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        
+        #QuestionContainer {
+            background-color: rgba(124,124,124,1);
+            width: 90%;
+            height: 65%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+
+            #ContentDiv {
+                background-color: rgba(59, 59, 59, 1);
+                border-radius: 20px;
+                display: flex;
+                padding-left: 20px;
+                align-items: center;
+                align-content: center;    
+                flex-direction: column;
+                justify-content: center;
+                width: 90%;
+                height: 85%;
+            }
+        }
+    }
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+
+    25% {
+        background-position: 100% 100%;
+        animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        /* ease-out */
+    }
+
+    40% {
+        background-position: 50% 50%;
+        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        /* ease-in */
+    }
+
+    100% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+}
+
+@keyframes slowlyMoveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}

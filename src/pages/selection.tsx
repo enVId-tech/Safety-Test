@@ -40,12 +40,15 @@ const Select: React.FC = (): React.JSX.Element => {
     }
 
     const Appear = (id: string): void => {
+        document.getElementsByClassName("show")[0]?.classList.remove("show");
         const optionsElement = document.getElementById(`${id}Options`);
         optionsElement?.classList.toggle("show");
     };
 
     const Save = (id: string): void => {
         setSelectedCategory(id);
+        document.getElementsByClassName("selected")[0]?.classList.remove("selected");
+        document.getElementById(`${id.split(" ")[0]}${id.split(" ")[1]}`)?.classList.add("selected");
         localStorage.setItem("selectedCategory", id);
     };
 

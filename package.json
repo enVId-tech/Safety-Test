@@ -1,6 +1,6 @@
 {
   "name": "safetytest",
-  "version": "21.01",
+  "version": "21.02",
   "private": true,
   "dependencies": {
     "cors": "^2.8.5",
