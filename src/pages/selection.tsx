@@ -4,7 +4,7 @@ import '../Assets/scss/selection.scss';
 
 const Select: React.FC = (): React.JSX.Element => {
     const [selectedCategory, setSelectedCategory] = React.useState<string>("");
-    const [settings, setSettings] = React.useState<string[]>([]);
+    const [settings, setSettings] = React.useState<string[][] | string[]>([]);
 
     const getSettings = async (): Promise<void> => {
         try {
@@ -12,6 +12,7 @@ const Select: React.FC = (): React.JSX.Element => {
             const settingsJSON: string[] = await getSettings.json();
             setSettings(settingsJSON);
 
+            console.log(settingsJSON);
         } catch (error: unknown) {
             console.error(error as string);
             setTimeout((): void => {
@@ -44,7 +45,8 @@ const Select: React.FC = (): React.JSX.Element => {
     };
 
     const Save = (id: string): void => {
-    
+        setSelectedCategory(id);
+        localStorage.setItem("selectedCategory", id);
     };
 
     window.onload = (): void => {
@@ -106,46 +108,41 @@ const Select: React.FC = (): React.JSX.Element => {
                         </div>
                     )}
                     {settings[1] === "STG" && (
-                    <div className="Categories">
-                        <h2 id="CategoriesTitle">Categories</h2>
-                        <p id="CategoriesLabel">
-                            This section contains categories that you can choose from.
-                        </p>
-                        <div id="CategorySelection">
-                                    {Array.from(settings[2]).map((category: string, index: number) => (
-                                        <div id={`${category}Div`} key={category}>
-                                            <input
-                                                type="button"
-                                                id={category}
-                                                value={category}
-                                                className="CategoryButton"
-                                                onClick={() => Appear(category)}
-                                            />
-                                            <div
-                                                id={`${category}Options`}
-                                                className="CategoryOptions"
-                                            >
-                                                {Array.from(settings[3][index]).map((subcategory) => (
-                                                    <div
-                                                        id={`${category}${subcategory}Div`}
-                                                        key={subcategory}
-                                                    >
-                                                        <input
-                                                            type="button"
-                                                            id={`${category}${subcategory}`}
-                                                            value={subcategory}
-                                                            className="CategoryButton"
-                                                            onClick={() => {
-                                                                Save(`${category} ${subcategory}`);
-                                                            }}
-                                                        />
-                                                    </div>
-                                                ))}
-                                            </div>
+                        <div className="Categories">
+                            <h2 id="CategoriesTitle">Categories</h2>
+                            <p id="CategoriesLabel">
+                                This section contains categories that you can choose from.
+                            </p>
+                            <div id="CategorySelection">
+                                {Array.from(settings[2]).map((category: string, index: number) => (
+                                    <div id={`${category}Div`} key={category} className="CategoryMainDiv">
+                                        <input
+                                            type="button"
+                                            id={category}
+                                            value={category}
+                                            className="CategoryButton"
+                                            onClick={() => Appear(category)}
+                                        />
+                                        <div
+                                            id={`${category}Options`}
+                                            className="CategoryOptions"
+                                        >
+                                            {Array.from(settings[3]).map((subcategory: string, index: number) => (
+                                                <input
+                                                    type="button"
+                                                    id={`${category}${settings[3][index]}`}
+                                                    value={settings[3][index]}
+                                                    className="CategorySubButton"
+                                                    onClick={() => {
+                                                        Save(`${category} ${settings[3][index]}`);
+                                                    }}
+                                                />
+                                            ))}
                                         </div>
-                                    ))}
-                                </div>
-                    </div>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
                     )}
                 </span>
             </div>

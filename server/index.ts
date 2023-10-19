@@ -89,7 +89,7 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
         const CATEGORIES_AVAILABLE: string[] = getOneSetting(10, "; ") as string[]
         const TEAMS_AVAILABLE: string[] = getOneSetting(11, "; ") as string[]
 
-        let selectionSettings: string[] = [];
+        let selectionSettings: (string[] | string)[] = [];
 
         if (ACCESSABLE === 'false') {
             res.send({ error: "Error" });
@@ -113,8 +113,8 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
             selectionSettings.push("NSTG");
         }
 
-        selectionSettings.push(...TEAMS_AVAILABLE);
-        selectionSettings.push(...CATEGORIES_AVAILABLE);
+        selectionSettings.push(TEAMS_AVAILABLE);
+        selectionSettings.push(CATEGORIES_AVAILABLE);
 
         res.send(selectionSettings);
     } catch (error: unknown) {
