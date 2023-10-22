@@ -58,6 +58,11 @@ const Home: React.FC = (): React.JSX.Element => {
                 const saveUser: Response = await fetch("/home/post/folders/dir", data);
                 const saveUserJSON: string = await saveUser.json();
 
+                if (saveUserJSON === "Error") {
+                    setError("Error", 3000);
+                    return;
+                }
+
                 window.location.href = "/selection";
             } catch (error: unknown) {
                 console.error(error as string);
@@ -119,7 +124,7 @@ const Home: React.FC = (): React.JSX.Element => {
                                 <a id="RoboticsFooter" href="https://frc4079.org/">OA Robotics</a>
                                 <div className="footerimg" />
                             </div>
-                            <p id="Revision">Revision 21.03 <br /> 10-20-2023 16:44:45 PT</p>
+                            <p id="Revision">Revision 22.00 <br /> 10-21-2023 20:31:45 PT</p>
                         </footer>
                     </div>
                 </div>
@@ -128,7 +133,7 @@ const Home: React.FC = (): React.JSX.Element => {
                         <h1 id="PageName">
                             Oxford Academy Robotics
                         </h1>
-                        <h2 id="Test">
+                        <h2 id="TestTitle">
                             Performance and Testing
                         </h2>
                     </div>

@@ -219,7 +219,7 @@ Question 19: Where should the safety binder be kept?
   - Taken home
   - Lost somewhere
   - Where you can't find it
-  
+
 Question 20: What do you need to do when the robot is enabled?
   - Touching a live wire
   + Backing up

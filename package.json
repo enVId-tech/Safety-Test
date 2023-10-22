@@ -1,6 +1,6 @@
 {
   "name": "safetytest",
-  "version": "21.03",
+  "version": "22.00",
   "private": true,
   "dependencies": {
     "cors": "^2.8.5",
@@ -16,7 +16,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "server": "ts-node --esm server/index.ts",
+    "server": "nodemon --exec ts-node --esm server/index.ts",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

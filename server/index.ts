@@ -21,7 +21,6 @@ app.use(express.json({ limit: '5mb' }));
 let settings: string[] = [];
 const mainTestPath: string = "Tests";
 const folderSplit: string = "\r\n" || "\n";
-let folderGet: string = "";
 
 // Functions
 const shuffleItems = (array: any[]): any[] => {
@@ -124,7 +123,7 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
 
 app.post('/home/post/folders/dir', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
     try {
-        folderGet = req.body.folder.replace(" ", "-");
+        let folderGet = req.body.folder.replace(" ", "-");
 
         const settingsYML: string = fs.readFileSync(`${mainTestPath}/${folderGet}/settings.yml`, 'utf8')
 
@@ -136,8 +135,114 @@ app.post('/home/post/folders/dir', async (req: NodeJS.Dict<any>, res: NodeJS.Dic
     }
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+app.post('/test/post/settings', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
+    try {
+        let answers: string[][] = [];
+        let questions: string[] = [];        
+
+        const typeOfTest: string = req.body.typeOfTest;
+
+        const maxQuestions: number = 16; // getOneSetting(2) as unknown as number;
+        const answersPerQuestion: number = 4; // getOneSetting(3) as unknown as number;
+        
+        const getTestFileData: string = await fs.readFileSync(`${mainTestPath}/${typeOfTest}/test.txt`, 'utf8');
+
+        const testFileData: string[] = getTestFileData.split("Question");
+
+        const shuffleTestFileData: string[] = shuffleItems(testFileData);
+
+        shuffleTestFileData.forEach((question: string, index: number) => {
+            if (shuffleTestFileData[index] !== "" && index <= maxQuestions) {
+                const question: string = shuffleTestFileData[index].split(":")[1].trim().split(folderSplit)[0].trim();
+
+                questions.push(question);
+
+                let answersPreShuffle: string[] = [];
+
+                shuffleTestFileData[index].split(folderSplit).splice(1).forEach((answer: string) => {
+                    if (answer !== "") {
+                        answersPreShuffle.push(answer.trim().replace(/[-+]/g, "").trim());
+                    }
+                });
+
+                console.log(answersPreShuffle);
+                answers.push(shuffleItems(answersPreShuffle).splice(0, answersPerQuestion));
+
+            } else {
+                shuffleTestFileData.splice(index, 1);
+            }
+        });
+
+        console.log(questions.length);
+        console.log(answers.length);
+
+        res.send({ questions, answers, maxQuestions, answersPerQuestion });
+    } catch (error: unknown) {
+        console.log(error as string)
+    }
+});
+
+app.post('/test/post/answers', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
+    try {
+        const { selectedAnswers, typeOfTest, answers, maxQuestions, questions } = req.body;
+
+        console.log("Received Answers: ", selectedAnswers);
+
+        let score: number = 0;
+
+        const getTestFileData: string = await fs.readFileSync(`${mainTestPath}/${typeOfTest}/test.txt`, 'utf8');
+
+        const testFileData: string[] = getTestFileData.split("Question");
+
+        for (let i = 0; i < maxQuestions; i++) {
+            const questionIndex = testFileData.findIndex((question) => question.includes(questions[i]));
+            if (questionIndex === -1) continue;
+
+            const answerLines = testFileData[questionIndex].split(folderSplit);
+            for (let j = 0; j < selectedAnswers[i].length; j++) {
+                const answerIndex = answerLines.findIndex((answer) => answer.includes(answers[i][j]));
+                if (answerIndex === -1) continue;
+
+                const answerLine = answerLines[answerIndex];
+                if (answerLine.includes("+") && selectedAnswers[i][j] === true) {
+                    score += 0.25; // getOneSetting(3) / getOneSetting(2);
+                } else if (answerLine.includes("-") && selectedAnswers[i][j] === false) {
+                    score += 0.25; // getOneSetting(3) / getOneSetting(2);
+                }
+            }
+        }
+        
+        res.send({ score });
+    } catch (error: unknown) {
+        console.log(error as string);
+    }
+});
+
+app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
+    try {
+        const { Name, Team, Category, Score, Type } = req.body;
+
+        const UnStrTime: Date = new Date();
+        const Time: string = UnStrTime.toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles"
+        })
+
+        const main = { Name, Team, Category, Score, Type, Time };
+
+        let data = JSON.parse(fs.readFileSync("server/responses/responses.json", "utf8"));
+
+        data.push(main);
+
+        fs.writeFileSync("server/responses/responses.json", JSON.stringify(data));
+
+        res.send({ send: "Success" });
+    } catch (error: unknown) {
+        console.log(error as string);
+    }
+});
+
+const __filename: string = fileURLToPath(import.meta.url);
+const __dirname: string = dirname(__filename);
 
 // Serve static files from the build directory
 app.use(express.static(join(__dirname, '..', 'build')));
@@ -148,6 +253,6 @@ app.get('/*', (req, res) => {
 });
 
 // Server
-const port = process.env.PORT || 19640;
-app.listen(port, () => console.log(`Listening on port ${port}`));
+const PORT: number = process.env.PORT as unknown as number || 19640 as number;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
 console.log('Server Started');
