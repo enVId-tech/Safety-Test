@@ -1,0 +1,236 @@
+#Test {
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    margin: 0 auto;
+    display: flex;
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    justify-content: space-between;
+    top: 0;
+    left: 0;
+
+    #backgroundImage {
+        position: absolute;
+        top: -50%;
+        left: -50%;
+        width: 600%;
+        height: 600%;
+        transform: rotate(10deg);
+        z-index: 3;
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/4079.png");
+        background-size: 0.75%;
+        background-position: center;
+        background-repeat: repeat;
+        animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
+    }
+
+    .QuestionContent {
+        width: 60%;
+        height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 3;
+        
+        #QuestionContainer {
+            background-color: rgba(124,124,124,1);
+            width: 90%;
+            height: 65%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+
+            #ContentDiv {
+                background-color: rgba(59, 59, 59, 1);
+                border-radius: 20px;
+                display: flex;
+                padding-left: 20px;
+                align-items: center;
+                align-content: center;    
+                flex-direction: column;
+                justify-content: space-around;
+                width: 90%;
+                height: 85%;
+                #QuestionDetails {
+                    background-color: rgba(32, 32, 32, 1);
+                    width: 95%;
+                    height: 8%;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    padding: 1vw;
+                    border-radius: 20px;
+                    margin-right: 1vw;
+                }
+
+                #QuestionContainerContent {
+                    background-color: rgba(32, 32, 32, 1);
+                    width: 95%;
+                    height: 65%;
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    padding: 1vw;
+                    border-radius: 20px;
+                    margin-right: 1vw;
+                    #QuestionDescription {
+                        display: flex;
+                        align-items: center;
+                        text-align: center;
+                        justify-content: center;
+                        font-size: 2rem;
+                        padding-left: 2vw;
+                        padding-right: 2vw;
+                    }
+                }
+            }
+        }
+    }
+
+    .SelectionContent {
+        background-color: rgb(0, 162, 255);
+        height: 100vh;
+        width: 40vw;
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: center;
+        justify-items: center;
+        flex-direction: column;
+        z-index: 1000;
+
+        .SelectQuestionTitle {
+            color: black;
+            font-size: 3rem;
+            font-weight: 600;
+            margin-bottom: 2vh;
+            font-family: 'Nanum Gothic', sans-serif;
+        }
+
+        #QuestionOptionsDivContainer {
+            width: 100%;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            justify-content: center;
+            justify-items: center;
+            flex-direction: column;
+            overflow-y: auto;
+            overflow-x: hidden;
+
+            #QuestionChoices {
+                height: 80%;
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+                align-items: center;
+
+                .Answer {
+                    font-size: 1.5rem;
+                    width: 30vw;
+                    padding: 0.75vw;
+                    border-radius: 20px;
+                    border-width: 4px;
+                    border-color: black;
+                    border-style: solid;
+                    transition: all 0.2s ease-in-out;
+                    text-align: center;
+                    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(0, 0, 0, 0.2);
+                    }
+
+                    &.selected {
+                        background-color: rgb(0, 255, 0);
+                    }
+                }
+            }
+
+            #ProgressionButtons {
+                display: flex;
+                align-items: center;
+                justify-content: space-around;
+                width: 100%;
+                height: 20%;
+                margin-top: 2vh;
+
+                > * {
+                    font-size: 2rem;
+                    padding: 0.2vw;
+                    padding-left: 0.5vw;
+                    padding-right: 0.5vw;
+                    border-radius: 15px;
+                    border-width: 4px;
+                    border-color: black;
+                    border-style: solid;
+                    transition: all 0.2s ease-in-out;
+                    background-color: transparent;
+                    
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+        }
+
+        > * {
+            opacity: 0;
+            animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+        }
+    }
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+
+    25% {
+        background-position: 100% 100%;
+        animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+        /* ease-out */
+    }
+
+    40% {
+        background-position: 50% 50%;
+        animation-timing-function: cubic-bezier(0.25, 0.1, 0.25, 1);
+        /* ease-in */
+    }
+
+    100% {
+        background-position: 0% 0%;
+        animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        /* ease-in-out */
+    }
+}
+
+@keyframes slowlyMoveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+
+    100% {
+        background-position: 100% 100%;
+    }
+}
+
+@keyframes appearIntoFrame {
+    0% {
+        opacity: 0;
+        transform: translateY(-15px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0px);
+    }
+}

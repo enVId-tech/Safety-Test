@@ -3,14 +3,15 @@
     "development"
   ],
   "hints": {
-    "axe/forms": "off",
-    "axe/parsing": [
-      "default",
-      {
-        "duplicate-id-active": "off"
-      }
-    ],
-    "disown-opener": "off",
-    "no-inline-styles": "off"
-  }
+    "typescript-config/is-valid": "off",
+    "axe/forms": "off"
+  },
+  "browserslist": [
+    "defaults",
+    "not ie 11",
+    "not and_ff <= 115",
+    "not firefox <= 115",
+    "not ios_saf <= 16.5",
+    "not safari <= 16.5"
+  ]
 }

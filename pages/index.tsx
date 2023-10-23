@@ -1,0 +1,151 @@
+import React from 'react';
+import Head from 'next/head';
+import Script from 'next/script';
+import styles from '../styles/home.module.scss';
+import PageTitle from '@/styles/Assets/PageTitle';
+import { Work_Sans } from 'next/font/google';
+
+const font = Work_Sans({
+    weight: "300",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const Home: React.FC = (): JSX.Element => {
+    const [selectedValue, setSelectedValue] = React.useState<string>("Safety-Test");
+    const [availableSelections, setAvailableSelections] = React.useState<string[]>(["Safety Test"]);
+    const [errorMessage, setErrorMessage] = React.useState<string>("");
+
+    const USER = React.useRef<HTMLInputElement>(null);
+
+    const getFolders: () => void = async (): Promise<void> => {
+        try {
+            const getFolders: Response = await fetch("/home/get/folders");
+            const foldersJSON: string[] = await getFolders.json();
+            setAvailableSelections(foldersJSON);
+
+        } catch (error: unknown) {
+            setErrorMessage(error as string);
+        }
+    }
+
+    const saveUser: () => void = async (): Promise<void> => {
+        const username: string = USER.current!.value;
+
+        if (username === "") {
+            setError("Please enter a username", 3000);
+            return;
+        } else if (!username.includes(" ")) {
+            setError("You must have a first and last name", 3000);
+            return;
+        } else if (username.split(" ")[0].length > 20 || username.split(" ")[1].length > 25) {
+            setError("First name must be less than 20 characters and last name must be less than 25 characters", 3000);
+            return;
+        } else if (username.split(" ")[0].length < 1 || username.split(" ")[1].length < 1) {
+            setError("First name must be more than 2 characters and last name must be more than 1 character", 3000);
+            return;
+        } else if (username.split(" ")[2] !== undefined) {
+            setError("You can only have a first and last name", 3000);
+            return;
+        } else if (username.split(" ")[0][0] !== username.split(" ")[0][0].toUpperCase() ||
+            username.split(" ")[1][0] !== username.split(" ")[1][0].toUpperCase()) {
+            setError("First and last name must be capitalized", 3000);
+            return;
+        } else {
+            localStorage.setItem("username", username);
+            const typeOfTest = (document.getElementById("typeOfTest") as HTMLSelectElement).value;
+            localStorage.setItem("typeOfTest", typeOfTest);
+            try {
+                const data: object = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ folder: selectedValue })
+                }
+
+                const saveUser: Response = await fetch("/home/post/folders/dir", data);
+                const saveUserJSON: string = await saveUser.json();
+
+                if (saveUserJSON === "Error") {
+                    setError("Error", 3000);
+                    return;
+                }
+
+                window.location.href = "/selection";
+            } catch (error: unknown) {
+                console.error(error as string);
+            }
+        }
+    }
+
+    const start: (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => void = (e: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
+        e.preventDefault();
+        saveUser();
+    }
+
+    const setError: (error: string, time: number) => void = (error: string, time: number): void => {
+        setErrorMessage(error);
+        setTimeout((): void => {
+            setErrorMessage("");
+        }, time);
+    }
+
+    return (
+        <div className={font.className}>
+            <PageTitle title="Home" />
+            <Script onLoad={() => getFolders()}/>
+            <div onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>): void => { if (e.key === "Enter") saveUser() }} />
+            <span className={styles.mainElements}>
+                <div className={styles.left}>
+                    <div className={styles.leftContent}>
+                        <h1 className={styles.selectionTitle}>Test Selection</h1>
+                        <form className={styles.loginForm}>
+                            <input type="text" className={styles.username} name="username" placeholder="Username" required ref={USER} />
+                            <br />
+                            {
+                                availableSelections.length > 1 ?
+                                    <select id="typeOfTest" value={selectedValue} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)}>
+                                        {
+                                            availableSelections.map((selection: string, index: number): React.JSX.Element => {
+                                                return (
+                                                    <option key={index} value={selection} className="typeOfTestOption">{selection}</option>
+                                                )
+                                            })
+                                        }
+                                    </select>
+                                    :
+                                    <select className={styles.typeOfTest} id="typeOfTest" value={selectedValue} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)} disabled>
+                                        <option value="Safety-Test" className={styles.typeOfTestOption}>Safety Test</option>
+                                    </select>
+                            }
+                            <input type="submit" className={styles.submit} name="submit" value="Start" onClick={start} style={{ cursor: "pointer" }} />
+                        </form>
+                        {
+                            errorMessage !== "" ? <h2 id="ErrorMessage">{errorMessage}</h2> : <></>
+                        }
+                        <footer className={styles.footer}>
+                            <div className={styles.OARobotics}>
+                                <a className={styles.RoboticsFooter} href="https://frc4079.org/">OA Robotics</a>
+                                <div className={styles.footerimg} />
+                            </div>
+                            <p className={styles.revisionDate}>Revision 23.00 <br /> 10-22-2023 23:19:45 PT</p>
+                        </footer>
+                    </div>
+                </div>
+                <div className={styles.right}>
+                    <div className={styles.rightContent}>
+                        <h1 className={`${styles.pageName} ${font.className}`}>
+                            Oxford Academy Robotics
+                        </h1>
+                        <h2 className={`${styles.testTitle} ${font.className}`}>
+                            Performance and Testing
+                        </h2>
+                    </div>
+                </div>
+            </span>
+        </div>
+    )
+}
+
+export default Home;
