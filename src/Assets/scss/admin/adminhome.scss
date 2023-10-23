@@ -1,4 +1,4 @@
-#AdminLogin {
+#AdminHome {
     font-family: 'Work Sans', sans-serif;
     position: absolute;
     top: 0;
@@ -12,7 +12,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    #AdminLoginContainer {
+    #AdminHomeContainer {
         display: flex;
         flex-direction: column;
         justify-content: space-around;
@@ -39,39 +39,7 @@
             justify-content: space-around;
             align-items: center;
             
-            #LoginTitle {
-                font-size: 2vw;
-                font-weight: 300;
-                margin-bottom: 0.5em;
-            }
-
-            #username {
-                width: 18.2vw;
-                height: 4.6vh;
-                border: none;
-                background-color: transparent;
-                border-bottom: 2px solid rgba(0, 0, 0, 0.75);
-                color: black;
-                font-size: 0.9vw;
-                padding-left: 0.5vw;
-                margin-bottom: 0.9vh;
-
-                &:focus {
-                    outline: none;
-                }
-
-                &:-webkit-autofill,
-                &:-webkit-autofill:hover,
-                &:-webkit-autofill:focus,
-                &:-webkit-autofill:active {
-                    -webkit-background-clip: text;
-                    -webkit-text-fill-color: black;
-                    transition: background-color 5000s ease-in-out 0s;
-                    box-shadow: inset 0 0 20px 20px transparent;
-                }
-            }
-
-            #submit {
+            .button {
                 width: 15.6vw;
                 height: 4.6vh;
                 border: none;

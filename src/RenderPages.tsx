@@ -8,6 +8,7 @@ import Test from "./pages/test";
 import AdminPanel from "./pages/admin/adminpanel";
 import Responses from './pages/admin/responses';
 import Questions from './pages/admin/questions';
+import AdminHome from "./pages/admin/adminhome";
 
 // TS
 
@@ -26,6 +27,7 @@ const RenderPages: React.FC = () => {
                 <Path path="/admin/*" element={<Redirect to="/admin/login" />} />
                 <Path path="/admin/responses/*" element={<Redirect to="/admin/responses" />} />
                 <Path path="/admin/questions/*" element={<Redirect to="/admin/questions" />} />
+                <Path path="/admin/home/*" element={<Redirect to="/admin/home" />} />
 
                 {/* Pages */}
                 <Path path="/" element={<Home />} />
@@ -34,6 +36,7 @@ const RenderPages: React.FC = () => {
                 <Path path="/admin/login" element={<AdminPanel />} />
                 <Path path="/admin/responses" element={<Responses />} />
                 <Path path="/admin/questions" element={<Questions />} />
+                <Path path="/admin/home" element={<AdminHome />} />
             </Pathhub>
         </ReactRouter>
     );

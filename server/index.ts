@@ -241,6 +241,35 @@ app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>
     }
 });
 
+app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
+    try {
+        const username: string = req.body.username;
+
+        const validUsernames = ["erick", "cabinet", "aaron"];
+
+        for (let i = 0; i < validUsernames.length; i++) {
+            if (username.toUpperCase().trim() === validUsernames[i].toUpperCase().trim()) {
+                res.send({ send: "Success" });
+                return;
+            }
+        }
+
+        res.send({ send: "Error" });
+    } catch (error: unknown) {
+        console.log(error as string);
+    }
+});
+
+app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
+    try {
+        const fileData = JSON.parse(fs.readFileSync("server/responses/responses.json", "utf8"));
+
+        res.send({ fileData });
+    } catch (error: unknown) {
+        console.log(error as string);
+    }
+});
+
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = dirname(__filename);
 

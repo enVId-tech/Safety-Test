@@ -124,7 +124,7 @@ const Home: React.FC = (): React.JSX.Element => {
                                 <a id="RoboticsFooter" href="https://frc4079.org/">OA Robotics</a>
                                 <div className="footerimg" />
                             </div>
-                            <p id="Revision">Revision 22.00 <br /> 10-21-2023 20:31:45 PT</p>
+                            <p id="Revision">Revision 22.00 <br /> 10-22-2023 20:28:02 PT</p>
                         </footer>
                     </div>
                 </div>

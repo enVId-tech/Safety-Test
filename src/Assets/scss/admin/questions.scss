@@ -1,0 +1,67 @@
+#Responses {
+    font-family: 'Work Sans', sans-serif;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../../images/adminpage.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    #ResponsesContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+        width: 30vw;
+        height: 70vh;
+        background: #fff;
+        border-radius: 10px;
+        #TopTitle {
+            font-size: 3vw;
+            font-weight: 300;
+            margin-bottom: 0.5em;
+        }
+        hr {
+            width: 80%;
+            border: 1px solid rgba(0, 0, 0, 0.75);
+        }
+        #Login {
+            background-color: rgb(255, 255, 255);
+            width: 100%;
+            height: 40%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            
+            .button {
+                width: 15.6vw;
+                height: 4.6vh;
+                border: none;
+                border-radius: 100px;
+                margin: 0.5vw 0.9vh;
+                background-color: transparent;
+                border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                background-color: black;
+                color: white;
+                font-size: 0.9vw;
+                font-weight: lighter;
+                padding-left: 0.5vw;
+                margin-bottom: 0.9vh;
+
+                &:focus {
+                    outline: none;
+                }
+                
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+}
