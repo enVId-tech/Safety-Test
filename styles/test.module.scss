@@ -1,4 +1,4 @@
-#Test {
+.testPage {
     height: 100%;
     width: 100%;
     background-color: transparent;
@@ -10,7 +10,7 @@
     top: 0;
     left: 0;
 
-    #backgroundImage {
+    .backgroundImage {
         position: absolute;
         top: -50%;
         left: -50%;
@@ -18,14 +18,14 @@
         height: 600%;
         transform: rotate(10deg);
         z-index: 3;
-        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../images/4079.png");
+        background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../public/4079.png");
         background-size: 0.75%;
         background-position: center;
         background-repeat: repeat;
         animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
     }
 
-    .QuestionContent {
+    .questionContent {
         width: 60%;
         height: 100vh;
         display: flex;
@@ -33,7 +33,7 @@
         justify-content: center;
         z-index: 3;
         
-        #QuestionContainer {
+        .questionContainer {
             background-color: rgba(124,124,124,1);
             width: 90%;
             height: 65%;
@@ -42,7 +42,7 @@
             justify-content: center;
             border-radius: 20px;
 
-            #ContentDiv {
+            .contentDiv {
                 background-color: rgba(59, 59, 59, 1);
                 border-radius: 20px;
                 display: flex;
@@ -53,7 +53,7 @@
                 justify-content: space-around;
                 width: 90%;
                 height: 85%;
-                #QuestionDetails {
+                .questionDetails {
                     background-color: rgba(32, 32, 32, 1);
                     width: 95%;
                     height: 8%;
@@ -66,7 +66,7 @@
                     margin-right: 1vw;
                 }
 
-                #QuestionContainerContent {
+                .questionContainerContent {
                     background-color: rgba(32, 32, 32, 1);
                     width: 95%;
                     height: 65%;
@@ -77,7 +77,7 @@
                     padding: 1vw;
                     border-radius: 20px;
                     margin-right: 1vw;
-                    #QuestionDescription {
+                    .questionDescription {
                         display: flex;
                         align-items: center;
                         text-align: center;
@@ -91,7 +91,7 @@
         }
     }
 
-    .SelectionContent {
+    .selectionContent {
         background-color: rgb(0, 162, 255);
         height: 100vh;
         width: 40vw;
@@ -103,7 +103,7 @@
         flex-direction: column;
         z-index: 1000;
 
-        .SelectQuestionTitle {
+        .selectQuestionTitle {
             color: black;
             font-size: 3rem;
             font-weight: 600;
@@ -111,7 +111,7 @@
             font-family: 'Nanum Gothic', sans-serif;
         }
 
-        #QuestionOptionsDivContainer {
+        .questionOptionsDivContainer {
             width: 100%;
             height: 80vh;
             display: flex;
@@ -123,14 +123,14 @@
             overflow-y: auto;
             overflow-x: hidden;
 
-            #QuestionChoices {
+            .questionChoices {
                 height: 80%;
                 display: flex;
                 flex-direction: column;
                 justify-content: space-between;
                 align-items: center;
 
-                .Answer {
+                .answerChoice {
                     font-size: 1.5rem;
                     width: 30vw;
                     padding: 0.75vw;
@@ -152,7 +152,7 @@
                 }
             }
 
-            #ProgressionButtons {
+            .progressionButtons {
                 display: flex;
                 align-items: center;
                 justify-content: space-around;

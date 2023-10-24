@@ -1,12 +1,13 @@
 // Libraries
-import express from 'express';
+import express, { Express } from 'express';
 import cors from 'cors';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import env from 'dotenv';
 
 // Express Init
-const app = express();
+const app: Express = express();
 
 // CORS
 app.use(cors({
@@ -49,7 +50,7 @@ const getOneSetting = (settingIndex: number, splitIndex?: string): string | null
             if (splitIndex) {
                 return settingValue.split(splitIndex);
             }
-            return settingValue
+            return settingValue;
         }
         return null;
     } catch (error: unknown) {
@@ -123,7 +124,7 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
 
 app.post('/home/post/folders/dir', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
     try {
-        let folderGet = req.body.folder.replace(" ", "-");
+        let folderGet: string = req.body.folder.replace(" ", "-");
 
         const settingsYML: string = fs.readFileSync(`${mainTestPath}/${folderGet}/settings.yml`, 'utf8')
 
@@ -165,7 +166,6 @@ app.post('/test/post/settings', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<a
                     }
                 });
 
-                console.log(answersPreShuffle);
                 answers.push(shuffleItems(answersPreShuffle).splice(0, answersPerQuestion));
 
             } else {
@@ -173,20 +173,23 @@ app.post('/test/post/settings', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<a
             }
         });
 
-        console.log(questions.length);
-        console.log(answers.length);
-
         res.send({ questions, answers, maxQuestions, answersPerQuestion });
     } catch (error: unknown) {
         console.log(error as string)
     }
 });
 
-app.post('/test/post/answers', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
-    try {
-        const { selectedAnswers, typeOfTest, answers, maxQuestions, questions } = req.body;
+interface TestRequestBody {
+    selectedAnswers: boolean[][];
+    typeOfTest: string;
+    answers: string[][];
+    maxQuestions: number;
+    questions: string[];
+}
 
-        console.log("Received Answers: ", selectedAnswers);
+app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: NodeJS.Dict<any>): Promise<void> => {
+    try {
+        const { selectedAnswers = [], typeOfTest = '', answers = [], maxQuestions = 0, questions = [] } = req.body || {};
 
         let score: number = 0;
 
@@ -194,13 +197,15 @@ app.post('/test/post/answers', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<an
 
         const testFileData: string[] = getTestFileData.split("Question");
 
+
+
         for (let i = 0; i < maxQuestions; i++) {
-            const questionIndex = testFileData.findIndex((question) => question.includes(questions[i]));
+            const questionIndex: number = testFileData.findIndex((question) => question.includes(questions[i]));
             if (questionIndex === -1) continue;
 
             const answerLines = testFileData[questionIndex].split(folderSplit);
             for (let j = 0; j < selectedAnswers[i].length; j++) {
-                const answerIndex = answerLines.findIndex((answer) => answer.includes(answers[i][j]));
+                const answerIndex: number = answerLines.findIndex((answer) => answer.includes(answers[i][j]));
                 if (answerIndex === -1) continue;
 
                 const answerLine = answerLines[answerIndex];
@@ -227,13 +232,13 @@ app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>
             timeZone: "America/Los_Angeles"
         })
 
-        const main = { Name, Team, Category, Score, Type, Time };
+        const main: object = { Name, Team, Category, Score, Type, Time };
 
-        let data = JSON.parse(fs.readFileSync("server/responses/responses.json", "utf8"));
+        let data: object[] = JSON.parse(fs.readFileSync("src/responses/responses.json", "utf8"));
 
         data.push(main);
 
-        fs.writeFileSync("server/responses/responses.json", JSON.stringify(data));
+        fs.writeFileSync("src/responses/responses.json", JSON.stringify(data));
 
         res.send({ send: "Success" });
     } catch (error: unknown) {
@@ -262,7 +267,7 @@ app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void =>
 
 app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
     try {
-        const fileData = JSON.parse(fs.readFileSync("server/responses/responses.json", "utf8"));
+        const fileData = JSON.parse(fs.readFileSync("src/responses/responses.json", "utf8"));
 
         res.send({ fileData });
     } catch (error: unknown) {
@@ -272,6 +277,8 @@ app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): 
 
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = dirname(__filename);
+
+env.config({ path: join(__dirname, 'port.env') });
 
 // Serve static files from the build directory
 app.use(express.static(join(__dirname, '..', 'build')));

@@ -16,11 +16,15 @@ const Home: React.FC = (): JSX.Element => {
     const [availableSelections, setAvailableSelections] = React.useState<string[]>(["Safety Test"]);
     const [errorMessage, setErrorMessage] = React.useState<string>("");
 
+    React.useEffect((): void => {
+        getFolders();
+    }, []);
+
     const USER = React.useRef<HTMLInputElement>(null);
 
     const getFolders: () => void = async (): Promise<void> => {
         try {
-            const getFolders: Response = await fetch("/home/get/folders");
+            const getFolders: Response = await fetch("http://localhost:19640/home/get/folders");
             const foldersJSON: string[] = await getFolders.json();
             setAvailableSelections(foldersJSON);
 
@@ -29,27 +33,35 @@ const Home: React.FC = (): JSX.Element => {
         }
     }
 
-    const saveUser: () => void = async (): Promise<void> => {
-        const username: string = USER.current!.value;
-
+    const validateUsername: (username: string) => boolean = (username: string): boolean => {
         if (username === "") {
             setError("Please enter a username", 3000);
-            return;
+            return false;
         } else if (!username.includes(" ")) {
             setError("You must have a first and last name", 3000);
-            return;
+            return false;
         } else if (username.split(" ")[0].length > 20 || username.split(" ")[1].length > 25) {
             setError("First name must be less than 20 characters and last name must be less than 25 characters", 3000);
-            return;
+            return false;
         } else if (username.split(" ")[0].length < 1 || username.split(" ")[1].length < 1) {
             setError("First name must be more than 2 characters and last name must be more than 1 character", 3000);
-            return;
+            return false;
         } else if (username.split(" ")[2] !== undefined) {
             setError("You can only have a first and last name", 3000);
-            return;
+            return false;
         } else if (username.split(" ")[0][0] !== username.split(" ")[0][0].toUpperCase() ||
             username.split(" ")[1][0] !== username.split(" ")[1][0].toUpperCase()) {
             setError("First and last name must be capitalized", 3000);
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    const saveUser: () => void = async (): Promise<void> => {
+        const username: string = USER.current!.value;
+
+        if (!validateUsername(username)) {
             return;
         } else {
             localStorage.setItem("username", username);
@@ -64,7 +76,7 @@ const Home: React.FC = (): JSX.Element => {
                     body: JSON.stringify({ folder: selectedValue })
                 }
 
-                const saveUser: Response = await fetch("/home/post/folders/dir", data);
+                const saveUser: Response = await fetch("http://localhost:19640/home/post/folders/dir", data);
                 const saveUserJSON: string = await saveUser.json();
 
                 if (saveUserJSON === "Error") {
@@ -94,18 +106,17 @@ const Home: React.FC = (): JSX.Element => {
     return (
         <div className={font.className}>
             <PageTitle title="Home" />
-            <Script onLoad={() => getFolders()}/>
             <div onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>): void => { if (e.key === "Enter") saveUser() }} />
             <span className={styles.mainElements}>
                 <div className={styles.left}>
                     <div className={styles.leftContent}>
                         <h1 className={styles.selectionTitle}>Test Selection</h1>
                         <form className={styles.loginForm}>
-                            <input type="text" className={styles.username} name="username" placeholder="Username" required ref={USER} />
+                            <input type="text" className={styles.username} name="username" placeholder="Username" required ref={USER} id="username"/>
                             <br />
                             {
                                 availableSelections.length > 1 ?
-                                    <select id="typeOfTest" value={selectedValue} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)}>
+                                    <select value={selectedValue} id="typeOfTest" onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)}>
                                         {
                                             availableSelections.map((selection: string, index: number): React.JSX.Element => {
                                                 return (
@@ -119,7 +130,7 @@ const Home: React.FC = (): JSX.Element => {
                                         <option value="Safety-Test" className={styles.typeOfTestOption}>Safety Test</option>
                                     </select>
                             }
-                            <input type="submit" className={styles.submit} name="submit" value="Start" onClick={start} style={{ cursor: "pointer" }} />
+                            <input type="submit" className={styles.submit} name="submit" value="Start" onClick={start} />
                         </form>
                         {
                             errorMessage !== "" ? <h2 id="ErrorMessage">{errorMessage}</h2> : <></>
@@ -129,7 +140,7 @@ const Home: React.FC = (): JSX.Element => {
                                 <a className={styles.RoboticsFooter} href="https://frc4079.org/">OA Robotics</a>
                                 <div className={styles.footerimg} />
                             </div>
-                            <p className={styles.revisionDate}>Revision 23.00 <br /> 10-22-2023 23:19:45 PT</p>
+                            <p className={styles.revisionDate}>Revision 24.00 <br /> 10-24-2023 00:40:00 PT</p>
                         </footer>
                     </div>
                 </div>

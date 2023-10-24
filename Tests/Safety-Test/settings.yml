@@ -1,0 +1,13 @@
+# Settings folder, controlling functions of the test, do NOT use the colon to split words, use semicolons
+# DO NOT RENAME FOLDER OR REMOVE THESE FIRST TWO LINES - DO NOT GO OVER THE MINIMUM AMOUNT OF ANSWERS OVER ALL QUESTIONS
+Accessable: true #
+Questions: 16 #
+AnswersPerQuestion: 4 #
+SelectionAvailable: true # If this is false, only test specific settings will be available
+TeamSelectionRequired: true #
+TextTestFileName: default # Assumed default if not specified, but can be changed, default path is test.txt
+SafetyTestGuides: true #
+RequiresUsername: true #
+TypeofTestToSendToSheet: Safety #
+CategoriesAvailable: Mechanical; Electrical; Software; Leadership # If TeamSelectionRequired is false, this is ignored
+TeamsAvailable: FRC; FTC; VEX # If TeamSelectionRequired is false, this is ignored
