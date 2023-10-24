@@ -1,15 +1,29 @@
 import React from "react";
-import '../../Assets/scss/admin/adminlogin.scss';
-import PageTitle from "../../Assets/ts/pagetitle/pagetitle";
+import styles from '../../styles/adminlogin.module.scss';
+import PageTitle from "@/styles/Assets/PageTitle";
 
 const AdminPanel: React.FC = (): React.JSX.Element => {
+    React.useEffect((): (() => void) => {
+        const handleKeyDown = (event: KeyboardEvent): void => {
+            if (event.key === "Enter") {
+                start(event as unknown as React.MouseEvent<HTMLButtonElement, MouseEvent>);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return (): void => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, []);
+
     const start: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
         event.preventDefault();
         console.log("Login");
 
         const username: string = (document.getElementById("username") as HTMLInputElement).value;
 
-        const data = {
+        const data: object = {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -21,7 +35,7 @@ const AdminPanel: React.FC = (): React.JSX.Element => {
             send: string;
         }
 
-        const login: Response = await fetch("/admin/login", data);
+        const login: Response = await fetch("http://localhost:19640/admin/login", data);
         const loginJSON: LoginResponse = await login.json();
 
         if (loginJSON.send === "Success") {
@@ -31,29 +45,23 @@ const AdminPanel: React.FC = (): React.JSX.Element => {
             const errorMessage: HTMLElement = document.getElementById("errorMessage") as HTMLElement;
             errorMessage.innerText = "Incorrect username";
 
-            setTimeout(() => {
+            setTimeout((): void => {
                 errorMessage.innerText = "";
             }, 3000);
         }
     }
 
-    window.onkeydown = (event: KeyboardEvent): void => {
-        if (event.key === "Enter") {
-            start(event as unknown as React.MouseEvent<HTMLButtonElement, MouseEvent>);
-        }
-    }
-
     return (
-        <div id="AdminLogin">
+        <div className={styles.adminLogin}>
             <PageTitle title="Admin Panel Login" />
-            <div id="AdminLoginContainer">
-                <h1 id="TopTitle">Admin Panel</h1>
+            <div className={styles.adminLoginContainer}>
+                <h1 className={styles.topTitle}>Admin Panel</h1>
                 <hr />
-                <div id="Login">
-                    <p id="LoginTitle">Login</p>
-                    <input type="text" id="username" name="username" placeholder="Username" required />
+                <div className={styles.loginTab}>
+                    <p className={styles.loginTitle}>Login</p>
+                    <input type="text" className={styles.usernameInput} id="username" name="username" placeholder="Username" required />
                     <p id="errorMessage"></p>
-                    <button id="submit" name="submit" onClick={start}>Login</button>
+                    <button id="submit" className={styles.submitButton} name="submit" onClick={start}>Login</button>
                 </div>
             </div>
         </div>

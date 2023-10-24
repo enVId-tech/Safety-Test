@@ -1,19 +1,20 @@
 import React from "react";
-import '../../Assets/scss/admin/adminhome.scss';
-import PageTitle from "../../Assets/ts/pagetitle/pagetitle";
+import styles from '../../styles/adminhome.module.scss';
+import PageTitle from "@/styles/Assets/PageTitle";
 
 const AdminHome: React.FC = (): React.JSX.Element => {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
 
-    window.onload = (): void => {
+    React.useEffect((): void => {
         const loggedIn: string | null = sessionStorage.getItem("admin");
+
         if (loggedIn === "isAdmin[@98duN@9xSW(SJ)]") {
             setLoggedIn(true);
         } else {
             setLoggedIn(false);
             window.location.href = "/admin";
         }
-    }
+    }, []);
 
     const redirect = (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): void => {
         const button: HTMLButtonElement = event.target as HTMLButtonElement;
@@ -28,14 +29,14 @@ const AdminHome: React.FC = (): React.JSX.Element => {
         <>
             {
                 loggedIn ? (
-                    <div id="AdminHome">
+                    <div className={styles.adminHome}>
                         <PageTitle title="Admin Panel" />
-                        <div id="AdminHomeContainer">
-                            <h1 id="TopTitle">Admin Panel</h1>
+                        <div className={styles.adminHomeContainer}>
+                            <h1 className={styles.topTitle}>Admin Panel</h1>
                             <hr />
-                            <div id="Login">
-                                <button id="questionsButton" name="button" className="button" onClick={redirect}>Questions</button>
-                                <button id="responsesButton" name="button" className="button" onClick={redirect}>Responses</button>
+                            <div className={styles.pagePanel}>
+                                <button id="questionsButton" name="button" className={styles.button} onClick={redirect}>Questions</button>
+                                <button id="responsesButton" name="button" className={styles.button} onClick={redirect}>Responses</button>
                             </div>
                         </div>
                     </div>

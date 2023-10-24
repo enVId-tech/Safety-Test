@@ -3,7 +3,7 @@
     opacity: 1;
 }
 
-#Selection {
+.Selection {
     .mainElements {
         font-family: 'Work Sans', sans-serif;
         font-size: 1.5rem;
@@ -16,7 +16,7 @@
         display: flex;
         flex-direction: column;
 
-        #Topbar {
+        .topBar {
             width: 100%;
             height: 30vh;
             background-color: rgb(0, 162, 255);
@@ -25,7 +25,7 @@
             justify-content: center;
             align-items: center;
 
-            #CategoryTitle {
+            .categoryTitle {
                 width: 30%;
                 height: 100%;
                 display: flex;
@@ -34,7 +34,7 @@
                 align-items: center;
             }
 
-            #CategoryLabel {
+            .categoryLabel {
                 width: 70%;
                 height: 100%;
                 display: flex;
@@ -43,7 +43,7 @@
                 align-items: center;
             }
 
-            #Buttons {
+            .buttonSection {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -51,7 +51,7 @@
                 width: 20%;
                 height: 100%;
 
-                .CategoryButton {
+                .categoryButton {
                     width: 50%;
                     height: 25%;
                     margin-top: 2vh;
@@ -70,13 +70,13 @@
             }
         }
 
-        #SelectionContent {
+        .selectionContent {
             display: flex;
             flex-direction: row;
             width: 100%;
             height: 70vh;
 
-            .Resources {
+            .resourcesTab {
                 width: 50%;
                 height: 100%;
                 display: flex;
@@ -84,7 +84,7 @@
                 justify-content: center;
                 align-items: center;
 
-                #ResourcesTitle {
+                .resourcesTitle {
                     width: 100%;
                     height: 10%;
                     display: flex;
@@ -95,7 +95,7 @@
                     font-weight: 500;
                 }
 
-                #Links {
+                .linksSection {
                     font-family: 'Work Sans', sans-serif;
                     display: flex;
                     flex-direction: column;
@@ -104,7 +104,7 @@
                 }
             }
 
-            .Categories {
+            .categoriesTab {
                 width: 50%;
                 height: 100%;
                 display: flex;
@@ -112,7 +112,7 @@
                 justify-content: center;
                 align-items: center;
 
-                #CategoriesTitle {
+                .categoriesTitle {
                     width: 100%;
                     height: 10%;
                     display: flex;
@@ -124,18 +124,18 @@
                     font-family: "Work Sans", sans-serif;
                 }
 
-                #CategorySelection {
+                .categorySelection {
                     display: flex;
                     flex-direction: row;
 
-                    .CategoryMainDiv {
+                    .categoryMainDiv {
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
                         margin: 2vw;
 
-                        .CategoryButton {
+                        .categoryButton {
                             padding: 1vh;
                             border-radius: 10px;
                             border: none;
@@ -143,9 +143,10 @@
                             width: calc(100% + 2vw);
                             font-size: 2.5rem;
                             font-family: "Work Sans", sans-serif;
+                            cursor: pointer;
                         }
 
-                        .CategoryOptions {
+                        .categoryOptions {
                             display: none;
                             flex-direction: column;
                             justify-content: center;
@@ -155,7 +156,7 @@
                                 display: flex;
                                 opacity: 1;
                             }
-                            .CategorySubButton {
+                            .categorySubButton {
                                 padding: 1vh;
                                 border-radius: 10px;
                                 border: none;

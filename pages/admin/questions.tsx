@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../Assets/scss/admin/questions.scss';
-import PageTitle from '../../Assets/ts/pagetitle/pagetitle';
+import '../../styles/questions.module.scss';
+import PageTitle from '@/styles/Assets/PageTitle';
 
 const Questions: React.FC = (): React.JSX.Element => {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);

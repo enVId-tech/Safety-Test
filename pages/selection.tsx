@@ -1,14 +1,19 @@
-import React from "react";
-import PageTitle from "../Assets/ts/pagetitle/pagetitle";
-import '../Assets/scss/selection.scss';
+import React from 'react';
+import PageTitle from '@/styles/Assets/PageTitle';
+import Script from 'next/script';
+import styles from '../styles/selection.module.scss';
 
 const Select: React.FC = (): React.JSX.Element => {
     const [selectedCategory, setSelectedCategory] = React.useState<string>("");
     const [settings, setSettings] = React.useState<string[][] | string[]>([]);
 
+    React.useEffect((): void => {
+        getSettings();
+    }, []);
+
     const getSettings = async (): Promise<void> => {
         try {
-            const getSettings: Response = await fetch("/home/get/selection");
+            const getSettings: Response = await fetch("http://localhost:19640/home/get/selection");
             const settingsJSON: string[] = await getSettings.json();
             setSettings(settingsJSON);
 
@@ -40,50 +45,48 @@ const Select: React.FC = (): React.JSX.Element => {
     }
 
     const Appear = (id: string): void => {
-        document.getElementsByClassName("show")[0]?.classList.remove("show");
+        document.getElementsByClassName(styles.show)[0]?.classList.remove(styles.show);
         const optionsElement = document.getElementById(`${id}Options`);
-        optionsElement?.classList.toggle("show");
+        console.log(id + "Options");
+        optionsElement?.classList.add(styles.show);
+        console.log(optionsElement);
     };
 
     const Save = (id: string): void => {
         setSelectedCategory(id);
-        document.getElementsByClassName("selected")[0]?.classList.remove("selected");
-        document.getElementById(`${id.split(" ")[0]}${id.split(" ")[1]}`)?.classList.add("selected");
+        document.getElementsByClassName(styles.selected)[0]?.classList.remove(styles.selected);
+        document.getElementById(`${id.split(" ")[0]}${id.split(" ")[1]}`)?.classList.add(styles.selected);
         localStorage.setItem("selectedCategory", id);
     };
 
-    window.onload = (): void => {
-        getSettings();
-    }
-
     return (
-        <div id="Selection">
+        <div className={styles.Selection}>
             <PageTitle title="Select" />
-            <div className="mainElements">
-                <nav id="Topbar">
-                    <h1 id="CategoryTitle">Prerequisites</h1>
-                    <p id="CategoryLabel">
+            <div className={styles.mainElements}>
+                <nav className={styles.topBar}>
+                    <h1 className={styles.categoryTitle}>Prerequisites</h1>
+                    <p className={styles.categoryLabel}>
                         This page has available resources and options for taking this
                         test. The test will allow you to go back to this page and save
                         your answers.
                     </p>
-                    <div id="Buttons">
-                        <button id="CategoryBack" className="CategoryButton" onClick={backButton}>
+                    <div className={styles.buttonSection}>
+                        <button id="CategoryBack" className={styles.categoryButton} onClick={backButton}>
                             Back
                         </button>
-                        <button id="CategoryNext" className="CategoryButton" onClick={nextButton}>
+                        <button id="CategoryNext" className={styles.categoryButton} onClick={nextButton}>
                             Next
                         </button>
                     </div>
                 </nav>
-                <span id="SelectionContent">
+                <span className={styles.selectionContent}>
                     {settings[0] === "TS" && (
-                        <div className="Resources">
-                            <h2 className="ResourcesTitle">Resources</h2>
-                            <p className="ResourcesLabel">
+                        <div className={styles.resourcesTab}>
+                            <h2 className={styles.resourcesTitle}>Resources</h2>
+                            <p className={styles.resourcesLabel}>
                                 This section contains resources that you can use for the test.
                             </p>
-                            <div id="Links">
+                            <div className={styles.linksSection}>
                                 <br />
                                 <h1 id="SafetyLink">
                                     <a
@@ -111,31 +114,32 @@ const Select: React.FC = (): React.JSX.Element => {
                         </div>
                     )}
                     {settings[1] === "STG" && (
-                        <div className="Categories">
-                            <h2 id="CategoriesTitle">Categories</h2>
+                        <div className={styles.categoriesTab}>
+                            <h2 className={styles.categoriesTitle}>Categories</h2>
                             <p id="CategoriesLabel">
                                 This section contains categories that you can choose from.
                             </p>
-                            <div id="CategorySelection">
+                            <div className={styles.categorySelection}>
                                 {Array.from(settings[2]).map((category: string, index: number) => (
-                                    <div id={`${category}Div`} key={category} className="CategoryMainDiv">
+                                    <div key={category} className={styles.categoryMainDiv}>
                                         <input
                                             type="button"
-                                            id={category}
                                             value={category}
-                                            className="CategoryButton"
+                                            id={`${category}Button`}
+                                            className={styles.categoryButton}
                                             onClick={() => Appear(category)}
                                         />
                                         <div
+                                            className={styles.categoryOptions}
                                             id={`${category}Options`}
-                                            className="CategoryOptions"
                                         >
                                             {Array.from(settings[3]).map((subcategory: string, index: number) => (
                                                 <input
                                                     type="button"
                                                     id={`${category}${settings[3][index]}`}
                                                     value={settings[3][index]}
-                                                    className="CategorySubButton"
+                                                    className={styles.categorySubButton}
+                                                    key={`${category}${settings[3][index]}`} // Add a unique "key" prop
                                                     onClick={() => {
                                                         Save(`${category} ${settings[3][index]}`);
                                                     }}

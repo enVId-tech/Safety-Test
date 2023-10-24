@@ -1,5 +1,7 @@
-import React from "react";
-import '../Assets/scss/test.scss';
+import React from 'react';
+import styles from '../styles/test.module.scss';
+import Image from 'next/image';
+import PageTitle from '@/styles/Assets/PageTitle';
 
 interface Settings {
     maxQuestions: number;
@@ -15,7 +17,11 @@ const Test: React.FC = (): React.JSX.Element => {
     const [selectedAnswers, setSelectedAnswers] = React.useState<boolean[][]>();
     const [score, setScore] = React.useState<number>(0);
 
-    window.onload = async (): Promise<void> => {
+    React.useEffect((): void => {
+        getSettings();
+    }, []);
+
+    const getSettings = async (): Promise<void> => {
         try {
             const typeOfTest: string | null = localStorage.getItem("typeOfTest");
 
@@ -32,11 +38,10 @@ const Test: React.FC = (): React.JSX.Element => {
                 body: JSON.stringify({ typeOfTest })
             }
 
-            const data: Response = await fetch("/test/post/settings", dataPost);
+            const data: Response = await fetch("http://localhost:19640/test/post/settings", dataPost);
             const settingsJSON: Settings = await data.json();
 
             setSettings(settingsJSON);
-            console.log(settingsJSON);
 
             setSelectedAnswers(new Array(settingsJSON!.maxQuestions).fill(new Array(settingsJSON!.answersPerQuestion).fill(false)));
         } catch (error: unknown) {
@@ -55,8 +60,6 @@ const Test: React.FC = (): React.JSX.Element => {
 
     const sendResponses = async (): Promise<void> => {
         try {
-            console.log("Sending responses");
-
             const dataPost: object = {
                 method: "POST",
                 headers: {
@@ -75,7 +78,7 @@ const Test: React.FC = (): React.JSX.Element => {
                 score: number;
             }
 
-            const data: Response = await fetch("/test/post/answers", dataPost);
+            const data: Response = await fetch("http://localhost:19640/test/post/answers", dataPost);
             const result: JSONRes = await data.json();
 
             const writeData: object = {
@@ -92,7 +95,7 @@ const Test: React.FC = (): React.JSX.Element => {
                 })
             }
 
-            await fetch("/test/post/write", writeData);
+            await fetch("http://localhost:19640/test/post/write", writeData);
 
             setScore(result.score);
         } catch (error: unknown) {
@@ -128,32 +131,33 @@ const Test: React.FC = (): React.JSX.Element => {
     }
 
     return (
-        <div id="Test">
+        <div className={styles.testPage}>
+            <PageTitle title="Test" />
             {settings ? (
                 <>
-                    <img alt="4079" id="backgroundImage" />
-                    <div className='QuestionContent active'>
-                        <div id="QuestionContainer">
-                            <div id="ContentDiv">
-                                <div id="QuestionDetails">
+                    <Image alt="4079" className={styles.backgroundImage} src=""/>
+                    <div className={styles.questionContent}>
+                        <div className={styles.questionContainer}>
+                            <div className={styles.contentDiv}>
+                                <div className={styles.questionDetails}>
                                     <h1 id="QuestionTitle">Question {questionNumber + 1}</h1>
                                 </div>
-                                <div id="QuestionContainerContent">
-                                    <p id="QuestionDescription">{settings?.questions[questionNumber]}</p>
+                                <div className={styles.questionContainerContent}>
+                                    <p className={styles.questionDescription}>{settings?.questions[questionNumber]}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className='SelectionContent active'>
-                        <h1 className="SelectQuestionTitle">Choose <strong className="SelectQuestionTitle"><em className="SelectQuestionTitle">all</em></strong> that apply</h1>
-                        <div id="QuestionOptionsDivContainer">
-                            <div id="QuestionChoices">
+                    <div className={styles.selectionContent}>
+                        <h1 className={styles.selectQuestionTitle}>Choose <strong className={styles.selectQuestionTitle}><em className={styles.selectQuestionTitle}>all</em></strong> that apply</h1>
+                        <div className={styles.questionOptionsDivContainer}>
+                            <div className={styles.questionChoices}>
                                 {
                                     settings?.answers[questionNumber].map((answer: string, index: number) => {
                                         return (
                                             <p
                                                 id={`QuestionAnswer${index}`}
-                                                className={`Answer ${selectedAnswers && selectedAnswers[questionNumber][index] ? 'selected' : ''}`}
+                                                className={`${styles.answerChoice} ${selectedAnswers && selectedAnswers[questionNumber][index] ? `${styles.selected}` : ''}`}
                                                 key={index}
                                                 onClick={(): void => handleAnswer(`QuestionAnswer${index}`, questionNumber)}
                                             >
@@ -163,7 +167,7 @@ const Test: React.FC = (): React.JSX.Element => {
                                     })
                                 }
                             </div>
-                            <span id="ProgressionButtons">
+                            <span className={styles.progressionButtons}>
                                 <button id="PreviousQuestion" className="Progression" onClick={previousQuestion}>
                                     {
                                         questionNumber === 0 ? "Back" : "Previous"

@@ -1,6 +1,6 @@
 import React from 'react';
-import '../../Assets/scss/admin/responses.scss';
-import PageTitle from '../../Assets/ts/pagetitle/pagetitle';
+import styles from '../../styles/responses.module.scss';
+import PageTitle from '@/styles/Assets/PageTitle';
 
 type UserResponse = {
     Name: string;
@@ -11,20 +11,11 @@ type UserResponse = {
     Time: string;
 }
 
-const Responses: React.FC = (): React.JSX.Element => {
+export default function Responses(): React.JSX.Element {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
     const [responses, setResponses] = React.useState<UserResponse[]>([]);
 
-    const getResponses = async (): Promise<void> => {
-        const getResponses: Response = await fetch("/admin/get/responses");
-
-        const getResponsesJSON: { fileData: UserResponse[] } = await getResponses.json();
-        setResponses(getResponsesJSON.fileData); // wrap the array in another array
-
-        console.log(getResponsesJSON.fileData[0].Name);
-    }
-
-    window.onload = (): void => {
+    React.useEffect((): void => {
         const loggedIn: string | null = sessionStorage.getItem("admin");
         if (loggedIn === "isAdmin[@98duN@9xSW(SJ)]") {
             setLoggedIn(true);
@@ -33,17 +24,45 @@ const Responses: React.FC = (): React.JSX.Element => {
             window.location.href = "/admin";
         }
 
-        getResponses();
-    }
-    //console.log(responses.fileData[0].Name)
+        setResponses([
+            {
+                Name: "Test",
+                Category: "Test",
+                Team: "Test",
+                Score: 0,
+                Type: "Test",
+                Time: "Test"
+            }
+        ]);
+    }, []);
+
+    const getData = React.useCallback(async (): Promise<UserResponse[]> => {
+        const responsesConst = await fetch(
+            "http://localhost:19640/admin/get/responses",
+            {
+                "next": { revalidate: 3 }
+            }
+        );
+        const responsesJSON: UserResponse[] = await responsesConst.json();
+        console.log(responsesJSON);
+        return responsesJSON;
+    }, []);
+
+    React.useEffect((): void => {
+        getData().then((responsesConst: UserResponse[]): void => {
+            // setResponses(responsesConst.fileData);
+            console.log(responsesConst);
+        });
+    }, [getData]);
+
     return (
         <>
             {
                 loggedIn ? (
-                    <div id="Responses">
+                    <div className={styles.responsePage}>
                         <PageTitle title="Responses" />
-                        <div id="ResponsesContainer">
-                            <h1 id="TopTitle">Responses</h1>
+                        <div className={styles.responsesContainer}>
+                            <h1 className={styles.topTitle}>Responses</h1>
                             <hr />
                             <table id="ResponsesTable">
                                 <thead>
@@ -84,5 +103,3 @@ const Responses: React.FC = (): React.JSX.Element => {
         </>
     );
 }
-
-export default Responses;
