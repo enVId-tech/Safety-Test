@@ -1,13 +1,13 @@
 {
   "name": "safetytest",
-  "version": "24.00",
+  "version": "24.10",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "server": "nodemon --exec ts-node --esm src/index.mts"
+    "server": "ts-node --esm src/index.mts"
   },
   "dependencies": {
     "cors": "^2.8.5",

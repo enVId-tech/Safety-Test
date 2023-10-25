@@ -15,45 +15,32 @@ export default function Responses(): React.JSX.Element {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
     const [responses, setResponses] = React.useState<UserResponse[]>([]);
 
+    let url: string;
+
     React.useEffect((): void => {
         const loggedIn: string | null = sessionStorage.getItem("admin");
         if (loggedIn === "isAdmin[@98duN@9xSW(SJ)]") {
             setLoggedIn(true);
         } else {
             setLoggedIn(false);
-            window.location.href = "/admin";
+            window.location.href = "/admin/login";
         }
 
-        setResponses([
-            {
-                Name: "Test",
-                Category: "Test",
-                Team: "Test",
-                Score: 0,
-                Type: "Test",
-                Time: "Test"
-            }
-        ]);
+        getDataConst();
+
+        setInterval(() => {
+            getDataConst();
+        }, 10000);
     }, []);
 
-    const getData = React.useCallback(async (): Promise<UserResponse[]> => {
-        const responsesConst = await fetch(
-            "http://localhost:19640/admin/get/responses",
-            {
-                "next": { revalidate: 3 }
-            }
-        );
-        const responsesJSON: UserResponse[] = await responsesConst.json();
+    const getDataConst = async (): Promise<void> => {
+        const responsesConst = await fetch("http://localhost:19640/admin/get/responses");
+        const responsesJSON = await responsesConst.json();
         console.log(responsesJSON);
-        return responsesJSON;
-    }, []);
+        setResponses(responsesJSON.fileData);
+    }
 
-    React.useEffect((): void => {
-        getData().then((responsesConst: UserResponse[]): void => {
-            // setResponses(responsesConst.fileData);
-            console.log(responsesConst);
-        });
-    }, [getData]);
+    // Work on fixing download later (mainly bc im too tired/lazy to do it right now)
 
     return (
         <>
@@ -63,8 +50,9 @@ export default function Responses(): React.JSX.Element {
                         <PageTitle title="Responses" />
                         <div className={styles.responsesContainer}>
                             <h1 className={styles.topTitle}>Responses</h1>
+                            <a href="responses.json" download={true} className={styles.downloadButton}>Download Responses</a>
                             <hr />
-                            <table id="ResponsesTable">
+                            <table className={styles.responsesTable}>
                                 <thead>
                                     <tr>
                                         <th>Name</th>

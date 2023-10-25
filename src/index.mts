@@ -4,7 +4,6 @@ import cors from 'cors';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
-import env from 'dotenv';
 
 // Express Init
 const app: Express = express();
@@ -234,11 +233,11 @@ app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>
 
         const main: object = { Name, Team, Category, Score, Type, Time };
 
-        let data: object[] = JSON.parse(fs.readFileSync("src/responses/responses.json", "utf8"));
+        let data: object[] = JSON.parse(fs.readFileSync("pages/admin/responses", "utf8"));
 
         data.push(main);
 
-        fs.writeFileSync("src/responses/responses.json", JSON.stringify(data));
+        fs.writeFileSync("pages/admin/responses", JSON.stringify(data));
 
         res.send({ send: "Success" });
     } catch (error: unknown) {
@@ -267,7 +266,7 @@ app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void =>
 
 app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
     try {
-        const fileData = JSON.parse(fs.readFileSync("src/responses/responses.json", "utf8"));
+        const fileData = JSON.parse(fs.readFileSync("pages/admin/responses", "utf8"));
 
         res.send({ fileData });
     } catch (error: unknown) {
@@ -277,8 +276,6 @@ app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): 
 
 const __filename: string = fileURLToPath(import.meta.url);
 const __dirname: string = dirname(__filename);
-
-env.config({ path: join(__dirname, 'port.env') });
 
 // Serve static files from the build directory
 app.use(express.static(join(__dirname, '..', 'build')));

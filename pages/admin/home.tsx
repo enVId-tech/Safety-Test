@@ -12,7 +12,7 @@ const AdminHome: React.FC = (): React.JSX.Element => {
             setLoggedIn(true);
         } else {
             setLoggedIn(false);
-            window.location.href = "/admin";
+            window.location.href = "/admin/login";
         }
     }, []);
 
