@@ -17,10 +17,18 @@ app.use(cors({
 app.use(express.json({ limit: '5mb' }));
 
 // Globals
-
 let settings: string[] = [];
 const mainTestPath: string = "Tests";
 const folderSplit: string = "\r\n" || "\n";
+
+// Interface
+interface TestRequestBody {
+    selectedAnswers: boolean[][];
+    typeOfTest: string;
+    answers: string[][];
+    maxQuestions: number;
+    questions: string[];
+}
 
 // Functions
 const shuffleItems = (array: any[]): any[] => {
@@ -36,7 +44,7 @@ const shuffleItems = (array: any[]): any[] => {
 
         return array;
     } catch (error: unknown) {
-        console.log(error as string)
+        console.error(error as string)
         return array;
     }
 }
@@ -53,7 +61,7 @@ const getOneSetting = (settingIndex: number, splitIndex?: string): string | null
         }
         return null;
     } catch (error: unknown) {
-        console.log(error as string)
+        console.error(error as string)
         return null;
     }
 }
@@ -75,7 +83,7 @@ app.get('/home/get/folders', async (req: any, res: any): Promise<void> => {
 
         res.send(filesNames);
     } catch (error: unknown) {
-        console.log(error as string)
+        console.error(error as string)
     }
 });
 
@@ -117,7 +125,7 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
 
         res.send(selectionSettings);
     } catch (error: unknown) {
-        console.log(error as string);
+        console.error(error as string);
     }
 });
 
@@ -131,20 +139,20 @@ app.post('/home/post/folders/dir', async (req: NodeJS.Dict<any>, res: NodeJS.Dic
 
         res.send({ send: folderGet });
     } catch (error: unknown) {
-        console.log(error as string)
+        console.error(error as string)
     }
 });
 
 app.post('/test/post/settings', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
     try {
         let answers: string[][] = [];
-        let questions: string[] = [];        
+        let questions: string[] = [];
 
         const typeOfTest: string = req.body.typeOfTest;
 
         const maxQuestions: number = 16; // getOneSetting(2) as unknown as number;
         const answersPerQuestion: number = 4; // getOneSetting(3) as unknown as number;
-        
+
         const getTestFileData: string = await fs.readFileSync(`${mainTestPath}/${typeOfTest}/test.txt`, 'utf8');
 
         const testFileData: string[] = getTestFileData.split("Question");
@@ -174,17 +182,9 @@ app.post('/test/post/settings', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<a
 
         res.send({ questions, answers, maxQuestions, answersPerQuestion });
     } catch (error: unknown) {
-        console.log(error as string)
+        console.error(error as string)
     }
 });
-
-interface TestRequestBody {
-    selectedAnswers: boolean[][];
-    typeOfTest: string;
-    answers: string[][];
-    maxQuestions: number;
-    questions: string[];
-}
 
 app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: NodeJS.Dict<any>): Promise<void> => {
     try {
@@ -196,7 +196,7 @@ app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: No
 
         const testFileData: string[] = getTestFileData.split("Question");
 
-
+        let pass: boolean = false;
 
         for (let i = 0; i < maxQuestions; i++) {
             const questionIndex: number = testFileData.findIndex((question) => question.includes(questions[i]));
@@ -215,33 +215,52 @@ app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: No
                 }
             }
         }
-        
-        res.send({ score });
+
+        if (score >= maxQuestions) {
+            pass = true;
+        }
+
+        res.send({ score, pass });
     } catch (error: unknown) {
-        console.log(error as string);
+        console.error(error as string);
     }
 });
 
 app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): Promise<void> => {
     try {
-        const { Name, Team, Category, Score, Type } = req.body;
+        const { Name, Team, Category, Score, Type, Pass } = req.body;
 
         const UnStrTime: Date = new Date();
         const Time: string = UnStrTime.toLocaleString("en-US", {
             timeZone: "America/Los_Angeles"
         })
 
-        const main: object = { Name, Team, Category, Score, Type, Time };
+        const main: object = { Name, Team, Category, Score, Type, Pass, Time };
 
-        let data: object[] = JSON.parse(fs.readFileSync("pages/admin/responses", "utf8"));
+        const validAdminNames: string[] = ["Erick Tran", "Aaron Truong"];
 
-        data.push(main);
+        if (!validAdminNames.includes(Name)) {
+            const data: object[] = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
 
-        fs.writeFileSync("pages/admin/responses", JSON.stringify(data));
+            data.push(main);
+
+            fs.writeFileSync("pages/admin/responses.json", JSON.stringify(data));
+        }
+        
+        if (Pass) {
+            const data2: object[] = JSON.parse(fs.readFileSync("pages/admin/passed.json", "utf8"));
+            const data3: object[] = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
+
+            data2.push(main);
+            data3.push(main);
+
+            fs.writeFileSync("pages/admin/passed.json", JSON.stringify(data2));
+            fs.writeFileSync("pages/admin/responses.json", JSON.stringify(data3));
+        }
 
         res.send({ send: "Success" });
     } catch (error: unknown) {
-        console.log(error as string);
+        console.error(error as string);
     }
 });
 
@@ -260,17 +279,27 @@ app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void =>
 
         res.send({ send: "Error" });
     } catch (error: unknown) {
-        console.log(error as string);
+        console.error(error as string);
     }
 });
 
 app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
     try {
-        const fileData = JSON.parse(fs.readFileSync("pages/admin/responses", "utf8"));
+        const fileData = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
 
         res.send({ fileData });
     } catch (error: unknown) {
-        console.log(error as string);
+        console.error(error as string);
+    }
+});
+
+app.get('/admin/get/names', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
+    try {
+        const validAdminNames: string[] = ["Erick Tran", "Aaron Truong"];
+
+        res.send({ adminNames: validAdminNames });
+    } catch (error: unknown) {
+        console.error(error as string)
     }
 });
 
@@ -287,5 +316,5 @@ app.get('/*', (req, res) => {
 
 // Server
 const PORT: number = process.env.PORT as unknown as number || 19640 as number;
-app.listen(PORT, () => console.log(`Listening on port ${PORT}`));
-console.log('Server Started');
+app.listen(PORT, () => console.error(`Listening on port ${PORT}`));
+console.error('Server Started');

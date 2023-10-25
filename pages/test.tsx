@@ -10,16 +10,60 @@ interface Settings {
     answers: string[][];
 }
 
+interface adminResponse {
+    adminNames: string[];
+}
 
 const Test: React.FC = (): React.JSX.Element => {
     const [questionNumber, setQuestionNumber] = React.useState<number>(0);
     const [settings, setSettings] = React.useState<Settings>();
     const [selectedAnswers, setSelectedAnswers] = React.useState<boolean[][]>();
     const [score, setScore] = React.useState<number>(0);
+    const [isAdmin, setIsAdmin] = React.useState<boolean>(false);
 
     React.useEffect((): void => {
-        getSettings();
+        try {
+            getSettings();
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
     }, []);
+
+    React.useEffect((): void => {
+        try {
+            autoScore();
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
+    }, [selectedAnswers]);
+
+    React.useEffect((): void => {
+        try {
+            if (isAdmin === true) {
+                alert("You are an admin! You now have special features enabled, including auto-scoring.");
+            }
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
+    }, [isAdmin]);
+
+    const autoScore = async (): Promise<void> => {
+        try {
+            const fetchNames: Response = await fetch("http://localhost:19640/admin/get/names");
+            const namesJSON: adminResponse = await fetchNames.json();
+
+            const adminNames: string[] = namesJSON.adminNames;
+
+            for (const admin of adminNames) {
+                if (admin === localStorage.getItem("username")!) {
+                    setIsAdmin(true);
+                    sendResponses();
+                }
+            }
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
+    }
 
     const getSettings = async (): Promise<void> => {
         try {
@@ -50,11 +94,15 @@ const Test: React.FC = (): React.JSX.Element => {
     }
 
     const previousQuestion: () => void = (): void => {
-        if (questionNumber < 1) {
-            setQuestionNumber(0);
-            window.location.href = "/selection";
-        } else {
-            setQuestionNumber(questionNumber - 1);
+        try {
+            if (questionNumber < 1) {
+                setQuestionNumber(0);
+                window.location.href = "/selection";
+            } else {
+                setQuestionNumber(questionNumber - 1);
+            }
+        } catch (error: unknown) {
+            console.error(error as string);
         }
     }
 
@@ -76,6 +124,7 @@ const Test: React.FC = (): React.JSX.Element => {
 
             type JSONRes = {
                 score: number;
+                pass: boolean;
             }
 
             const data: Response = await fetch("http://localhost:19640/test/post/answers", dataPost);
@@ -91,6 +140,7 @@ const Test: React.FC = (): React.JSX.Element => {
                     Team: localStorage.getItem("selectedCategory")!.split(" ")[0],
                     Category: localStorage.getItem("selectedCategory")!.split(" ")[1],
                     Score: result.score,
+                    Pass: result.pass,
                     Type: localStorage.getItem("typeOfTest")!.replace(" ", ""),
                 })
             }
@@ -104,17 +154,19 @@ const Test: React.FC = (): React.JSX.Element => {
     }
 
     const nextQuestion: () => void = (): void => {
-        if (questionNumber >= settings!.maxQuestions - 1) {
-            sendResponses();
-        } else {
-            setQuestionNumber(questionNumber + 1);
+        try {
+            if (questionNumber >= settings!.maxQuestions - 1) {
+                sendResponses();
+            } else {
+                setQuestionNumber(questionNumber + 1);
+            }
+        } catch (error: unknown) {
+            console.error(error as string);
         }
     }
 
     const handleAnswer = (id: string, questionNum: number): void => {
         try {
-            console.log(settings?.answers[questionNum]);
-
             const index: number = parseInt(id.slice(id.length - 1));
             const newSelectedAnswers: boolean[][] = [...selectedAnswers!];
             const questionAnswers: boolean[] = [...newSelectedAnswers[questionNum]];
@@ -123,8 +175,6 @@ const Test: React.FC = (): React.JSX.Element => {
             newSelectedAnswers[questionNum] = questionAnswers;
 
             setSelectedAnswers(newSelectedAnswers);
-
-            console.log(newSelectedAnswers);
         } catch (error: unknown) {
             console.error(error as string);
         }
@@ -135,7 +185,7 @@ const Test: React.FC = (): React.JSX.Element => {
             <PageTitle title="Test" />
             {settings ? (
                 <>
-                    <Image alt="4079" className={styles.backgroundImage} src=""/>
+                    <Image alt="4079" className={styles.backgroundImage} src="" />
                     <div className={styles.questionContent}>
                         <div className={styles.questionContainer}>
                             <div className={styles.contentDiv}>
