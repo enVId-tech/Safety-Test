@@ -1,3 +1,8 @@
+.pageClosed {
+    opacity: 1;
+    animation: moveUpDisappear 1s ease-in-out forwards;
+}
+
 .mainElements {
     display: flex;
     flex-direction: row;
@@ -7,10 +12,16 @@
     width: 100%;
     height: 100vh;
     .left {
+        &.mainCloseLeft {
+            width: 30%;
+            animation: afterLoadShrinkOut 1.25s 0.5s ease-in-out forwards;
+        }
+
         display: flex;
-        width: 30%;
+        width: 0;
         height: 100vh;
         background-color: rgb(0, 162, 255);
+        animation: shrinkOut 2s 1s ease-in-out forwards;
         .leftContent {
             height: 100vh;
             width: 100%;
@@ -23,6 +34,8 @@
                 font-size: 3em;
                 font-weight: 300;
                 margin-bottom: 0.5em;
+                opacity: 0;
+                animation: moveUpAppear 1s 3s ease-in-out forwards;
             }
             .loginForm {
                 width: 80%;
@@ -43,6 +56,8 @@
                     font-size: 0.9vw;
                     padding-left: 0.5vw;
                     margin-bottom: 0.9vh;
+                    opacity: 0;
+                    animation: moveUpAppear 1s 3.2s ease-in-out forwards;
 
                     &:focus {
                         outline: none;
@@ -70,6 +85,8 @@
                     font-size: 0.9vw;
                     padding-left: 0.5vw;
                     margin-bottom: 0.9vh;
+                    opacity: 0;
+                    animation: moveUpAppear 1s 3.4s ease-in-out forwards;
 
                     &:disabled {
                         cursor: not-allowed;
@@ -125,6 +142,8 @@
                     padding-left: 0.5vw;
                     margin-bottom: 0.9vh;
                     cursor: pointer;
+                    opacity: 0;
+                    animation: moveUpAppear 1s 3.6s ease-in-out forwards;
 
                     &:focus {
                         outline: none;
@@ -144,6 +163,8 @@
                     flex-direction: row;
                     justify-content: center;
                     align-items: center;
+                    opacity: 0;
+                    animation: moveUpAppear 1s 3.8s ease-in-out forwards;
                     .footerimg {
                         width: 8vh;
                         height: 8vh;
@@ -156,6 +177,8 @@
                 }
                 .revisionDate {
                     text-align: center;
+                    opacity: 0;
+                    animation: moveUpAppear 1s 4s ease-in-out forwards;
                 }
             }
         }
@@ -167,8 +190,14 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
-        width: 70%;
+        width: 100%;
         height: 100vh;
+        animation: shrinkIn 2s 1s ease-in-out forwards;
+
+        &.mainCloseRight {
+            width: 70%;
+            animation: afterLoadShrinkIn 1.25s 0.5s ease-in-out forwards;
+        }
 
         .rightContent {
             width: 100%;
@@ -184,15 +213,80 @@
                 font-size: 5vw;
                 font-weight: 300;
                 margin-bottom: 0.5em;
+                opacity: 0;
+                animation: moveUpAppear 1.3s ease-in-out forwards;
             }
 
             .testTitle {
                 font-size: 2.5vw;
                 font-weight: 300;
+                opacity: 0;
+                animation: moveUpAppear 1.3s ease-in-out forwards;
             }
         }
     }
 }
 
+@keyframes shrinkIn {
+    0% {
+        width: 100%;
+    }
 
+    100% {
+        width: 70%;
+    }
+}
 
+@keyframes shrinkOut {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 30%;
+    }
+}
+
+@keyframes afterLoadShrinkOut {
+    0% {
+        width: 30%;
+    }
+
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes afterLoadShrinkIn {
+    0% {
+        width: 70%;
+    }
+
+    100% {
+        width: 0;
+    }
+}
+
+@keyframes moveUpAppear {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes moveUpDisappear {
+    0% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-5%);
+        opacity: 0;
+    }
+}

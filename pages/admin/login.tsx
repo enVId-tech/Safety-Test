@@ -2,52 +2,58 @@ import React from "react";
 import styles from '../../styles/adminlogin.module.scss';
 import PageTitle from "@/styles/Assets/PageTitle";
 
+type LoginResponse = {
+    send: string;
+}
+
 const AdminPanel: React.FC = (): React.JSX.Element => {
-    React.useEffect((): (() => void) => {
-        const handleKeyDown = (event: KeyboardEvent): void => {
-            if (event.key === "Enter") {
-                start(event as unknown as React.MouseEvent<HTMLButtonElement, MouseEvent>);
-            }
-        };
+    React.useEffect(() => {
+        try {
+            const handleKeyDown = (event: KeyboardEvent): void => {
+                if (event.key === "Enter") {
+                    start(event as unknown as React.MouseEvent<HTMLButtonElement, MouseEvent>);
+                }
+            };
 
-        window.addEventListener("keydown", handleKeyDown);
+            window.addEventListener("keydown", handleKeyDown);
 
-        return (): void => {
-            window.removeEventListener("keydown", handleKeyDown);
-        };
+            return (): void => {
+                window.removeEventListener("keydown", handleKeyDown);
+            };
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
     }, []);
 
     const start: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void = async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>): Promise<void> => {
-        event.preventDefault();
-        console.log("Login");
+        try {
+            event.preventDefault();
+            const username: string = (document.getElementById("username") as HTMLInputElement).value;
 
-        const username: string = (document.getElementById("username") as HTMLInputElement).value;
+            const data: object = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ username: username })
+            }
 
-        const data: object = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ username: username })
-        }
+            const login: Response = await fetch("http://localhost:19640/admin/login", data);
+            const loginJSON: LoginResponse = await login.json();
 
-        type LoginResponse = {
-            send: string;
-        }
+            if (loginJSON.send === "Success") {
+                sessionStorage.setItem("admin", "isAdmin[@98duN@9xSW(SJ)]");
+                window.location.href = "/admin/home";
+            } else {
+                const errorMessage: HTMLElement = document.getElementById("errorMessage") as HTMLElement;
+                errorMessage.innerText = "Incorrect username";
 
-        const login: Response = await fetch("http://localhost:19640/admin/login", data);
-        const loginJSON: LoginResponse = await login.json();
-
-        if (loginJSON.send === "Success") {
-            sessionStorage.setItem("admin", "isAdmin[@98duN@9xSW(SJ)]");
-            window.location.href = "/admin/home";
-        } else {
-            const errorMessage: HTMLElement = document.getElementById("errorMessage") as HTMLElement;
-            errorMessage.innerText = "Incorrect username";
-
-            setTimeout((): void => {
-                errorMessage.innerText = "";
-            }, 3000);
+                setTimeout((): void => {
+                    errorMessage.innerText = "";
+                }, 3000);
+            }
+        } catch (error: unknown) {
+            console.error(error as string);
         }
     }
 

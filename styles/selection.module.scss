@@ -3,6 +3,11 @@
     opacity: 1;
 }
 
+.pageClosedSelection {
+    opacity: 1;
+    animation: moveUpDisappear 1s ease-in-out forwards;
+}
+
 .Selection {
     .mainElements {
         font-family: 'Work Sans', sans-serif;
@@ -18,12 +23,17 @@
 
         .topBar {
             width: 100%;
-            height: 30vh;
+            height: 100vh;
             background-color: rgb(0, 162, 255);
             display: flex;
             flex-direction: row;
             justify-content: center;
             align-items: center;
+            animation: onLoadMoveUpAppear 1s ease-in-out forwards;
+
+            &.topBarClose {
+                animation: afterLoadShrinkOut 1s ease-in-out forwards;
+            }
 
             .categoryTitle {
                 width: 30%;
@@ -32,6 +42,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                animation: moveUpAppear 1.2s, 1s ease-in-out forwards;
             }
 
             .categoryLabel {
@@ -41,6 +52,7 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                animation: moveUpAppear 1.2s, 1s ease-in-out forwards;
             }
 
             .buttonSection {
@@ -50,6 +62,7 @@
                 align-items: center;
                 width: 20%;
                 height: 100%;
+                animation: moveUpAppear 1.2s, 1s ease-in-out forwards;
 
                 .categoryButton {
                     width: 50%;
@@ -74,7 +87,12 @@
             display: flex;
             flex-direction: row;
             width: 100%;
-            height: 70vh;
+            height: 0;
+            animation: onLoadMoveUpAppear2 1s ease-in-out forwards;
+
+            &.selectionContentClose {
+                animation: afterLoadShrinkIn 1s ease-in-out forwards;
+            }
 
             .resourcesTab {
                 width: 50%;
@@ -83,6 +101,8 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                animation: moveUpAppear 1s 0.1s ease-in-out forwards;
+                opacity: 0;
 
                 .resourcesTitle {
                     width: 100%;
@@ -111,6 +131,8 @@
                 flex-direction: column;
                 justify-content: center;
                 align-items: center;
+                opacity: 0;
+                animation: moveUpAppear 1s 0.1s ease-in-out forwards;
 
                 .categoriesTitle {
                     width: 100%;
@@ -183,4 +205,73 @@
             }
         }
     }
+}
+
+@keyframes onLoadMoveUpAppear {
+    0% {
+        height: 100%;
+    }
+
+    100% {
+        height: 30vh;
+    }
+    
+}
+
+@keyframes onLoadMoveUpAppear2 {
+    0% {
+        opacity: 0;
+        height: 0;
+    }
+
+    100% {
+        opacity: 1;
+        height: 70vh;
+    }
+}
+
+@keyframes moveUpAppear {
+    0% {
+        transform: translateY(25%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+}
+
+@keyframes moveUpDisappear {
+    0% {
+        transform: translateY(0%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-5%);
+        opacity: 0;
+    }
+}
+
+@keyframes afterLoadShrinkOut {
+    0% {
+        height: 30vh;
+    }
+
+    100% {
+        height: 100vh;
+    }
+    
+}
+
+@keyframes afterLoadShrinkIn {
+    0% {
+        height: 70vh;
+    }
+
+    100% {
+        height: 0;
+    }
+    
 }

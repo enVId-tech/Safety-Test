@@ -6,18 +6,27 @@ interface Props {
 }
 
 const PageTitle: React.FC<Props> = ({ title }: Props): JSX.Element => {
-    if (title === undefined) {
+    try {
+        if (title === undefined) {
+            return (
+                <Head>
+                    <title>Next.js</title>
+                </Head>
+            );
+        } else {
+            return (
+                <Head>
+                    <title>OA Robotics - {title}</title>
+                </Head>
+            );
+        }
+    } catch (error: unknown) {
+        console.error(error as string);
         return (
             <Head>
-                <title>Next.js</title>
+                <title>OA Robotics</title>
             </Head>
-        );
-    } else {
-        return (
-            <Head>
-                <title>OA Robotics - {title}</title>
-            </Head>
-        );
+        )
     }
 };
 
