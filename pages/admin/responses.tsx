@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from '../../styles/responses.module.scss';
 import PageTitle from '@/styles/Assets/PageTitle';
+import { Work_Sans } from 'next/font/google';
 
 interface UserResponse {
     Name: string;
@@ -20,12 +21,19 @@ interface downloadFileResponse {
     fileData: string;
 }
 
+const font = Work_Sans({
+    weight: "300",
+    style: 'normal',
+    subsets: ['latin']
+});
+
 export default function Responses(): React.JSX.Element {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
     const [responses, setResponses] = React.useState<UserResponse[]>([]);
     const [timeToNextRefresh, setTimeToNextRefresh] = React.useState<number>(2);
     const [userRefreshTime, setUserRefreshTime] = React.useState<number>(2);
     const [responsesType, setResponsesType] = React.useState<string>("responsesAll");
+    const [isFetching, setIsFetching] = React.useState<boolean>(false);
 
     React.useEffect((): void => {
         try {
@@ -54,11 +62,15 @@ export default function Responses(): React.JSX.Element {
         }
     }, [timeToNextRefresh, userRefreshTime]);
 
+    React.useEffect((): void => {
+        getDataConst();
+    }, [responsesType]);
+    
     React.useEffect(() => {
         try {
             const interval: NodeJS.Timeout = setInterval((): void => {
-                setTimeToNextRefresh(timeToNextRefresh - 0.01);
-            }, 10);
+                setTimeToNextRefresh(timeToNextRefresh - 0.1);
+            }, 100);
 
             // Clear interval on unmount
             return (): void => {
@@ -71,9 +83,21 @@ export default function Responses(): React.JSX.Element {
 
     const getDataConst = async (): Promise<void> => {
         try {
-            const responsesConst: Response = await fetch("http://localhost:19640/admin/get/responses");
-            const responsesJSON: fileDataResponse = await responsesConst.json();
-            setResponses(responsesJSON.fileData);
+            setIsFetching(true);
+            if (responsesType === "responsesAll") {
+                const responsesConst: Response = await fetch("http://localhost:19640/admin/get/responses");
+                const responsesJSON: fileDataResponse = await responsesConst.json();
+                
+                setResponses(responsesJSON.fileData);
+            } else if (responsesType === "responsesPassed") {
+                const responsesConst: Response = await fetch("http://localhost:19640/admin/get/responses/passed");
+                const responsesJSON: fileDataResponse = await responsesConst.json();
+                
+                setResponses(responsesJSON.fileData);
+            } else {
+                throw new Error("Invalid responses type");
+            }
+            setIsFetching(false);
         } catch (error: unknown) {
             console.error(error as string);
         }
@@ -82,8 +106,17 @@ export default function Responses(): React.JSX.Element {
     // Download available on the same level as the responses page
     const downloadFile = async (responseType: string): Promise<void> => {
         try {
-            const downloadFile: Response = await fetch("http://localhost:19640/admin/get/responses");
-            const downloadFileJSON: downloadFileResponse = await downloadFile.json();
+            let downloadFileDataRes: Response;
+
+            if (responseType === "responsesAll") {
+                downloadFileDataRes = await fetch("http://localhost:19640/admin/get/responses");
+            } else if (responseType === "responsesPassed") {
+                downloadFileDataRes = await fetch("http://localhost:19640/admin/get/responses/passed");
+            } else {
+                throw new Error("Invalid responses type, cannot download");
+            }
+
+            const downloadFileJSON: downloadFileResponse = await downloadFileDataRes.json();
             const downloadFileData: string = downloadFileJSON.fileData;
 
             const downloadFileDataString: string = JSON.stringify(downloadFileData);
@@ -139,7 +172,7 @@ export default function Responses(): React.JSX.Element {
                                 }
                             </a>
                             <hr />
-                            <table className={styles.responsesTable}>
+                            <table className={`${styles.responsesTable}`}>
                                 <thead>
                                     <tr>
                                         <th>Name</th>
@@ -186,7 +219,7 @@ export default function Responses(): React.JSX.Element {
                                 </button>
                                 <h1 className={styles.numberOfResponses}># of Responses: {responses.length}</h1>
                                 <h1 className={styles.latestResponse}>Latest: {responses[responses.length - 1]?.Name}</h1>
-                                <h1 className={styles.timeToNextRefresh}>Time to next refresh: {timeToNextRefresh.toFixed(2)}s</h1>
+                                <h1 className={styles.timeToNextRefresh}>Time to next refresh: {timeToNextRefresh.toFixed(1)}s</h1>
                                 <span>
                                     <input
                                         type="number"
@@ -204,7 +237,7 @@ export default function Responses(): React.JSX.Element {
                                         }}
                                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => { if (e.key === "Enter") setTimeToNextRefresh(userRefreshTime) }}
                                     />
-                                    <p className={styles.refreshTimeLabel}>Press enter for immediate refresh</p>
+                                    <p className={`${styles.refreshTimeLabel} ${font.className}`}>{isFetching ? "Fetching Data" : "Press enter for immediate refresh."}</p>
                                 </span>
                             </div>
                         </div>

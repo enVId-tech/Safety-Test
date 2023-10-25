@@ -122,10 +122,7 @@ const Test: React.FC = (): React.JSX.Element => {
                 })
             }
 
-            type JSONRes = {
-                score: number;
-                pass: boolean;
-            }
+            type JSONRes = { score: number; pass: boolean; };
 
             const data: Response = await fetch("http://localhost:19640/test/post/answers", dataPost);
             const result: JSONRes = await data.json();

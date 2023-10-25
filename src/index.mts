@@ -98,26 +98,26 @@ app.get('/home/get/selection', async (req: any, res: any): Promise<void> => {
 
         let selectionSettings: (string[] | string)[] = [];
 
-        if (ACCESSABLE === 'false') {
+        if (!ACCESSABLE as boolean) {
             res.send({ error: "Error" });
             return;
         }
 
-        if (SELECTION_AVAILABLE === 'false') {
+        if (!SELECTION_AVAILABLE as boolean) {
             res.send({ send: "Test" });
             return;
         }
 
-        if (TEAM_SELECTION_REQUIRED === 'true') {
-            selectionSettings.push("TS");
-        } else {
-            selectionSettings.push("NTS");
+        switch (TEAM_SELECTION_REQUIRED){
+            case "true": selectionSettings.push("TS"); break;
+            case "false": selectionSettings.push("NTS"); break;
+            default: res.send({ error: "Error" }); return;
         }
 
-        if (SAFETY_TEST_GUIDES === 'true') {
-            selectionSettings.push("STG");
-        } else {
-            selectionSettings.push("NSTG");
+        switch (SAFETY_TEST_GUIDES){
+            case "true": selectionSettings.push("STG"); break;
+            case "false": selectionSettings.push("NSTG"); break;
+            default: res.send({ error: "Error" }); return;
         }
 
         selectionSettings.push(TEAMS_AVAILABLE);
@@ -268,7 +268,7 @@ app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void =>
     try {
         const username: string = req.body.username;
 
-        const validUsernames = ["erick", "cabinet", "aaron"];
+        const validUsernames: string[] = ["erick", "cabinet", "aaron"];
 
         for (let i = 0; i < validUsernames.length; i++) {
             if (username.toUpperCase().trim() === validUsernames[i].toUpperCase().trim()) {
@@ -285,7 +285,7 @@ app.post('/admin/login', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void =>
 
 app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
     try {
-        const fileData = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
+        const fileData: JSON = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
 
         res.send({ fileData });
     } catch (error: unknown) {
@@ -300,6 +300,16 @@ app.get('/admin/get/names', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void
         res.send({ adminNames: validAdminNames });
     } catch (error: unknown) {
         console.error(error as string)
+    }
+});
+
+app.get('/admin/get/responses/passed', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
+    try {
+        const fileData: JSON = JSON.parse(fs.readFileSync("pages/admin/passed.json", "utf8"));
+
+        res.send({ fileData });
+    } catch (error: unknown) {
+        console.error(error as string);
     }
 });
 

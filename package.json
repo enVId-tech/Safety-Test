@@ -1,6 +1,6 @@
 {
   "name": "safetytest",
-  "version": "24.20",
+  "version": "25.30",
   "private": true,
   "scripts": {
     "dev": "next dev",
