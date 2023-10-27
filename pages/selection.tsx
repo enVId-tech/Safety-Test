@@ -3,14 +3,26 @@ import PageTitle from '@/styles/Assets/PageTitle';
 import { Work_Sans } from 'next/font/google';
 import styles from '../styles/selection.module.scss';
 
-const font = Work_Sans({
+const Work_Sans300 = Work_Sans({
     weight: "300",
     style: 'normal',
     subsets: ['latin']
 });
 
-const font2 = Work_Sans({
+const Work_Sans400 = Work_Sans({
+    weight: "400",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const Work_Sans500 = Work_Sans({
     weight: "500",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const Work_Sans600 = Work_Sans({
+    weight: "600",
     style: 'normal',
     subsets: ['latin']
 });
@@ -23,8 +35,7 @@ const Select: React.FC = (): React.JSX.Element => {
     React.useEffect((): void => {
         try {
             getSettings();
-        }
-        catch (error: unknown) {
+        } catch (error: unknown) {
             console.error(error as string);
         }
     }, []);
@@ -53,7 +64,7 @@ const Select: React.FC = (): React.JSX.Element => {
                 setpageClose(true);
                 setTimeout((): void => {
                     window.location.href = "/test";
-                }, 2000);
+                }, 1000);
             }
         } catch (error: unknown) {
             console.error(error as string);
@@ -98,8 +109,8 @@ const Select: React.FC = (): React.JSX.Element => {
             <PageTitle title="Select" />
             <div className={styles.mainElements}>
                 <nav className={`${styles.topBar} ${pageClose ? styles.topBarClose : ""}`}>
-                    <h1 className={`${styles.categoryTitle} ${font2.className} ${pageClose ? styles.pageClosedSelection : ""}`}>Prerequisites</h1>
-                    <p className={`${styles.categoryLabel} ${font.className} ${pageClose ? styles.pageClosedSelection : ""}`}>
+                    <h1 className={`${styles.categoryTitle} ${Work_Sans500.className} ${pageClose ? styles.pageClosedSelection : ""}`}>Prerequisites</h1>
+                    <p className={`${styles.categoryLabel} ${Work_Sans400.className} ${pageClose ? styles.pageClosedSelection : ""}`}>
                         This page has available resources and options for taking this
                         test. The test will allow you to go back to this page and save
                         your answers.
@@ -116,8 +127,8 @@ const Select: React.FC = (): React.JSX.Element => {
                 <span className={`${styles.selectionContent} ${pageClose ? styles.selectionContentClose : ""}`}>
                     {settings[0] === "TS" && (
                         <div className={`${styles.resourcesTab} ${pageClose ? styles.pageClosedSelection : ""}`}>
-                            <h2 className={`${styles.resourcesTitle} ${font2.className}`}>Resources</h2>
-                            <p className={`${styles.resourcesLabel} ${font.className}`}>
+                            <h2 className={`${styles.resourcesTitle} ${Work_Sans600.className}`}>Resources</h2>
+                            <p className={`${styles.resourcesLabel} ${Work_Sans300.className}`}>
                                 This section contains resources that you can use for the test.
                             </p>
                             <div className={styles.linksSection}>
@@ -128,7 +139,7 @@ const Select: React.FC = (): React.JSX.Element => {
                                         rel="noreferrer"
                                         target="_blank"
                                         id="SafetySlidesLink"
-                                        className={`${styles.safetySlidesLink} ${font.className}`}
+                                        className={`${styles.safetySlidesLink} ${Work_Sans300.className}`}
                                     >
                                         Safety Slides Link
                                     </a>
@@ -140,7 +151,7 @@ const Select: React.FC = (): React.JSX.Element => {
                                         rel="noreferrer"
                                         target="_blank"
                                         id="CategoryChooseLink"
-                                        className={`${styles.categoryChooseLink} ${font.className}`}
+                                        className={`${styles.categoryChooseLink} ${Work_Sans300.className}`}
                                     >
                                         Category Choose Link
                                     </a>
@@ -151,18 +162,18 @@ const Select: React.FC = (): React.JSX.Element => {
                     )}
                     {settings[1] === "STG" && (
                         <div className={`${styles.categoriesTab} ${pageClose ? styles.pageClosedSelection : ""}`}>
-                            <h2 className={`${styles.categoriesTitle} ${font2.className}`}>Categories</h2>
-                            <p id="CategoriesLabel" className={`${styles.categoriesLabel} ${font.className}`}>
+                            <h2 className={`${styles.categoriesTitle} ${Work_Sans600.className}`}>Categories</h2>
+                            <p id="CategoriesLabel" className={`${styles.categoriesLabel} ${Work_Sans300.className}`}>
                                 This section contains categories that you can choose from.
                             </p>
                             <div className={styles.categorySelection}>
                                 {Array.from(settings[2]).map((category: string, index: number) => (
-                                    <div key={category} className={styles.categoryMainDiv}>
+                                    <div key={category} className={`${styles.categoryMainDiv}`}>
                                         <input
                                             type="button"
                                             value={category}
                                             id={`${category}Button`}
-                                            className={`${styles.categoryButton} ${font.className}`}
+                                            className={`${styles.categoryButton} ${Work_Sans400.className}`}
                                             onClick={() => Appear(category)}
                                         />
                                         <div
@@ -174,7 +185,7 @@ const Select: React.FC = (): React.JSX.Element => {
                                                     type="button"
                                                     id={`${category}${settings[3][index]}`}
                                                     value={settings[3][index]}
-                                                    className={`${styles.categorySubButton} ${font.className}`}
+                                                    className={`${styles.categorySubButton} ${Work_Sans300.className}`}
                                                     key={`${category}${settings[3][index]}`} // Add a unique "key" prop
                                                     onClick={() => {
                                                         Save(`${category} ${settings[3][index]}`);

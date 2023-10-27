@@ -165,7 +165,7 @@ const Home: React.FC = (): JSX.Element => {
                                 <a className={styles.RoboticsFooter} href="https://frc4079.org/">OA Robotics</a>
                                 <div className={styles.footerimg} />
                             </div>
-                            <p className={styles.revisionDate}>Revision 25.30 <br /> 10-25-2023 11:47:00 PT</p>
+                            <p className={styles.revisionDate}>Revision 25.40 <br /> 10-26-2023 16:39:00 PT</p>
                         </footer>
                     </div>
                 </div>

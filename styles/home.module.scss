@@ -1,6 +1,6 @@
 .pageClosed {
     opacity: 1;
-    animation: moveUpDisappear 1s ease-in-out forwards;
+    animation: moveUpDisappear 1s ease-in-out forwards !important;
 }
 
 .mainElements {
@@ -289,4 +289,8 @@
         transform: translateY(-5%);
         opacity: 0;
     }
+}
+
+@media (max-width: 1000px) {
+    
 }

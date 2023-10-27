@@ -4,13 +4,11 @@
 }
 
 .pageClosedSelection {
-    opacity: 1;
-    animation: moveUpDisappear 1s ease-in-out forwards;
+    animation: moveUpDisappearAfterLoad 0.5s ease-in-out forwards !important;
 }
 
 .Selection {
     .mainElements {
-        font-family: 'Work Sans', sans-serif;
         font-size: 1.5rem;
         font-weight: 500;
         position: absolute;
@@ -116,7 +114,6 @@
                 }
 
                 .linksSection {
-                    font-family: 'Work Sans', sans-serif;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -143,7 +140,6 @@
                     align-items: center;
                     font-size: 2rem;
                     font-weight: 500;
-                    font-family: "Work Sans", sans-serif;
                 }
 
                 .categorySelection {
@@ -164,7 +160,6 @@
                             background-color: rgb(184, 184, 184);
                             width: calc(100% + 2vw);
                             font-size: 2.5rem;
-                            font-family: "Work Sans", sans-serif;
                             cursor: pointer;
                         }
 
@@ -185,7 +180,6 @@
                                 background-color: rgb(184, 184, 184);
                                 width: 100%;
                                 font-size: 1rem;
-                                font-family: "Work Sans", sans-serif;
                                 margin: 1vh;
                                 transition: all 0.2s ease-in-out;
 
@@ -242,14 +236,14 @@
     }
 }
 
-@keyframes moveUpDisappear {
+@keyframes moveUpDisappearAfterLoad {
     0% {
         transform: translateY(0%);
         opacity: 1;
     }
 
     100% {
-        transform: translateY(-5%);
+        transform: translateY(25%);
         opacity: 0;
     }
 }

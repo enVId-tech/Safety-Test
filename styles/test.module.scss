@@ -1,10 +1,9 @@
 .testPage {
-    height: 100%;
-    width: 100%;
+    height: 100vw;
+    width: 100vw;
     background-color: transparent;
     margin: 0 auto;
     display: flex;
-    font-family: 'Work Sans', sans-serif;
     position: absolute;
     justify-content: space-between;
     top: 0;
@@ -26,13 +25,14 @@
     }
 
     .questionContent {
-        width: 60%;
+        width: 0;
         height: 100vh;
         display: flex;
         align-items: center;
         justify-content: center;
         z-index: 3;
-        
+        animation: shrinkScreen 1.6s ease-in-out forwards;
+
         .questionContainer {
             background-color: rgba(124,124,124,1);
             width: 90%;
@@ -85,6 +85,8 @@
                         font-size: 2rem;
                         padding-left: 2vw;
                         padding-right: 2vw;
+                        opacity: 0;
+                        animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
                     }
                 }
             }
@@ -94,7 +96,7 @@
     .selectionContent {
         background-color: rgb(0, 162, 255);
         height: 100vh;
-        width: 40vw;
+        width: 100vw;
         display: flex;
         align-items: center;
         align-content: center;
@@ -102,13 +104,13 @@
         justify-items: center;
         flex-direction: column;
         z-index: 1000;
+        animation: expandScreen 1.6s ease-in-out forwards;
 
         .selectQuestionTitle {
             color: black;
             font-size: 3rem;
             font-weight: 600;
             margin-bottom: 2vh;
-            font-family: 'Nanum Gothic', sans-serif;
         }
 
         .questionOptionsDivContainer {
@@ -232,5 +234,25 @@
     100% {
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+
+@keyframes expandScreen {
+    0% {
+        width: 100%;
+    }
+
+    100% {
+        width: 40vw;
+    }
+}
+
+@keyframes shrinkScreen {
+    0% {
+        width: 0;
+    }
+
+    100% {
+        width: 60vw;
     }
 }

@@ -2,6 +2,7 @@ import React from 'react';
 import styles from '../styles/test.module.scss';
 import Image from 'next/image';
 import PageTitle from '@/styles/Assets/PageTitle';
+import { Work_Sans } from 'next/font/google';
 
 interface Settings {
     maxQuestions: number;
@@ -13,6 +14,18 @@ interface Settings {
 interface adminResponse {
     adminNames: string[];
 }
+
+const Work_Sans300 = Work_Sans({
+    weight: "300",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const Work_Sans500 = Work_Sans({
+    weight: "500",
+    style: 'normal',
+    subsets: ['latin']
+});
 
 const Test: React.FC = (): React.JSX.Element => {
     const [questionNumber, setQuestionNumber] = React.useState<number>(0);
@@ -40,7 +53,9 @@ const Test: React.FC = (): React.JSX.Element => {
     React.useEffect((): void => {
         try {
             if (isAdmin === true) {
-                alert("You are an admin! You now have special features enabled, including auto-scoring.");
+                setTimeout((): void => {
+                    alert("You are an admin! You now have special features enabled, including auto-scoring.");
+                }, 2750);
             }
         } catch (error: unknown) {
             console.error(error as string);
@@ -187,16 +202,16 @@ const Test: React.FC = (): React.JSX.Element => {
                         <div className={styles.questionContainer}>
                             <div className={styles.contentDiv}>
                                 <div className={styles.questionDetails}>
-                                    <h1 id="QuestionTitle">Question {questionNumber + 1}</h1>
+                                    <h1 id="QuestionTitle" className={Work_Sans500.className}>Question {questionNumber + 1}</h1>
                                 </div>
-                                <div className={styles.questionContainerContent}>
+                                <div className={`${styles.questionContainerContent} ${Work_Sans300.className}`}>
                                     <p className={styles.questionDescription}>{settings?.questions[questionNumber]}</p>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <div className={styles.selectionContent}>
-                        <h1 className={styles.selectQuestionTitle}>Choose <strong className={styles.selectQuestionTitle}><em className={styles.selectQuestionTitle}>all</em></strong> that apply</h1>
+                        <h1 className={`${styles.selectQuestionTitle} ${Work_Sans500.className}`}>Choose <strong className={styles.selectQuestionTitle}><em className={styles.selectQuestionTitle}>all</em></strong> that apply</h1>
                         <div className={styles.questionOptionsDivContainer}>
                             <div className={styles.questionChoices}>
                                 {
@@ -204,7 +219,7 @@ const Test: React.FC = (): React.JSX.Element => {
                                         return (
                                             <p
                                                 id={`QuestionAnswer${index}`}
-                                                className={`${styles.answerChoice} ${selectedAnswers && selectedAnswers[questionNumber][index] ? `${styles.selected}` : ''}`}
+                                                className={`${styles.answerChoice} ${selectedAnswers && selectedAnswers[questionNumber][index] ? `${styles.selected}` : ''} ${Work_Sans300.className}`}
                                                 key={index}
                                                 onClick={(): void => handleAnswer(`QuestionAnswer${index}`, questionNumber)}
                                             >
@@ -215,27 +230,27 @@ const Test: React.FC = (): React.JSX.Element => {
                                 }
                             </div>
                             <span className={styles.progressionButtons}>
-                                <button id="PreviousQuestion" className="Progression" onClick={previousQuestion}>
+                                <button id="PreviousQuestion" className={`${Work_Sans300.className}`} onClick={previousQuestion}>
                                     {
                                         questionNumber === 0 ? "Back" : "Previous"
                                     }
                                 </button>
                                 {
                                     questionNumber !== settings!.maxQuestions - 1 ? (
-                                        <button id="SubmitQuestion" className="Progression" onClick={sendResponses}>
+                                        <button id="SubmitQuestion" className={`${Work_Sans300.className}`} onClick={sendResponses}>
                                             Submit
                                         </button>
                                     ) : (
                                         <></>
                                     )
                                 }
-                                <button id="NextQuestion" className="Progression" onClick={nextQuestion}>
+                                <button id="NextQuestion" className={`${Work_Sans300.className}`} onClick={nextQuestion}>
                                     {
                                         settings!.maxQuestions ? questionNumber === settings!.maxQuestions - 1 ? "Submit" : "Next" : "Next"
                                     }
                                 </button>
                             </span>
-                            <h1 id="Score">
+                            <h1 id="Score" className={`${Work_Sans500.className}`}>
                                 Current score: {score}
                             </h1>
                         </div>
