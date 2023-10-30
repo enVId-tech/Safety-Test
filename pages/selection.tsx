@@ -58,14 +58,14 @@ const Select: React.FC = (): React.JSX.Element => {
             if (selectedCategory === "") {
                 alert("Please select a category");
                 return;
-            } else {
-                localStorage.setItem("selectedCategory", selectedCategory);
-
-                setpageClose(true);
-                setTimeout((): void => {
-                    window.location.href = "/test";
-                }, 1000);
             }
+            
+            localStorage.setItem("selectedCategory", selectedCategory);
+
+            setpageClose(true);
+            setTimeout((): void => {
+                window.location.href = "/test";
+            }, 1000);
         } catch (error: unknown) {
             console.error(error as string);
         }
@@ -186,7 +186,7 @@ const Select: React.FC = (): React.JSX.Element => {
                                                     id={`${category}${settings[3][index]}`}
                                                     value={settings[3][index]}
                                                     className={`${styles.categorySubButton} ${Work_Sans300.className}`}
-                                                    key={`${category}${settings[3][index]}`} // Add a unique "key" prop
+                                                    key={`${category}${settings[3][index]}`}
                                                     onClick={() => {
                                                         Save(`${category} ${settings[3][index]}`);
                                                     }}
