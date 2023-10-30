@@ -52,7 +52,7 @@
                     border: none;
                     background-color: transparent;
                     border-bottom: 2px solid rgba(0, 0, 0, 0.75);
-                    color: bclak;
+                    color: black;
                     font-size: 0.9vw;
                     padding-left: 0.5vw;
                     margin-bottom: 0.9vh;
@@ -292,5 +292,262 @@
 }
 
 @media (max-width: 1000px) {
-    
+    .mainElements {
+        display: flex;
+        flex-direction: column-reverse;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        .left {
+            width: 100vw;
+            height: 0;
+            animation: shrinkIn 2s 1s ease-in-out forwards;
+            
+            &.mainCloseLeft {
+                width: 100vw;
+                animation: afterLoadShrinkOutMobile 1.25s 0.5s ease-in-out forwards;
+            }
+
+            .leftContent {
+                display: flex;
+                flex-direction: row;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Work Sans', sans-serif;
+                height: 100%;
+                width: 100%;
+                .selectionTitle {
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    height: 60vh;
+                }
+
+                .loginForm {
+                    width: 60%;
+                    height: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    justify-content: space-evenly;
+                    .username {
+                        width: 70%;
+                        height: 6vh;
+                        border: none;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        color: black;
+                        font-size: 1.75vh;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+                        opacity: 0;
+                        animation: moveUpAppear 1s 3.2s ease-in-out forwards;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:-webkit-autofill,
+                        &:-webkit-autofill:hover,
+                        &:-webkit-autofill:focus,
+                        &:-webkit-autofill:active {
+                            -webkit-background-clip: text;
+                            -webkit-text-fill-color: black;
+                            transition: background-color 5000s ease-in-out 0s;
+                            box-shadow: inset 0 0 20px 20px transparent;
+                        }
+                    }
+
+                    .typeOfTest {
+                        width: 70%;
+                        height: 6vh;
+                        border: none;
+                        border-radius: 0;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        color: white;
+                        font-size: 1.75vh;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+                        opacity: 0;
+                        animation: moveUpAppear 1s 3.4s ease-in-out forwards;
+
+                        &:disabled {
+                            cursor: not-allowed;
+                            color: rgb(102, 102, 102);
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::after {
+                            content: "\25BE";
+                            /* Unicode character for down arrow */
+                            position: absolute;
+                            top: 50%;
+                            right: 10px;
+                            transform: translateY(-50%);
+                            pointer-events: none;
+                            /* Ensure arrow doesn't interfere with select functionality */
+                        }
+
+                        .typeOfTestOption {
+                            width: 70%;
+                            height: 6vh;
+                            border: none;
+                            border-radius: 0px;
+                            background-color: transparent;
+                            border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                            background-color: black;
+                            color: white;
+                            font-size: 9.1vw;
+                            padding-left: 0.5vw;
+                            margin-bottom: 0.9vh;
+
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+
+                    .submit {
+                        width: 70%;
+                        height: 6vh;
+                        border: none;
+                        border-radius: 100px;
+                        margin: 0.5vw 0.9vh;
+                        background-color: transparent;
+                        border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                        background-color: black;
+                        color: white;
+                        font-size: 3vh;
+                        font-weight: lighter;
+                        padding-left: 0.5vw;
+                        margin-bottom: 0.9vh;
+                        cursor: pointer;
+                        opacity: 0;
+                        animation: moveUpAppear 1s 3.6s ease-in-out forwards;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+
+                .footer {
+                    .OARobotics {
+                        display: flex;
+                        flex-direction: row;
+                        justify-content: center;
+                        align-items: center;
+                        font-size: 2vh;
+                        .footerimg {
+                            width: 8vh;
+                            height: 8vh;
+                            background-image: url('../public/4079-transparent.png');
+                            z-index: 100;
+                            background-size: cover;
+                            background-repeat: no-repeat;
+                            background-position: center;
+                        }
+                    }
+
+                    .revisionDate {
+                        text-align: center;
+                        font-size: 1.75vh;
+                    }
+                }
+            }
+        }
+        .right {
+            width: 100vw;
+            height: 100vh;
+            animation: shrinkOut 2s 1s ease-in-out forwards;
+
+            &.mainCloseRight {
+                width: 100vw;
+                animation: afterLoadShrinkInMobile 1.25s 0.5s ease-in-out forwards;
+            }
+
+            .rightContent {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                font-family: 'Work Sans', sans-serif;
+                color: white;
+
+                .pageName {
+                    font-size: 5vh;
+                    font-weight: 300;
+                    margin-bottom: 0.5em;
+                    opacity: 0;
+                    animation: moveUpAppear 1.3s ease-in-out forwards;
+                }
+
+                .testTitle {
+                    font-size: 2.5vh;
+                    font-weight: 300;
+                    opacity: 0;
+                    animation: moveUpAppear 1.3s ease-in-out forwards;
+                }
+            }
+        }
+    }
+
+    @keyframes shrinkIn {
+        0% {
+            height: 0vh;
+            width: 100vw;
+        }
+
+        100% {
+            height: 60vh;
+            width: 100vw;
+        }
+    }
+
+    @keyframes shrinkOut {
+        0% {
+            height: 100vh;
+            width: 100vw;
+        }
+
+        100% {
+            height: 40vh;
+            width: 100vw;
+        }
+    }
+
+    @keyframes afterLoadShrinkOutMobile {
+        0% {
+            height: 60vh;
+            width: 100vw;
+        }
+
+        100% {
+            height: 100vh;
+            width: 100vw;
+        }
+    }
+
+    @keyframes afterLoadShrinkInMobile {
+        0% {
+            height: 40vh;
+            width: 100vw;
+        }
+
+        100% {
+            height: 0vh;
+            width: 100vw;
+        }
+    }
 }
