@@ -201,7 +201,6 @@ app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: No
         for (let i = 0; i < maxQuestions; i++) {
             const questionIndex: number = testFileData.findIndex((question) => question.includes(questions[i]));
             if (questionIndex === -1) continue;
-
             const answerLines = testFileData[questionIndex].split(folderSplit);
             for (let j = 0; j < selectedAnswers[i].length; j++) {
                 const answerIndex: number = answerLines.findIndex((answer) => answer.includes(answers[i][j]));

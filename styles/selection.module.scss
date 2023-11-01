@@ -280,9 +280,6 @@
         display: flex;
 
         .mainElements {
-            width: max-content;
-            height: max-content;
-
             .topBar {
                 width: 100%;
                 height: 100vh;
@@ -293,7 +290,7 @@
                 .categoryTitle {
                     width: 100%;
                     height: 30vh;
-                    font-size: 15vh;
+                    font-size: 4vh;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -301,10 +298,9 @@
                 }
 
                 .categoryLabel {
-                    width: 300vw;
-                    height: 30vh;
-                    font-size: 4vh;
-                    white-space: initial;
+                    width: 75vw;
+                    height: 3vh;
+                    font-size: 2vh;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -319,12 +315,12 @@
                     align-items: center;
                     width: 100%;
                     .categoryButton {
-                        width: 30%;
-                        height: 50%;
+                        width: 25%;
+                        height: 70%;
                         border: none;
                         background-color: white;
                         color: black;
-                        font-size: 8vh;
+                        font-size: 5vh;
                         font-weight: 500;
                         border-radius: 10px;
             
@@ -338,26 +334,26 @@
             .selectionContent {
                 display: flex;
                 flex-direction: column;
-                width: fit-content;
+                width: 100vw;
+                height: 70vh;
                 color: black;
-                width: 100%;
 
                 .resourcesTab {
-                    width: 100%;
-                    height: 100vh;
+                    width: 100vw;
+                    height: 50%;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
 
                     .resourcesTitle {
-                        width: max-content;
+                        width: 100vw;
                         height: 20%;
                         display: flex;
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
-                        font-size: 8vh;
+                        font-size: 3vh;
                         font-weight: 500;
                     }
             
@@ -366,6 +362,7 @@
                         flex-direction: column;
                         justify-content: center;
                         align-items: center;
+                        font-size: 1.5vh;
                     }
                 }
 
@@ -378,7 +375,7 @@
                     align-items: center;
 
                     .categoriesTitle {
-                        width: max-content;
+                        width: 100%;
                         height: 20%;
                         display: flex;
                         flex-direction: column;
@@ -445,14 +442,15 @@
             }
         }
     }
-    
-    @keyframes afterLoadShrinkInMobile {
-        0% {
-            height: 100vh;
-        }
 
+    @keyframes onLoadMoveUpAppearMobile {
+        0% {
+            height: 100%;
+        }
+    
         100% {
             height: 30vh;
         }
+        
     }
 }
