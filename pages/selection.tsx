@@ -59,7 +59,7 @@ const Select: React.FC = (): React.JSX.Element => {
                 alert("Please select a category");
                 return;
             }
-            
+
             localStorage.setItem("selectedCategory", selectedCategory);
 
             setpageClose(true);
@@ -132,7 +132,6 @@ const Select: React.FC = (): React.JSX.Element => {
                                 This section contains resources that you can use for the test.
                             </p>
                             <div className={styles.linksSection}>
-                                <br />
                                 <h1 id="SafetyLink">
                                     <a
                                         href="https://docs.google.com/presentation/d/1fQ98hhuO8KD8b8ZOy71ZRj2cuW5fbBJ8/edit#slide=id.p1"
@@ -144,7 +143,6 @@ const Select: React.FC = (): React.JSX.Element => {
                                         Safety Slides Link
                                     </a>
                                 </h1>
-                                <br />
                                 <h1 id="CategoryChoose">
                                     <a
                                         href="https://docs.google.com/document/d/10V0XJ5hpwAzRJV55c4fkTmZtw_brwUsQKo5n-rWnwog/edit?usp=sharing"

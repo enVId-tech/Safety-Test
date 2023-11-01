@@ -166,9 +166,9 @@ const Home: React.FC = (): JSX.Element => {
                                 <div className={styles.footerimg} />
                             </div>
                             <p className={styles.revisionDate}>
-                                Revision 25.43
+                                Revision 25.50
                                 <br /> 
-                                10-31-2023 17:34:00 PT
+                                10-31-2023 20:13:20 PT
                             </p>
                         </footer>
                     </div>

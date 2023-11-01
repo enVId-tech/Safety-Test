@@ -228,31 +228,33 @@ const Test: React.FC = (): React.JSX.Element => {
                                         )
                                     })
                                 }
-                            </div>
-                            <span className={styles.progressionButtons}>
-                                <button id="PreviousQuestion" className={`${Work_Sans300.className}`} onClick={previousQuestion}>
-                                    {
-                                        questionNumber === 0 ? "Back" : "Previous"
-                                    }
-                                </button>
-                                {
-                                    questionNumber !== settings!.maxQuestions - 1 ? (
-                                        <button id="SubmitQuestion" className={`${Work_Sans300.className}`} onClick={sendResponses}>
-                                            Submit
+                                <div className={styles.submissionDiv}>
+                                    <span className={styles.progressionButtons}>
+                                        <button id="PreviousQuestion" className={`${Work_Sans300.className}`} onClick={previousQuestion}>
+                                            {
+                                                questionNumber === 0 ? "Back" : "Previous"
+                                            }
                                         </button>
-                                    ) : (
-                                        <></>
-                                    )
-                                }
-                                <button id="NextQuestion" className={`${Work_Sans300.className}`} onClick={nextQuestion}>
-                                    {
-                                        settings!.maxQuestions ? questionNumber === settings!.maxQuestions - 1 ? "Submit" : "Next" : "Next"
-                                    }
-                                </button>
-                            </span>
-                            <h1 id="Score" className={`${Work_Sans500.className}`}>
-                                Current score: {score}
-                            </h1>
+                                        {
+                                            questionNumber !== settings!.maxQuestions - 1 ? (
+                                                <button id="SubmitQuestion" className={`${Work_Sans300.className}`} onClick={sendResponses}>
+                                                    Submit
+                                                </button>
+                                            ) : (
+                                                <></>
+                                            )
+                                        }
+                                        <button id="NextQuestion" className={`${Work_Sans300.className}`} onClick={nextQuestion}>
+                                            {
+                                                settings!.maxQuestions ? questionNumber === settings!.maxQuestions - 1 ? "Submit" : "Next" : "Next"
+                                            }
+                                        </button>
+                                    </span>
+                                    <h1 id="Score" className={`${styles.score} ${Work_Sans500.className}`}>
+                                        Current score: {score}
+                                    </h1>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </>

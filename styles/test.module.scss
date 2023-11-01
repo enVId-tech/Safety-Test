@@ -11,14 +11,14 @@
 
     .backgroundImage {
         position: absolute;
-        top: -50%;
-        left: -50%;
+        top: -50vw;
+        left: -50vw;
         width: 600%;
         height: 600%;
         transform: rotate(10deg);
         z-index: 3;
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../public/4079.png");
-        background-size: 0.75%;
+        background-size: 10vh;
         background-position: center;
         background-repeat: repeat;
         animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
@@ -34,7 +34,7 @@
         animation: shrinkScreen 1.6s ease-in-out forwards;
 
         .questionContainer {
-            background-color: rgba(124,124,124,1);
+            background-color: rgba(124, 124, 124, 1);
             width: 90%;
             height: 65%;
             display: flex;
@@ -48,11 +48,12 @@
                 display: flex;
                 padding-left: 20px;
                 align-items: center;
-                align-content: center;    
+                align-content: center;
                 flex-direction: column;
                 justify-content: space-around;
                 width: 90%;
                 height: 85%;
+
                 .questionDetails {
                     background-color: rgba(32, 32, 32, 1);
                     width: 95%;
@@ -77,12 +78,13 @@
                     padding: 1vw;
                     border-radius: 20px;
                     margin-right: 1vw;
+
                     .questionDescription {
                         display: flex;
                         align-items: center;
                         text-align: center;
                         justify-content: center;
-                        font-size: 2rem;
+                        font-size: 4vh;
                         padding-left: 2vw;
                         padding-right: 2vw;
                         opacity: 0;
@@ -108,7 +110,7 @@
 
         .selectQuestionTitle {
             color: black;
-            font-size: 3rem;
+            font-size: 4vh;
             font-weight: 600;
             margin-bottom: 2vh;
             text-align: center;
@@ -116,7 +118,7 @@
 
         .questionOptionsDivContainer {
             width: 100%;
-            height: 80vh;
+            height: 100%;
             display: flex;
             align-items: center;
             align-content: center;
@@ -133,8 +135,43 @@
                 justify-content: space-between;
                 align-items: center;
 
+                .submissionDiv {
+                    width: 100%;
+                    .progressionButtons {
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-around;
+                        width: 100%;
+                        height: fit-content;
+                        margin-top: 2vh;
+
+                        >* {
+                            font-size: 4vh;
+                            padding: 0.2vw;
+                            padding-left: 0.5vw;
+                            padding-right: 0.5vw;
+                            border-radius: 15px;
+                            border-width: 4px;
+                            border-color: black;
+                            border-style: solid;
+                            transition: all 0.2s ease-in-out;
+                            background-color: transparent;
+
+                            &:hover {
+                                cursor: pointer;
+                                background-color: rgba(0, 0, 0, 0.2);
+                            }
+                        }
+                    }
+
+                    .score {
+                        font-size: 4vh;
+                        text-align: center;
+                    }
+                }
+
                 .answerChoice {
-                    font-size: 1.5rem;
+                    font-size: 3vh;
                     width: 30vw;
                     padding: 0.75vw;
                     border-radius: 20px;
@@ -143,7 +180,7 @@
                     border-style: solid;
                     transition: all 0.2s ease-in-out;
                     text-align: center;
-                    
+
                     &:hover {
                         cursor: pointer;
                         background-color: rgba(0, 0, 0, 0.2);
@@ -154,36 +191,9 @@
                     }
                 }
             }
-
-            .progressionButtons {
-                display: flex;
-                align-items: center;
-                justify-content: space-around;
-                width: 100%;
-                height: 20%;
-                margin-top: 2vh;
-
-                > * {
-                    font-size: 2rem;
-                    padding: 0.2vw;
-                    padding-left: 0.5vw;
-                    padding-right: 0.5vw;
-                    border-radius: 15px;
-                    border-width: 4px;
-                    border-color: black;
-                    border-style: solid;
-                    transition: all 0.2s ease-in-out;
-                    background-color: transparent;
-                    
-                    &:hover {
-                        cursor: pointer;
-                        background-color: rgba(0, 0, 0, 0.2);
-                    }
-                }
-            }
         }
 
-        > * {
+        >* {
             opacity: 0;
             animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
         }
@@ -262,12 +272,152 @@
     .testPage {
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        width: 100vw;
+
+        .backgroundImage {
+            position: absolute;
+            top: -50vh;
+            left: -50vh;
+            width: 600%;
+            height: 600%;
+            transform: rotate(10deg);
+            z-index: 3;
+            background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../public/4079.png");
+            background-size: 10vh;
+            background-position: center;
+            background-repeat: repeat;
+            animation: moveBackground 2s linear, slowlyMoveBackground 320s 2s linear infinite;
+        }
+
         .questionContent {
-            width: 100vw;
+            width: 100%;
             height: 30vh;
             display: flex;
             flex-direction: row;
-            
+            align-items: center;
+            justify-content: center;
+            animation: loadOutFrame 1.6s ease-in-out forwards;
+
+            .questionContainer {
+                background-color: rgba(124, 124, 124, 1);
+                width: 90%;
+                height: 90%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 20px;
+
+                .contentDiv {
+                    background-color: rgba(59, 59, 59, 1);
+                    border-radius: 20px;
+                    display: flex;
+                    padding-left: 20px;
+                    align-items: center;
+                    align-content: center;
+                    flex-direction: column;
+                    justify-content: space-around;
+                    width: 90%;
+                    height: 85%;
+
+                    .questionDetails {
+                        background-color: rgba(32, 32, 32, 1);
+                        width: 95%;
+                        height: 8%;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: flex-start;
+                        padding: 1vw;
+                        border-radius: 20px;
+                        margin-right: 1vw;
+                    }
+
+                    .questionContainerContent {
+                        background-color: rgba(32, 32, 32, 1);
+                        width: 95%;
+                        height: 65%;
+                        color: white;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: 1vw;
+                        border-radius: 20px;
+                        margin-right: 1vw;
+
+                        .questionDescription {
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            justify-content: center;
+                            font-size: 3vh;
+                            padding-left: 2vw;
+                            padding-right: 2vw;
+                            opacity: 0;
+                            animation: appearIntoFrame 0.5s 1.8s ease-in-out forwards;
+                        }
+                    }
+                }
+            }
+        }
+
+        .selectionContent {
+            width: 100%;
+            height: 70vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            animation: loadInFrame 1.6s ease-in-out forwards;
+
+            .selectQuestionTitle {
+                color: black;
+                font-size: 4vh;
+                font-weight: 600;
+                margin-bottom: 2vh;
+                text-align: center;
+            }
+
+            .questionOptionsDivContainer {
+                width: 100vw;
+                overflow-y: auto;
+
+                .questionChoices {
+                    width: 100%;
+
+                    .answerChoice {
+                        width: 80%;
+                        height: min-content;
+                        padding: 1.5vh;
+                    }
+                }
+            }
+        }
+    }
+
+    @keyframes loadInFrame {
+        0% {
+            height: 100vh;
+            width: 100%;
+        }
+
+        100% {
+            height: 70vh;
+            width: 100%;
+        }
+    }
+
+    @keyframes loadOutFrame {
+        0% {
+            height: 00vh;
+            width: 100%;
+        }
+
+        100% {
+            height: 30vh;
+            width: 100%;
         }
     }
 }
