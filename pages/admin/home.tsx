@@ -1,6 +1,6 @@
 import React from "react";
 import styles from '../../styles/adminhome.module.scss';
-import PageTitle from "@/styles/Assets/PageTitle";
+import Head from "next/head";
 
 const AdminHome: React.FC = (): React.JSX.Element => {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
@@ -38,7 +38,7 @@ const AdminHome: React.FC = (): React.JSX.Element => {
             {
                 loggedIn ? (
                     <div className={styles.adminHome}>
-                        <PageTitle title="Admin Panel" />
+                        <Head>Admin Panel</Head>
                         <div className={styles.adminHomeContainer}>
                             <h1 className={styles.topTitle}>Admin Panel</h1>
                             <hr />
@@ -50,7 +50,7 @@ const AdminHome: React.FC = (): React.JSX.Element => {
                     </div>
                 ) : (
                     <>
-                        <PageTitle title="Redirecting..." />
+                        <Head>Redirecting...</Head>
                     </>
                 )
             }

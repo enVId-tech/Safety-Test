@@ -1,7 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import styles from '../../styles/responses.module.scss';
-import PageTitle from '@/styles/Assets/PageTitle';
 import { Work_Sans } from 'next/font/google';
+import Head from 'next/head';
 
 interface UserResponse {
     Name: string;
@@ -85,12 +86,12 @@ export default function Responses(): React.JSX.Element {
         try {
             setIsFetching(true);
             if (responsesType === "responsesAll") {
-                const responsesConst: Response = await fetch("http://localhost:19640/admin/get/responses");
+                const responsesConst: Response = await fetch("/admin/get/responses");
                 const responsesJSON: fileDataResponse = await responsesConst.json();
                 
                 setResponses(responsesJSON.fileData);
             } else if (responsesType === "responsesPassed") {
-                const responsesConst: Response = await fetch("http://localhost:19640/admin/get/responses/passed");
+                const responsesConst: Response = await fetch("/admin/get/responses/passed");
                 const responsesJSON: fileDataResponse = await responsesConst.json();
                 
                 setResponses(responsesJSON.fileData);
@@ -109,9 +110,9 @@ export default function Responses(): React.JSX.Element {
             let downloadFileDataRes: Response;
 
             if (responseType === "responsesAll") {
-                downloadFileDataRes = await fetch("http://localhost:19640/admin/get/responses");
+                downloadFileDataRes = await fetch("/admin/get/responses");
             } else if (responseType === "responsesPassed") {
-                downloadFileDataRes = await fetch("http://localhost:19640/admin/get/responses/passed");
+                downloadFileDataRes = await fetch("/admin/get/responses/passed");
             } else {
                 throw new Error("Invalid responses type, cannot download");
             }
@@ -151,7 +152,7 @@ export default function Responses(): React.JSX.Element {
             {
                 loggedIn ? (
                     <div className={styles.responsePage}>
-                        <PageTitle title="Responses" />
+                        <Head>Responses</Head>
                         <div className={styles.responsesContainer}>
                             <h1 className={styles.topTitle}>
                                 {
@@ -244,7 +245,7 @@ export default function Responses(): React.JSX.Element {
                     </div>
                 ) : (
                     <>
-                        <PageTitle title="Redirecting..." />
+                        <Head>Redirecting...</Head>
                     </>
                 )
             }

@@ -1,2 +1,1 @@
-npm run dev
-PAUSE
+npm run start

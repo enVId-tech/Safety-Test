@@ -1,7 +1,7 @@
 import React from 'react';
-import PageTitle from '@/styles/Assets/PageTitle';
 import { Work_Sans } from 'next/font/google';
 import styles from '../styles/selection.module.scss';
+import Head from 'next/head';
 
 const Work_Sans300 = Work_Sans({
     weight: "300",
@@ -42,7 +42,7 @@ const Select: React.FC = (): React.JSX.Element => {
 
     const getSettings = async (): Promise<void> => {
         try {
-            const getSettings: Response = await fetch("http://localhost:19640/home/get/selection");
+            const getSettings: Response = await fetch("/home/get/selection");
             const settingsJSON: string[] = await getSettings.json();
             setSettings(settingsJSON);
         } catch (error: unknown) {
@@ -106,7 +106,7 @@ const Select: React.FC = (): React.JSX.Element => {
 
     return (
         <div className={styles.Selection}>
-            <PageTitle title="Select" />
+            <Head>Selection - OA Robotics</Head>
             <div className={styles.mainElements}>
                 <nav className={`${styles.topBar} ${pageClose ? styles.topBarClose : ""}`}>
                     <h1 className={`${styles.categoryTitle} ${Work_Sans500.className} ${pageClose ? styles.pageClosedSelection : ""}`}>Prerequisites</h1>

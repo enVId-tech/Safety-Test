@@ -1,8 +1,9 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react';
 import styles from '../styles/test.module.scss';
 import Image from 'next/image';
-import PageTitle from '@/styles/Assets/PageTitle';
 import { Work_Sans } from 'next/font/google';
+import Head from 'next/head';
 
 interface Settings {
     maxQuestions: number;
@@ -64,7 +65,7 @@ const Test: React.FC = (): React.JSX.Element => {
 
     const autoScore = async (): Promise<void> => {
         try {
-            const fetchNames: Response = await fetch("http://localhost:19640/admin/get/names");
+            const fetchNames: Response = await fetch("/admin/get/names");
             const namesJSON: adminResponse = await fetchNames.json();
 
             const adminNames: string[] = namesJSON.adminNames;
@@ -97,7 +98,7 @@ const Test: React.FC = (): React.JSX.Element => {
                 body: JSON.stringify({ typeOfTest })
             }
 
-            const data: Response = await fetch("http://localhost:19640/test/post/settings", dataPost);
+            const data: Response = await fetch("/test/post/settings", dataPost);
             const settingsJSON: Settings = await data.json();
 
             setSettings(settingsJSON);
@@ -139,7 +140,7 @@ const Test: React.FC = (): React.JSX.Element => {
 
             type JSONRes = { score: number; pass: boolean; };
 
-            const data: Response = await fetch("http://localhost:19640/test/post/answers", dataPost);
+            const data: Response = await fetch("/test/post/answers", dataPost);
             const result: JSONRes = await data.json();
 
             const writeData: object = {
@@ -157,7 +158,7 @@ const Test: React.FC = (): React.JSX.Element => {
                 })
             }
 
-            await fetch("http://localhost:19640/test/post/write", writeData);
+            await fetch("/test/post/write", writeData);
 
             setScore(result.score);
         } catch (error: unknown) {
@@ -194,7 +195,7 @@ const Test: React.FC = (): React.JSX.Element => {
 
     return (
         <div className={styles.testPage}>
-            <PageTitle title="Test" />
+            <Head>Test - OA Robotics</Head>
             {settings ? (
                 <>
                     <Image alt="4079" className={styles.backgroundImage} src="" />

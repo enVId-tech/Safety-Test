@@ -2,7 +2,6 @@ import React from 'react';
 import Head from 'next/head';
 import Script from 'next/script';
 import styles from '../styles/home.module.scss';
-import PageTitle from '@/styles/Assets/PageTitle';
 import { Work_Sans } from 'next/font/google';
 
 const font = Work_Sans({
@@ -29,7 +28,7 @@ const Home: React.FC = (): JSX.Element => {
 
     const getFolders: () => void = async (): Promise<void> => {
         try {
-            const getFolders: Response = await fetch("http://localhost:19640/home/get/folders");
+            const getFolders: Response = await fetch("/home/get/folders");
             const foldersJSON: string[] = await getFolders.json();
             setAvailableSelections(foldersJSON);
 
@@ -87,7 +86,7 @@ const Home: React.FC = (): JSX.Element => {
                         body: JSON.stringify({ folder: selectedValue })
                     }
 
-                    const saveUser: Response = await fetch("http://localhost:19640/home/post/folders/dir", data);
+                    const saveUser: Response = await fetch("/home/post/folders/dir", data);
                     const saveUserJSON: string = await saveUser.json();
 
                     if (saveUserJSON === "Error") {
@@ -130,7 +129,7 @@ const Home: React.FC = (): JSX.Element => {
 
     return (
         <div className={font.className}>
-            <PageTitle title="Home" />
+            <Head>Home - OA Robotics</Head>
             <div onKeyDown={(e: React.KeyboardEvent<HTMLDivElement>): void => { if (e.key === "Enter") saveUser() }} />
             <span className={styles.mainElements}>
                 <div className={`${styles.left} ${pageClosed ? styles.mainCloseLeft : ""}`}>
@@ -158,7 +157,11 @@ const Home: React.FC = (): JSX.Element => {
                             <input type="submit" className={styles.submit} name="submit" value="Start" onClick={start} />
                         </form>
                         {
-                            errorMessage !== "" ? <h2 id="ErrorMessage">{errorMessage}</h2> : <></>
+                            errorMessage !== "" ? (
+                                <h2 id="ErrorMessage">{errorMessage as string}</h2>
+                            ) : (
+                                <></>
+                            )
                         }
                         <footer className={styles.footer}>
                             <div className={styles.OARobotics}>
@@ -166,9 +169,9 @@ const Home: React.FC = (): JSX.Element => {
                                 <div className={styles.footerimg} />
                             </div>
                             <p className={styles.revisionDate}>
-                                Revision 25.50
-                                <br /> 
-                                10-31-2023 20:13:20 PT
+                                Revision 25.51
+                                <br />
+                                11-2-2023 01:47:10 PT
                             </p>
                         </footer>
                     </div>

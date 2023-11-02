@@ -1,6 +1,6 @@
 import React from "react";
 import styles from '../../styles/adminlogin.module.scss';
-import PageTitle from "@/styles/Assets/PageTitle";
+import Head from "next/head";
 
 type LoginResponse = {
     send: string;
@@ -38,7 +38,7 @@ const AdminPanel: React.FC = (): React.JSX.Element => {
                 body: JSON.stringify({ username: username })
             }
 
-            const login: Response = await fetch("http://localhost:19640/admin/login", data);
+            const login: Response = await fetch("/admin/login", data);
             const loginJSON: LoginResponse = await login.json();
 
             if (loginJSON.send === "Success") {
@@ -59,7 +59,7 @@ const AdminPanel: React.FC = (): React.JSX.Element => {
 
     return (
         <div className={styles.adminLogin}>
-            <PageTitle title="Admin Panel Login" />
+            <Head>Admin Panel Login</Head>
             <div className={styles.adminLoginContainer}>
                 <h1 className={styles.topTitle}>Admin Panel</h1>
                 <hr />
