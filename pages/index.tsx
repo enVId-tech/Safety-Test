@@ -31,8 +31,8 @@ const Home: React.FC = (): JSX.Element => {
             const getFolders: Response = await fetch("/home/get/folders");
             const foldersJSON: string[] = await getFolders.json();
             setAvailableSelections(foldersJSON);
-
         } catch (error: unknown) {
+            console.error("Lines 31-33")
             setErrorMessage(error as string);
         }
     }
@@ -62,6 +62,7 @@ const Home: React.FC = (): JSX.Element => {
                 return true;
             }
         } catch (error: unknown) {
+            console.error("Lines 41-63")
             console.error(error as string);
             return false;
         }
@@ -75,9 +76,10 @@ const Home: React.FC = (): JSX.Element => {
                 return;
             } else {
                 localStorage.setItem("username", username);
-                const typeOfTest = (document.getElementById("typeOfTest") as HTMLSelectElement).value;
+                const typeOfTest: string = (document.getElementById("typeOfTest") as HTMLSelectElement).value;
                 localStorage.setItem("typeOfTest", typeOfTest);
                 try {
+                    console.log({ folder: selectedValue })
                     const data: object = {
                         method: "POST",
                         headers: {
@@ -99,10 +101,12 @@ const Home: React.FC = (): JSX.Element => {
                         window.location.href = "/selection";
                     }, 2000);
                 } catch (error: unknown) {
+                    console.error("Lines 71-99");
                     console.error(error as string);
                 }
             }
         } catch (error: unknown) {
+            console.error("Lines 73-106")
             console.error(error as string);
         }
     }
@@ -112,6 +116,7 @@ const Home: React.FC = (): JSX.Element => {
             e.preventDefault();
             saveUser();
         } catch (error: unknown) {
+            console.error("Lines 114-115");
             console.error(error as string);
         }
     }
@@ -123,6 +128,7 @@ const Home: React.FC = (): JSX.Element => {
                 setErrorMessage("");
             }, time);
         } catch (error: unknown) {
+            console.error("Lines 123-126");
             console.error(error as string);
         }
     }
@@ -169,9 +175,9 @@ const Home: React.FC = (): JSX.Element => {
                                 <div className={styles.footerimg} />
                             </div>
                             <p className={styles.revisionDate}>
-                                Revision 25.51
+                                Revision 25.60
                                 <br />
-                                11-2-2023 01:47:10 PT
+                                11-2-2023 09:20:10 PT
                             </p>
                         </footer>
                     </div>

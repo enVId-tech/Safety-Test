@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../styles/questions.module.scss';
-import PageTitle from '@/styles/Assets/PageTitle';
+import Head from 'next/head';
 
 const Questions: React.FC = (): React.JSX.Element => {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
@@ -24,11 +24,11 @@ const Questions: React.FC = (): React.JSX.Element => {
             {
                 loggedIn ? (
                     <div id="Questions">
-                        <PageTitle title="Questions" />
+                        <Head>Questions</Head>
                     </div>
                 ) : (
                     <>
-                        <PageTitle title="Redirecting..." />
+                        <Head>Redirecting...</Head>
                     </>
                 )
             }
