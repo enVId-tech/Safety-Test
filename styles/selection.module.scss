@@ -145,6 +145,9 @@
                 .categorySelection {
                     display: flex;
                     flex-direction: row;
+                    flex-wrap: wrap;
+                    justify-content: center;
+                    max-width: 80%;
 
                     .categoryMainDiv {
                         display: flex;
@@ -159,41 +162,51 @@
                             border: none;
                             background-color: rgb(184, 184, 184);
                             width: calc(100% + 2vw);
-                            font-size: 2.5rem;
+                            font-size: 2vw;
                             cursor: pointer;
-                        }
 
-                        .categoryOptions {
-                            display: none;
-                            flex-direction: column;
-                            justify-content: center;
-                            align-items: center;
-                            
-                            &.show {
-                                display: flex;
-                                opacity: 1;
+                            &:hover {
+                                cursor: pointer;
                             }
-                            .categorySubButton {
-                                padding: 1vh;
-                                border-radius: 10px;
-                                border: none;
-                                background-color: rgb(184, 184, 184);
-                                width: 100%;
-                                font-size: 1rem;
-                                margin: 1vh;
+
+                            &.selected {
+                                background-color: rgb(0, 255, 13);
                                 transition: all 0.2s ease-in-out;
-
-                                &:hover {
-                                    cursor: pointer;
-                                }
-
-                                &.selected {
-                                    background-color: rgb(0, 255, 13);
-                                    transition: all 0.2s ease-in-out;
-                                    color: black;
-                                }
+                                color: black;
                             }
                         }
+
+                        // .categoryOptions {
+                        //     display: none;
+                        //     flex-direction: column;
+                        //     justify-content: center;
+                        //     align-items: center;
+                            
+                        //     &.show {
+                        //         display: flex;
+                        //         opacity: 1;
+                        //     }
+                        //     .categorySubButton {
+                        //         padding: 1vh;
+                        //         border-radius: 10px;
+                        //         border: none;
+                        //         background-color: rgb(184, 184, 184);
+                        //         width: 100%;
+                        //         font-size: 1rem;
+                        //         margin: 1vh;
+                        //         transition: all 0.2s ease-in-out;
+
+                        //         &:hover {
+                        //             cursor: pointer;
+                        //         }
+
+                        //         &.selected {
+                        //             background-color: rgb(0, 255, 13);
+                        //             transition: all 0.2s ease-in-out;
+                        //             color: black;
+                        //         }
+                        //     }
+                        // }
                     }
                 }
             }
@@ -280,6 +293,7 @@
         display: flex;
 
         .mainElements {
+            width: 100vw;
             .topBar {
                 width: 100%;
                 height: 100vh;
@@ -299,7 +313,7 @@
 
                 .categoryLabel {
                     width: 75vw;
-                    height: 3vh;
+                    height: 7vh;
                     font-size: 2vh;
                     display: flex;
                     flex-direction: column;
@@ -340,7 +354,9 @@
 
                 .resourcesTab {
                     width: 100vw;
-                    height: 50%;
+                    height: min-content;
+                    padding-top: 2vh;
+                    padding-bottom: 2vh;
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
@@ -380,7 +396,7 @@
                         align-items: center;
                         margin: 0;
                         width: 100%;
-                        height: 100%;
+                        height: min-content;
                         font-size: 1.25vh;
                         padding: 0;
                     }
@@ -421,7 +437,7 @@
                     .categorySelection {
                         display: flex;
                         flex-direction: row;
-                        width: 100%;
+                        width: 100vw;
                         height: 100%;
                         justify-content: center;
 
@@ -430,15 +446,14 @@
                             flex-direction: column;
                             justify-content: center;
                             align-items: center;
-                            width: 25%;
 
                             .categoryButton {
                                 border-radius: 10px;
                                 border: none;
                                 background-color: rgb(184, 184, 184);
-                                width: 100%;
-                                height: 7vh;
-                                font-size: 4vh;
+                                height: 13vw;
+                                width: min-content;
+                                font-size: 8vw;
                                 cursor: pointer;
                             }
 

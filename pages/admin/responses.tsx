@@ -22,11 +22,30 @@ interface downloadFileResponse {
     fileData: string;
 }
 
-const font = Work_Sans({
+const WorkSans300 = Work_Sans({
     weight: "300",
     style: 'normal',
     subsets: ['latin']
 });
+
+const WorkSans400 = Work_Sans({
+    weight: "400",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const WorkSans500 = Work_Sans({
+    weight: "500",
+    style: 'normal',
+    subsets: ['latin']
+});
+
+const WorkSans600 = Work_Sans({
+    weight: "600",
+    style: 'normal',
+    subsets: ['latin']
+});
+
 
 export default function Responses(): React.JSX.Element {
     const [loggedIn, setLoggedIn] = React.useState<boolean>(false);
@@ -154,7 +173,7 @@ export default function Responses(): React.JSX.Element {
                     <div className={styles.responsePage}>
                         <Head>Responses</Head>
                         <div className={styles.responsesContainer}>
-                            <h1 className={styles.topTitle}>
+                            <h1 className={`${styles.topTitle} ${WorkSans600.className}`}>
                                 {
                                     responsesType === "responsesAll" ? (
                                         "All Responses"
@@ -175,13 +194,11 @@ export default function Responses(): React.JSX.Element {
                             <hr />
                             <table className={`${styles.responsesTable}`}>
                                 <thead>
-                                    <tr>
+                                    <tr className={`${styles.responsesTableHeader} ${WorkSans400.className}`}>
                                         <th>Name</th>
-                                        <th>Category</th>
                                         <th>Team</th>
                                         <th>Score</th>
                                         <th>Type</th>
-                                        <th>Pass</th>
                                         <th>Time</th>
                                     </tr>
                                 </thead>
@@ -195,7 +212,7 @@ export default function Responses(): React.JSX.Element {
                                         })
                                             .map((response: UserResponse, index: number) => {
                                                 return (
-                                                    <tr key={index}>
+                                                    <tr key={index} className={`${styles.responsesTableRow} ${WorkSans500.className}`}>
                                                         <td>{response.Name}</td>
                                                         <td>{response.Category}</td>
                                                         <td>{response.Team}</td>
@@ -213,14 +230,14 @@ export default function Responses(): React.JSX.Element {
 
                         <div className={styles.statisticsContainer}>
                             <div className={styles.statisticsBar}>
-                                <h1 className={styles.statisticsTitle}>Statistics</h1>
+                                <h1 className={`${styles.statisticsTitle} ${WorkSans400.className}`}>Statistics</h1>
                                 <hr />
                                 <button className={styles.switchDataButton} onClick={switchData}>
                                     Switch data table
                                 </button>
-                                <h1 className={styles.numberOfResponses}># of Responses: {responses.length}</h1>
+                                <h1 className={`${styles.numberOfResponses} ${WorkSans400.className}`}># of Responses: {responses.length}</h1>
                                 <h1 className={styles.latestResponse}>Latest: {responses[responses.length - 1]?.Name}</h1>
-                                <h1 className={styles.timeToNextRefresh}>Time to next refresh: {timeToNextRefresh.toFixed(1)}s</h1>
+                                <h1 className={`${styles.timeToNextRefresh} ${WorkSans500.className}`}>Time to next refresh: {timeToNextRefresh.toFixed(1)}s</h1>
                                 <span>
                                     <input
                                         type="number"
@@ -238,7 +255,7 @@ export default function Responses(): React.JSX.Element {
                                         }}
                                         onKeyDown={(e: React.KeyboardEvent<HTMLInputElement>): void => { if (e.key === "Enter") setTimeToNextRefresh(userRefreshTime) }}
                                     />
-                                    <p className={`${styles.refreshTimeLabel} ${font.className}`}>{isFetching ? "Fetching Data" : "Press enter for immediate refresh."}</p>
+                                    <p className={`${styles.refreshTimeLabel} ${WorkSans400.className}`}>{isFetching ? "Fetching Data" : "Press enter for immediate refresh."}</p>
                                 </span>
                             </div>
                         </div>

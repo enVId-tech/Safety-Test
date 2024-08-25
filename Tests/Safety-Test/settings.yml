@@ -10,4 +10,4 @@ SafetyTestGuides: true #
 RequiresUsername: true #
 TypeofTestToSendToSheet: Safety #
 CategoriesAvailable: Mechanical; Electrical; Software; Leadership # If TeamSelectionRequired is false, this is ignored
-TeamsAvailable: FRC; FTC; VEX # If TeamSelectionRequired is false, this is ignored
+TeamsAvailable: FRC; FTC; VEX; Marketing; Other # If TeamSelectionRequired is false, this is ignored

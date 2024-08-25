@@ -186,7 +186,7 @@
 
     .right {
         display: flex;
-        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../public/FRC.jpg');
+        background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), url('../public/FRC.png');
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center;
@@ -291,7 +291,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 719px) {
     .mainElements {
         display: flex;
         flex-direction: column-reverse;
@@ -312,19 +312,21 @@
 
             .leftContent {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: center;
                 align-items: center;
                 font-family: 'Work Sans', sans-serif;
                 height: 100%;
                 width: 100%;
+
                 .selectionTitle {
                     display: flex;
                     flex-direction: column;
                     justify-content: center;
                     align-items: center;
                     text-align: center;
-                    height: 60vh;
+                    margin-top: 2vh;
+                    padding: 0;
                 }
 
                 .loginForm {

@@ -83,21 +83,21 @@ const Select: React.FC = (): React.JSX.Element => {
         }
     }
 
-    const Appear = (id: string): void => {
-        try {
-            document.getElementsByClassName(styles.show)[0]?.classList.remove(styles.show);
-            const optionsElement = document.getElementById(`${id}Options`);
-            optionsElement?.classList.add(styles.show);
-        } catch (error: unknown) {
-            console.error(error as string);
-        }
-    };
+    // const Appear = (id: string): void => {
+    //     try {
+    //         document.getElementsByClassName(styles.show)[0]?.classList.remove(styles.show);
+    //         const optionsElement = document.getElementById(`${id}Options`);
+    //         optionsElement?.classList.add(styles.show);
+    //     } catch (error: unknown) {
+    //         console.error(error as string);
+    //     }
+    // };
 
     const Save = (id: string): void => {
         try {
             setSelectedCategory(id);
             document.getElementsByClassName(styles.selected)[0]?.classList.remove(styles.selected);
-            document.getElementById(`${id.split(" ")[0]}${id.split(" ")[1]}`)?.classList.add(styles.selected);
+            document.getElementById(`${id}Button`)?.classList.add(styles.selected);
             localStorage.setItem("selectedCategory", id);
         } catch (error: unknown) {
             console.error(error as string);
@@ -143,17 +143,6 @@ const Select: React.FC = (): React.JSX.Element => {
                                         Safety Slides Link
                                     </a>
                                 </h1>
-                                <h1 id="CategoryChoose">
-                                    <a
-                                        href="https://docs.google.com/document/d/10V0XJ5hpwAzRJV55c4fkTmZtw_brwUsQKo5n-rWnwog/edit?usp=sharing"
-                                        rel="noreferrer"
-                                        target="_blank"
-                                        id="CategoryChooseLink"
-                                        className={`${styles.categoryChooseLink} ${Work_Sans300.className}`}
-                                    >
-                                        Category Choose Link
-                                    </a>
-                                </h1>
                             </div>
                             <br />
                         </div>
@@ -172,9 +161,13 @@ const Select: React.FC = (): React.JSX.Element => {
                                             value={category}
                                             id={`${category}Button`}
                                             className={`${styles.categoryButton} ${Work_Sans400.className}`}
-                                            onClick={() => Appear(category)}
+                                            // onClick={() => Appear(category)}
+                                            key={category}
+                                            onClick={() => {
+                                                Save(category);
+                                            }}
                                         />
-                                        <div
+                                        {/* <div
                                             className={styles.categoryOptions}
                                             id={`${category}Options`}
                                         >
@@ -190,7 +183,7 @@ const Select: React.FC = (): React.JSX.Element => {
                                                     }}
                                                 />
                                             ))}
-                                        </div>
+                                        </div> */}
                                     </div>
                                 ))}
                             </div>

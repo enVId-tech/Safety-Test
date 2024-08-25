@@ -8,13 +8,13 @@
     justify-content: space-between;
     top: 0;
     left: 0;
+    overflow: hidden;
 
     .backgroundImage {
         position: absolute;
-        top: -50vw;
-        left: -50vw;
-        width: 600%;
-        height: 600%;
+        width: 700vw;
+        height: 700vh;
+        left: -300vw;
         transform: rotate(10deg);
         z-index: 3;
         background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("../public/4079.png");
@@ -128,6 +128,39 @@
             overflow-y: auto;
             overflow-x: hidden;
 
+            .submissionDiv {
+                width: 60%;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-direction: column;
+                align-items: flex-start;
+
+                .score {
+                    font-size: 3vh;
+                    text-align: center;
+                }
+
+                .retake {
+                    font-size: 3vh;
+                    padding: 0.2vw;
+                    padding-left: 0.5vw;
+                    padding-right: 0.5vw;
+                    border-radius: 15px;
+                    border-width: 4px;
+                    border-color: black;
+                    border-style: solid;
+                    transition: all 0.2s ease-in-out;
+                    background-color: transparent;
+                    align-self: center;
+
+                    &:hover {
+                        cursor: pointer;
+                        background-color: rgba(0, 0, 0, 0.2);
+                    }
+                }
+            }
+
             .questionChoices {
                 height: 80%;
                 display: flex;
@@ -137,6 +170,7 @@
 
                 .submissionDiv {
                     width: 100%;
+
                     .progressionButtons {
                         display: flex;
                         align-items: center;
@@ -168,6 +202,8 @@
                         font-size: 4vh;
                         text-align: center;
                     }
+
+
                 }
 
                 .answerChoice {
@@ -268,7 +304,7 @@
     }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 899px) {
     .testPage {
         display: flex;
         flex-direction: column;
@@ -333,6 +369,10 @@
                         padding: 1vw;
                         border-radius: 20px;
                         margin-right: 1vw;
+
+                        h1 {
+                            font-size: 7vw;
+                        }
                     }
 
                     .questionContainerContent {
@@ -352,7 +392,7 @@
                             align-items: center;
                             text-align: center;
                             justify-content: center;
-                            font-size: 3vh;
+                            font-size: 6vw;
                             padding-left: 2vw;
                             padding-right: 2vw;
                             opacity: 0;
@@ -369,28 +409,43 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             animation: loadInFrame 1.6s ease-in-out forwards;
-
-            .selectQuestionTitle {
-                color: black;
-                font-size: 4vh;
-                font-weight: 600;
-                margin-bottom: 2vh;
-                text-align: center;
-            }
-
+            
             .questionOptionsDivContainer {
-                width: 100vw;
-                overflow-y: auto;
+                height: min-content;
+                width: 100%;
+                display: flex;
+                justify-content: flex-start;
 
                 .questionChoices {
-                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                    align-items: center;
 
                     .answerChoice {
-                        width: 80%;
+                        font-size: 3vh;
                         height: min-content;
-                        padding: 1.5vh;
+                        width: 90vw;
+                        padding: 0.75vw;
+                        margin-top: 1vh;
+                        margin-bottom: 1vh;
+                        border-radius: 20px;
+                        border-width: 4px;
+                        border-color: black;
+                        border-style: solid;
+                        transition: all 0.2s ease-in-out;
+                        text-align: center;
+
+                        &:hover {
+                            cursor: pointer;
+                            background-color: rgba(0, 0, 0, 0.2);
+                        }
+
+                        &.selected {
+                            background-color: rgb(0, 255, 0);
+                        }
                     }
                 }
             }
