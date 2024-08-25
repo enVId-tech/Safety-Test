@@ -1,6 +1,5 @@
 import React from 'react';
 import Head from 'next/head';
-import Script from 'next/script';
 import styles from '../styles/home.module.scss';
 import { Work_Sans } from 'next/font/google';
 
@@ -175,9 +174,9 @@ const Home: React.FC = (): JSX.Element => {
                                 <div className={styles.footerimg} />
                             </div>
                             <p className={styles.revisionDate}>
-                                Revision 25.60
+                                Revision 25.70
                                 <br />
-                                11-2-2023 09:20:10 PT
+                                8-24-2024 17:24:40 PT
                             </p>
                         </footer>
                     </div>

@@ -325,7 +325,7 @@ nextApp.prepare().then(() => {
     });
 
     // Server
-    const PORT: number = process.env.PORT as unknown as number || 19640 as number;
+    const PORT: number = process.env.PORT as unknown as number || 3040 as number;
     app.listen(PORT, () => console.error(`Listening on port ${PORT}`));
     console.error('Server Started');
 });
