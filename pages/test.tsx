@@ -218,7 +218,7 @@ const Test: React.FC = (): React.JSX.Element => {
                         <h1 className={`${styles.selectQuestionTitle} ${Work_Sans500.className}`}>Choose <strong className={styles.selectQuestionTitle}><em className={styles.selectQuestionTitle}>all</em></strong> that apply</h1>
                         <div className={styles.questionOptionsDivContainer}>
                             {
-                                isSubmitted === false ? (
+                                // isSubmitted === false ? (
                                 <div className={styles.questionChoices}>
                                     {
                                         settings?.answers[questionNumber].map((answer: string, index: number) => {
@@ -241,54 +241,54 @@ const Test: React.FC = (): React.JSX.Element => {
                                                     questionNumber === 0 ? "Back" : "Previous"
                                                 }
                                             </button>
-                                            {
-                                                isSubmitted === false ? (
-                                                    questionNumber !== settings!.maxQuestions - 1 ? (
+                                            {/* {
+                                                isSubmitted === false ? ( */}
+                                                    {/* questionNumber !== settings!.maxQuestions - 1 ? ( */}
                                                         <button id="SubmitQuestion" className={`${Work_Sans300.className}`} onClick={sendResponses}>
                                                             Submit
                                                         </button>
-                                                    ) : (
+                                                    {/* ) : (
                                                         <></>
                                                     )
                                                 ) : (
                                                     <></>
                                                 )
-                                            }
+                                            } */}
                                             <button id="NextQuestion" className={`${Work_Sans300.className}`} onClick={nextQuestion}>
                                                 {
                                                     settings!.maxQuestions ? questionNumber === settings!.maxQuestions - 1 ? "Submit" : "Next" : "Next"
                                                 }
                                             </button>
                                         </span>
-                                        {/* <h1 id="Score" className={`${styles.score} ${Work_Sans500.className}`}>
+                                        <h1 id="Score" className={`${styles.score} ${Work_Sans500.className}`}>
                                             Current score: {score}
-                                        </h1> */}
+                                        </h1>
                                     </div>
                                 </div>
-                                ) : (
-                                    <div className={styles.submissionDiv}>
-                                        <h1 id="TestTaker" className={`${styles.testTaker} ${Work_Sans500.className}`}>
-                                            Test Taker: {localStorage.getItem("username")}
-                                        </h1>
-                                        <h1 id="Score" className={`${styles.score} ${Work_Sans500.className}`}>
-                                            Final score: {score as number} / {settings!.maxQuestions}
-                                        </h1>
-                                        <h1 id="Pass" className={`${styles.pass} ${Work_Sans500.className}`}>
-                                            {
-                                                score == settings!.maxQuestions ? "Pass" : "Fail"
-                                            }
-                                        </h1>
-                                        {
-                                            score === settings!.maxQuestions ? (
-                                                <></> 
-                                            ) : (
-                                                <button id="Retake" className={`${styles.retake} ${Work_Sans300.className}`} onClick={() => window.location.href = "/test"}>
-                                                    Retake
-                                                </button>
-                                            )
-                                        }
-                                    </div>
-                                )
+                                // ) : (
+                                //     <div className={styles.submissionDiv}>
+                                //         <h1 id="TestTaker" className={`${styles.testTaker} ${Work_Sans500.className}`}>
+                                //             Test Taker: {localStorage.getItem("username")}
+                                //         </h1>
+                                //         <h1 id="Score" className={`${styles.score} ${Work_Sans500.className}`}>
+                                //             Final score: {score as number} / {settings!.maxQuestions}
+                                //         </h1>
+                                //         <h1 id="Pass" className={`${styles.pass} ${Work_Sans500.className}`}>
+                                //             {
+                                //                 score == settings!.maxQuestions ? "Pass" : "Fail"
+                                //             }
+                                //         </h1>
+                                //         {
+                                //             score === settings!.maxQuestions ? (
+                                //                 <></> 
+                                //             ) : (
+                                //                 <button id="Retake" className={`${styles.retake} ${Work_Sans300.className}`} onClick={() => window.location.href = "/test"}>
+                                //                     Retake
+                                //                 </button>
+                                //             )
+                                //         }
+                                //     </div>
+                                // )
                             }
                         </div>
                     </div>

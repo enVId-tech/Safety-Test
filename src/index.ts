@@ -24,6 +24,7 @@ const nextHandler = nextApp.getRequestHandler();
 let settings: string[] = [];
 const mainTestPath: string = "Tests";
 const folderSplit: string = "\r\n" || "\n";
+const listOfNames: string[] = ["Erick Tran", "Aaron Truong"];
 
 // Interface
 interface TestRequestBody {
@@ -205,8 +206,6 @@ app.post('/test/post/answers', async (req: NodeJS.Dict<TestRequestBody>, res: No
 
         let pass: boolean = false;
 
-        const listOfNames: string[]= ["Erick Tran", "Aaron Truong"];
-
         for (let i: number = 0; i < maxQuestions; i++) {
             const questionIndex: number = testFileData.findIndex((question) => question.includes(questions[i]));
             if (questionIndex === -1) continue;
@@ -254,9 +253,7 @@ app.post('/test/post/write', async (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>
 
         const main: object = { Name, Team, Category, Score, Type, Pass, Time };
 
-        const validAdminNames: string[] = ["Erick Tran", "Aaron Truong"];
-
-        if (!validAdminNames.includes(Name)) {
+        if (!listOfNames.includes(Name)) {
             const data: object[] = JSON.parse(fs.readFileSync("pages/admin/responses.json", "utf8"));
 
             data.push(main);
@@ -312,9 +309,8 @@ app.get('/admin/get/responses', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): 
 
 app.get('/admin/get/names', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
     try {
-        const validAdminNames: string[] = ["Erick Tran", "Aaron Truong"];
 
-        res.send({ adminNames: validAdminNames });
+        res.send({ adminNames: listOfNames });
     } catch (error: unknown) {
         console.error(error as string)
     }
@@ -325,6 +321,24 @@ app.get('/admin/get/responses/passed', (req: NodeJS.Dict<any>, res: NodeJS.Dict<
         const fileData: JSON = JSON.parse(fs.readFileSync("pages/admin/passed.json", "utf8"));
 
         res.send({ fileData });
+    } catch (error: unknown) {
+        console.error(error as string);
+    }
+});
+
+app.get('admin/get/questions', (req: NodeJS.Dict<any>, res: NodeJS.Dict<any>): void => {
+    try {
+        const getNumOfItemsInTestDir: string[] = fs.readdirSync(mainTestPath);
+
+        let testFileData: string = "";
+
+        for (let i: number = 0; i < getNumOfItemsInTestDir.length; i++) {
+            const testFileData: string = fs.readFileSync(`${mainTestPath
+                }/${getNumOfItemsInTestDir[i]
+                }/test.txt`, 'utf8');
+        }
+
+        res.send({ testFileData });
     } catch (error: unknown) {
         console.error(error as string);
     }

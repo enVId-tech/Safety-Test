@@ -19,6 +19,16 @@ const Questions: React.FC = (): React.JSX.Element => {
         }
     }, []);
 
+    const getQuestions: () => void = async (): Promise<void> => {
+        try {
+            const getQuestions: Response = await fetch("/admin/get/questions");
+            const questionsJSON: string[] = await getQuestions.json();
+            console.log(questionsJSON);
+        } catch (error: unknown) {
+            console.error(error as string);
+        }
+    }
+
     return (
         <>
             {

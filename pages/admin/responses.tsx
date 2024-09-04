@@ -85,7 +85,7 @@ export default function Responses(): React.JSX.Element {
     React.useEffect((): void => {
         getDataConst();
     }, [responsesType]);
-    
+
     React.useEffect(() => {
         try {
             const interval: NodeJS.Timeout = setInterval((): void => {
@@ -107,12 +107,12 @@ export default function Responses(): React.JSX.Element {
             if (responsesType === "responsesAll") {
                 const responsesConst: Response = await fetch("/admin/get/responses");
                 const responsesJSON: fileDataResponse = await responsesConst.json();
-                
+
                 setResponses(responsesJSON.fileData);
             } else if (responsesType === "responsesPassed") {
                 const responsesConst: Response = await fetch("/admin/get/responses/passed");
                 const responsesJSON: fileDataResponse = await responsesConst.json();
-                
+
                 setResponses(responsesJSON.fileData);
             } else {
                 throw new Error("Invalid responses type");
