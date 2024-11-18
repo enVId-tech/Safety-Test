@@ -1,0 +1,229 @@
+Question 1: What type of things are MSDSs used for?
+  - Software
+  + Paint
+  - Metal pieces
+  - Injuries
+  - Electrical Components
+  - Robot Structures
+  - Number of people
+  + Chemicals
+  + Toxic Gases
+
+Question 2: What is the unabbreviated form of PPE?
+  + Personal Protective Equipment
+  - Protective Personal Equalities
+  - Protective Pretty Equipment
+  - Personal Performance Equipment
+  - Protective Plastic Equipment
+  - Protective Performant Equipment
+  - Proper Protective Equipment
+
+Question 3: In what situations do you need proper ventilation?
+  + When working with chemicals
+  + When soldering
+  - When bolting metal parts
+  + When welding
+  - When eating
+  + While power sanding
+  + While sawing wood/metal
+  - While using your phone
+
+Question 4: In what situations do you need to wear a filter mask?
+  + When working with chemicals
+  - When soldering
+  - When bolting metal parts
+  + When welding
+  + When using a miter saw
+  - When walking outside
+  + When power sanding
+  + When painting
+
+Question 5: What are the most important attributes for safety?
+  + Common sense
+  + Knowledge
+  - Skill
+  - Tools
+  - Excitement
+  - Joy
+  + Communication
+  - Eagerness
+  - Adventure
+  + Paying attention
+
+Question 6: Which of the following should always be available?
+  + Fire extinguisher
+  + First aid kit
+  + Safety glasses
+  - Spare ear pods (for music)
+  - Duct tape
+  - Materials to make a fire
+  - Money
+  - A whiteboard
+  - Paint
+  - Power tools
+
+Question 7: What is the unabbreviated form of MSDS?
+  + Material Safety Data Sheet
+  - Massive Super Data Sheet
+  - Mechanized System Distribution Safety
+  - Mostly Simpleminded Derpy Students
+  - Modified Security Derivative System
+  - Modem Software Delivery System
+  - Mostly Software Data Sheet
+  - Modern Safety Data Sheet
+  - Material Safety Data Skills
+
+Question 8: When do you have to be wearing safety glasses?
+  + In the workshop
+  + When working on the robot
+  - When eating
+  + When competition pit scouting
+  - When signing into the workday
+  - When talking to someone
+  + In the machine shop
+  + When working on mechanical
+  + When working on electical
+  - While sitting down outside
+  + While using a hacksaw
+  + In the pit (Robot workzone during competition)
+
+Question 9: What are inherit risks of lead-acid batteries?
+  + Explosions
+  + Fires
+  + Corrosion
+  + Sparks
+  - Boredom
+  + Overheating
+  - Tiredness
+  - Dizziness
+  - Nausea
+  - Headaches
+  - Vomiting
+  - Drowsiness
+  - Confusion
+  + Irritation
+  - Coughing
+  - Shortness of breath
+  - Chest pain
+  - Weakness
+
+Question 10: What is the job of the Safety Captain?
+  + To make sure everyone is safe
+  + Ruling with an iron fist
+  - To manage finances
+  - Interacts with the media
+  - Compares progress to schedule
+  - Approves purchase requests
+  + Interacts with mentors and safety advisors
+  + Talks with students about safety protocol
+  - Works on mechanical stuff
+  - Works on scouting matches
+  + Enforces safety protocol
+
+Question 11: When do you NOT use a potentially dangerous tool?
+  + When you are scared
+  - When it requires electricity
+  - When it is sharp
+  - When others aren't using it
+  + When it is broken
+  + When you are not sure how to use it
+  + When you are pressured to do it by others
+  + When the wall plug is broken
+  + When you are not sure if it is safe
+
+Question 12: Which of the following are proper PPE for usage of an angle grinder?
+  + Safety glasses
+  - Ear pods (for music)
+  + Gloves
+  + Long pants
+  + Long sleeves
+  + Shoes
+  - A helmet
+  - A tie
+  - A computer
+  - A phone
+  - A watch
+
+Question 13: Which of the following are adequate PPE for normal robot assembly?
+  + Safety glasses
+  - Ear pods (for music)
+  + Shoes
+  + Clothing
+  - A helmet
+  - A tie
+  - A computer
+  - A phone
+  - A watch
+  - A hat
+  - Sandals
+  - Ear protectors
+
+Question 14: What items should go in the Safety Binder?
+  + Incident Reports
+  + Audit Results
+  - Build Schedules
+  + Training Records
+  - Instruction Manuals (for tools)
+  - Materials
+  - Inventory
+  - Software
+
+Question 15: What SHOULDN'T be done for proper electricity use?
+  + Breaking off the ground prong on the plug
+  + Not wearing your safety glasses next to a power tool
+  + Using a power tool with a damaged cord
+  + Using a damaged power tool
+  + Walking next to people wielding power tools without safety goggles
+  - Communication
+  + Pouring water into an outlet
+  - Collaboration
+  + Plugging two batteries into each other
+  - Wearing safety glasses
+  - Pulling on a plug plugged into the wall instead of a wire 
+
+Question 16: What do you do if a battery explodes?
+  + Back away from it
+  - Touch it
+  - Throw it
+  + Neutralize it
+  + Get someone to help you
+  + Get the battery disposal kit
+  - Pour water on it
+  + Treat injured people
+  - Jump into it
+  - Smash it with a hammer
+
+Question 17: What person should you go to for safety guidance/instruction?
+  + Your mentor
+  - A random person online
+  - Your friend
+  - Your neighbor
+  - Your family member
+  + The safety captain
+
+Question 18: What should you do if you are unsure of how to use a tool?
+  + Ask your mentor
+  - Ask your friend
+  - Ask your neighbor
+  - Ask your family member
+  - Ask a random person online
+  - Ask the safety captain
+  - Search it up online
+  - Wing it and hope that you do it right
+  - Don't say anything and hope that no one notices
+
+Question 19: Where should the safety binder be kept?
+  - In the restroom
+  + At the competition
+  + In the workshop
+  - Taken home
+  - Lost somewhere
+  - Where you can't find it
+
+Question 20: What do you need to do when the robot is enabled?
+  - Touching a live wire
+  + Backing up
+  + Wearing safety googles
+  - Continue working on the robot
+  - Scream
+  + Pay attention
