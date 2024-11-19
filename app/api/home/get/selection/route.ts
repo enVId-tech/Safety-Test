@@ -4,7 +4,7 @@ import { getOneSetting } from "@/app/api/funcs.ts";
 
 export async function GET(): Promise<NextResponse> {
     try {
-        const ACCESSABLE: string = getOneSetting(settings, 1) as string;
+        const ACCESSIBLE: string = getOneSetting(settings, 1) as string;
         const SELECTION_AVAILABLE: string = getOneSetting(settings, 4) as string;
         const TEAM_SELECTION_REQUIRED: string = getOneSetting(settings, 5) as string;
         const SAFETY_TEST_GUIDES: string = getOneSetting(settings, 7) as string;
@@ -13,7 +13,7 @@ export async function GET(): Promise<NextResponse> {
 
         const selectionSettings: (string[] | string)[] = [];
 
-        if (!ACCESSABLE as boolean) {
+        if (!ACCESSIBLE as boolean) {
             return NextResponse.json({ error: "Error" });
         }
 
