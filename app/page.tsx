@@ -13,6 +13,7 @@ const font: NextFont = Work_Sans({
 })
 
 let errorMessage: string = "";
+let pageClosed: boolean = false;
 
 export async function setErrorMessage(error: string, time: number): Promise<void> {
     try {
@@ -26,9 +27,12 @@ export async function setErrorMessage(error: string, time: number): Promise<void
     }
 }
 
-export default async function Home(): Promise<React.ReactElement> {
-	const pageClosed: boolean = false;
 
+export async function setPageClosed(isClosed: boolean = false) {
+    pageClosed = isClosed;
+}
+
+export default async function Home(): Promise<React.ReactElement> {
 	return (
 		<div className={font.className}>
 			<Head>Home - OA Robotics</Head>
