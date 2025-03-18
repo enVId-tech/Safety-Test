@@ -28,7 +28,7 @@ export async function setErrorMessage(error: string, time: number): Promise<void
 }
 
 
-export async function setPageClosed(isClosed: boolean = false) {
+export async function setPageClosed(isClosed: boolean = false): Promise<void> {
     pageClosed = isClosed;
 }
 

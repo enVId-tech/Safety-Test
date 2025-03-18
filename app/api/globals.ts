@@ -1,6 +1,6 @@
-import { settingsExport } from "@/app/api/home/post/folders/dir/route.ts";
+import { settingsList } from "@/app/api/home/post/folders/dir/route.ts";
 
-export const settings: string[] = settingsExport;
+export const settings: string[] = settingsList;
 export const mainTestPath: string = "Tests";
 export const folderSplit: string = "\r\n";
 export const listOfNames: string[] = ["Erick Tran", "Aaron Truong"];

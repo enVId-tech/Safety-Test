@@ -80,7 +80,7 @@ export default function HomePageForm(): React.ReactElement {
                         body: JSON.stringify({ folder: selectedValue })
                     }
 
-                    const saveUser: Response = await fetch("/home/post/folders/dir", data);
+                    const saveUser: Response = await fetch("/api/home/post/folders/dir", data);
                     const saveUserJSON: string = await saveUser.json();
 
                     if (saveUserJSON === "Error") {

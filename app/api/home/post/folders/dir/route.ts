@@ -2,7 +2,6 @@ import { NextResponse } from 'next/server';
 import fs from 'fs';
 import { ErrorResponse, folderSplit, mainTestPath } from '@/app/api/globals.ts';
 
-export let settingsExport: string[] = [];
 
 export async function POST(req: Request): Promise<NextResponse> {
     try {
@@ -12,9 +11,9 @@ export async function POST(req: Request): Promise<NextResponse> {
 
         const settingsYML: string = fs.readFileSync(`${mainTestPath}/${folderGet}/settings.yml`, 'utf8')
 
-        settingsExport = settingsYML.split(folderSplit);
+        const settings: string[] = settingsYML.split(folderSplit);
 
-        return NextResponse.json({ send: folderGet });
+        return NextResponse.json({ "send": folderGet, "settings": settings });
     } catch (error: unknown) {
         return NextResponse.json({error: error as ErrorResponse}, {status: 500});
     }
