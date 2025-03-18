@@ -1,6 +1,6 @@
-# Settings folder, controlling functions of the test, use semicolons to separate values
+# Settings folder, controlling functions of the test, do NOT use the colon to split words, use semicolons
 # DO NOT RENAME FOLDER OR REMOVE THESE FIRST TWO LINES - DO NOT GO OVER THE MINIMUM AMOUNT OF ANSWERS OVER ALL QUESTIONS
-Accessible: true #
+Accessable: true #
 Questions: 16 #
 AnswersPerQuestion: 4 #
 SelectionAvailable: true # If this is false, only test specific settings will be available

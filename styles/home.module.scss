@@ -42,6 +42,7 @@
                 height: 50%;
                 display: flex;
                 flex-direction: column;
+                justify-content: center;
                 align-items: center;
                 justify-content: space-evenly;
 
@@ -111,7 +112,8 @@
                         width: 9.1vw;
                         height: 4.6vh;
                         border: none;
-                        border-radius: 0;
+                        border-radius: 0px;
+                        background-color: transparent;
                         border-bottom: 2px solid rgba(0, 0, 0, 0.75);
                         background-color: black;
                         color: white;
@@ -375,10 +377,44 @@
                         padding-left: 0.5vw;
                         margin-bottom: 0.9vh;
                         opacity: 0;
+                        animation: moveUpAppear 1s 3.4s ease-in-out forwards;
+
+                        &:disabled {
+                            cursor: not-allowed;
+                            color: rgb(102, 102, 102);
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &::after {
+                            content: "\25BE";
+                            /* Unicode character for down arrow */
+                            position: absolute;
+                            top: 50%;
+                            right: 10px;
+                            transform: translateY(-50%);
+                            pointer-events: none;
+                            /* Ensure arrow doesn't interfere with select functionality */
+                        }
 
                         .typeOfTestOption {
                             width: 70%;
                             height: 6vh;
+                            border: none;
+                            border-radius: 0px;
+                            background-color: transparent;
+                            border-bottom: 2px solid rgba(0, 0, 0, 0.75);
+                            background-color: black;
+                            color: white;
+                            font-size: 9.1vw;
+                            padding-left: 0.5vw;
+                            margin-bottom: 0.9vh;
+
+                            &:focus {
+                                outline: none;
+                            }
                         }
                     }
 
