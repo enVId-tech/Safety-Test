@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import styles from '../../../styles/test.module.scss';
+import styles from '@/styles/test.module.scss';
 import { Work_Sans } from 'next/font/google';
 import { useRouter } from 'next/navigation';
 
@@ -55,7 +55,7 @@ export default function Test() {
 
     React.useEffect((): void => {
         try {
-            if (isAdmin === true) {
+            if (isAdmin) {
                 setTimeout((): void => {
                     alert("You are an admin! You now have special features enabled, including auto-scoring.");
                 }, 2750);

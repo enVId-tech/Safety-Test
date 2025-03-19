@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="00d5adaa-cad8-4804-be71-d7e117ad05d6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/app/_components/homepageform.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/home/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/login/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/admin/questions/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/get/names/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/get/questions/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/get/responses/passed/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/get/responses/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/admin/login/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/funcs.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/globals.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/home/get/folders/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/home/get/selection/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/home/post/folders/dir/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/responses/passed.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/responses/responses.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/test/post/answers/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/test/post/settings/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/api/test/post/write/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/layout.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/selection/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/test/page.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/admin/get/questions/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/home/post/folders/dir/route.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/api/home/post/folders/dir/route.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/api/test/post/settings/route.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/selection/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/selection/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/app/test/page.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/app/test/page.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/settings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/settings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/lib/utils.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/lib/utils.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tsconfig.json" beforeDir="false" afterPath="$PROJECT_DIR$/tsconfig.json" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;enVId-tech&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/enVId-tech/Safety-Test.git&quot;,
+    &quot;accountId&quot;: &quot;6f5db840-4829-4bff-a877-4b28cab57505&quot;
+  }
+}</component>
+  <component name="ProjectColorInfo">{
+  &quot;customColor&quot;: &quot;&quot;,
+  &quot;associatedIndex&quot;: 0
+}</component>
+  <component name="ProjectId" id="2uTZk9hhq0kVdVSFufkmppuZDqd" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;remodel&quot;,
+    &quot;last_opened_file_path&quot;: &quot;A:/JS-TS/Web Apps/SafetyTest-Remodel&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;A:\\JS-TS\\Web Apps\\SafetyTest-Remodel\\node_modules\\typescript\\lib&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\JS-TS\Web Apps\SafetyTest-Remodel\my-app" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\JS-TS\Web Apps\SafetyTest-Remodel" />
+      <recent name="G:\JS-TS\Web Apps\SafetyTest-Remodel\my-app" />
+      <recent name="G:\JS-TS\Web Apps\SafetyTest-Remodel\my-app\styles" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-WS-243.26053.12" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="00d5adaa-cad8-4804-be71-d7e117ad05d6" name="Changes" comment="" />
+      <created>1742274666497</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1742274666497</updated>
+      <workItem from="1742274668151" duration="1841000" />
+      <workItem from="1742283294300" duration="256000" />
+      <workItem from="1742348926038" duration="774000" />
+      <workItem from="1742350165325" duration="2864000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+</project>

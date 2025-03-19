@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
-import { getSettings } from '@/lib/settings';
-import path from 'path';
+import fs from "fs";
+import {mainTestPath} from "@/src/lib/settings";
 
 export async function POST(request: Request) {
     try {
@@ -8,10 +8,9 @@ export async function POST(request: Request) {
         const sentData: string = body.folder;
         const folderGet: string = sentData.replace(" ", "-");
 
-        // Load settings into cache
-        getSettings(folderGet);
+        const settings = fs.readFileSync(`${mainTestPath}/${folderGet}/settings.yml`, "utf8");
 
-        return NextResponse.json({ send: folderGet });
+        return NextResponse.json({ send: folderGet, settings: settings });
     } catch (error) {
         console.error("Error processing folder:", error);
         return NextResponse.json({ error: "Error processing folder" }, { status: 500 });

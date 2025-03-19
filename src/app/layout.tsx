@@ -1,4 +1,4 @@
-import '../styles/globals.scss';
+import '@/styles/globals.scss';
 import { Work_Sans } from 'next/font/google';
 import { Metadata } from 'next';
 

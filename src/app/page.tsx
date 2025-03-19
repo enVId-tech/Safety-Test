@@ -1,10 +1,9 @@
 'use client';
 
 import React from 'react';
-import styles from '../../../styles/home.module.scss';
+import styles from '@/styles/home.module.scss';
 import { Work_Sans } from 'next/font/google';
 import { useRouter } from 'next/navigation';
-import { Metadata } from 'next';
 
 const font = Work_Sans({
     weight: "300",
@@ -19,6 +18,9 @@ export default function Home() {
     const [errorMessage, setErrorMessage] = React.useState<string>("");
     const [pageClosed, setPageClosed] = React.useState<boolean>(false);
 
+    const USER = React.useRef<HTMLInputElement>(null);
+    const TYPE_OF_TEST = React.useRef<HTMLSelectElement>(null);
+
     React.useEffect((): void => {
         try {
             getFolders();
@@ -27,11 +29,14 @@ export default function Home() {
         }
     }, []);
 
-    const USER = React.useRef<HTMLInputElement>(null);
+
 
     const getFolders = async (): Promise<void> => {
         try {
-            const getFolders: Response = await fetch("/home/get/folders");
+            const getFolders: Response = await fetch("/api/home/get/folders");
+
+            console.log(getFolders);
+
             const foldersJSON: string[] = await getFolders.json();
             setAvailableSelections(foldersJSON);
         } catch (error: unknown) {
@@ -77,11 +82,12 @@ export default function Home() {
             if (!validateUsername(username)) {
                 return;
             } else {
+                const typeOfTest: string = TYPE_OF_TEST.current!.value;
+
                 localStorage.setItem("username", username);
-                const typeOfTest: string = (document.getElementById("typeOfTest") as HTMLSelectElement).value;
                 localStorage.setItem("typeOfTest", typeOfTest);
+
                 try {
-                    console.log({ folder: selectedValue })
                     const data: object = {
                         method: "POST",
                         headers: {
@@ -90,7 +96,7 @@ export default function Home() {
                         body: JSON.stringify({ folder: selectedValue })
                     }
 
-                    const saveUser: Response = await fetch("/home/post/folders/dir", data);
+                    const saveUser: Response = await fetch("/api/home/post/folders/dir", data);
                     const saveUserJSON: any = await saveUser.json();
 
                     if (saveUserJSON === "Error") {
@@ -114,7 +120,7 @@ export default function Home() {
     const start = (e: React.MouseEvent<HTMLInputElement, MouseEvent>): void => {
         try {
             e.preventDefault();
-            saveUser();
+            saveUser().then(r => r);
         } catch (error: unknown) {
             console.error(error as string);
         }
@@ -143,7 +149,7 @@ export default function Home() {
                             <br />
                             {
                                 availableSelections.length > 1 ?
-                                    <select value={selectedValue} id="typeOfTest" onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)}>
+                                    <select value={selectedValue} ref={TYPE_OF_TEST} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)}>
                                         {
                                             availableSelections.map((selection: string, index: number): React.JSX.Element => {
                                                 return (
@@ -153,7 +159,7 @@ export default function Home() {
                                         }
                                     </select>
                                     :
-                                    <select className={styles.typeOfTest} id="typeOfTest" value={selectedValue} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)} disabled>
+                                    <select ref={TYPE_OF_TEST} className={styles.typeOfTest} id="typeOfTest" value={selectedValue} onChange={(e: React.ChangeEvent<HTMLSelectElement>): void => setSelectedValue(e.target.value)} disabled>
                                         <option value="Safety-Test" className={styles.typeOfTestOption}>Safety Test</option>
                                     </select>
                             }

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { Work_Sans } from 'next/font/google';
-import styles from '../../../styles/selection.module.scss';
+import styles from '@/styles/selection.module.scss';
 import { useRouter } from 'next/navigation';
 
 const Work_Sans300 = Work_Sans({
@@ -45,6 +45,17 @@ export default function Select() {
 
     const getSettings = async (): Promise<void> => {
         try {
+            const sendJSON = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    'Cache-Control': 'no-cache'
+                },
+                body: JSON.stringify({
+                    "folder": localStorage.getItem("typeOfTest"),
+                })
+            }
+
             const getSettings: Response = await fetch("/home/get/selection");
             const settingsJSON: string[] = await getSettings.json();
             setSettings(settingsJSON);

@@ -1,11 +1,55 @@
 import fs from 'fs';
 import path from 'path';
 
-const mainTestPath = path.join(process.cwd(), "Tests");
-const folderSplit = "\r\n" || "\n";
+export const mainTestPath = path.join(process.cwd(), "Tests");
+export const folderSplit = "\n";
 
 // Cache for settings to avoid repeated file reads
 const settingsCache = new Map<string, string[]>();
+
+interface ISettings {
+    folderName: string;
+    settings: string[];
+}
+
+export class GlobalSettings {
+    private static folderName: string;
+    private static settingsArr: string[];
+
+    constructor(folderName: string) {
+        GlobalSettings.folderName = folderName;
+        GlobalSettings.settingsArr = getSettings(folderName);
+    }
+
+    public getSetting(settingIndex: number, splitIndex?: string): string | null | string[] {
+        const settingString = GlobalSettings.settingsArr.slice(2)[settingIndex - 1];
+
+        if (settingString) {
+            const settingValue = settingString.split(':')[1].trim().split("#")[0].trim();
+            if (splitIndex) {
+                return settingValue.split(splitIndex);
+            }
+            return settingValue;
+        }
+        return null;
+    }
+
+    get settings(): string[] {
+        return GlobalSettings.settingsArr;
+    }
+
+    set settings(settings: string[]) {
+        GlobalSettings.settingsArr = settings;
+    }
+
+    set folderName(folderName: string) {
+        GlobalSettings.folderName = folderName;
+    }
+
+    get folderName(): string {
+        return GlobalSettings.folderName;
+    }
+}
 
 export function getSettings(folderName: string): string[] {
     // Check if settings are in cache
@@ -30,21 +74,3 @@ export function getSettings(folderName: string): string[] {
     }
 }
 
-export function getOneSetting(folderName: string, settingIndex: number, splitIndex?: string): string | null | string[] {
-    try {
-        const settings = getSettings(folderName);
-        const settingString = settings.slice(2)[settingIndex - 1];
-
-        if (settingString) {
-            const settingValue = settingString.split(':')[1].trim().split("#")[0].trim();
-            if (splitIndex) {
-                return settingValue.split(splitIndex);
-            }
-            return settingValue;
-        }
-        return null;
-    } catch (error) {
-        console.error(`Error getting setting ${settingIndex} for ${folderName}:`, error);
-        return null;
-    }
-}
