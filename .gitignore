@@ -39,3 +39,6 @@ _test-old.txt
 
 Tests/Safety-Test/test.txt
 .txt
+
+.idea
+.idea/*

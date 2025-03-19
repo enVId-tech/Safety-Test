@@ -241,19 +241,19 @@ const Test: React.FC = (): React.JSX.Element => {
                                                     questionNumber === 0 ? "Back" : "Previous"
                                                 }
                                             </button>
-                                            {/* {
-                                                isSubmitted === false ? ( */}
-                                                    {/* questionNumber !== settings!.maxQuestions - 1 ? ( */}
+                                            {
+                                                // isSubmitted === false ? (
+                                                    questionNumber !== settings!.maxQuestions - 1 ? (
                                                         <button id="SubmitQuestion" className={`${Work_Sans300.className}`} onClick={sendResponses}>
                                                             Submit
                                                         </button>
-                                                    {/* ) : (
+                                                    ) : (
                                                         <></>
                                                     )
-                                                ) : (
-                                                    <></>
-                                                )
-                                            } */}
+                                                // ) : (
+                                                    // <></>
+                                                // )
+                                            }
                                             <button id="NextQuestion" className={`${Work_Sans300.className}`} onClick={nextQuestion}>
                                                 {
                                                     settings!.maxQuestions ? questionNumber === settings!.maxQuestions - 1 ? "Submit" : "Next" : "Next"
