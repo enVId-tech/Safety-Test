@@ -21,7 +21,7 @@
     "react-dom": "^18",
     "safetytest": "file:",
     "sass": "^1.69.4",
-    "tsx": "^4.16.3"
+    "tsx": "^4.19.3"
   },
   "devDependencies": {
     "@types/node": "^20",
