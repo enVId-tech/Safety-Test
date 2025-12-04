@@ -8,7 +8,8 @@
     "start": "tsx src/index.ts",
     "lint": "next lint",
     "next": "next start",
-    "nodemon": "nodemon --watch src --exec tsx src/index.ts"
+    "nodemon": "nodemon --watch src --exec tsx src/index.ts",
+    "update-deps": "ncu -u && npm install"
   },
   "dependencies": {
     "@types/cors": "^2.8.19",
