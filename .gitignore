@@ -42,3 +42,5 @@ Tests/Safety-Test/test.txt
 
 .idea
 .idea/*
+
+.hintrc
