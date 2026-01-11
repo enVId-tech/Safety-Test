@@ -9,29 +9,28 @@
     "lint": "next lint",
     "next": "next start",
     "nodemon": "nodemon --watch src --exec tsx src/index.ts",
-    "update-deps": "ncu -u && npm install"
+    "ncu": "npx npm-check-updates -u && npm install"
   },
   "dependencies": {
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "cors": "^2.8.5",
     "express": "^5.2.1",
-    "express": "^5.2.1",
     "lodash": "^4.17.21",
-    "next": "16.0.7",
+    "next": "16.1.1",
     "react": "^19",
     "react-dom": "^19",
     "safetytest": "file:",
-    "sass": "^1.94.2",
+    "sass": "^1.97.2",
     "tsx": "^4.21.0"
   },
   "devDependencies": {
-    "@types/node": "^24",
+    "@types/node": "^25",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^9",
-    "eslint-config-next": "16.0.7",
+    "eslint-config-next": "16.1.1",
     "typescript": "^5"
   },
   "config": {
