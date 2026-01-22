@@ -16,7 +16,7 @@
     "@types/express": "^5.0.6",
     "cors": "^2.8.5",
     "express": "^5.2.1",
-    "lodash": "^4.17.21",
+    "lodash": "^4.17.23",
     "next": "16.1.1",
     "react": "^19",
     "react-dom": "^19",
