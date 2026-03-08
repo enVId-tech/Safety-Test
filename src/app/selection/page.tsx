@@ -56,7 +56,7 @@ export default function Select() {
                 })
             }
 
-            const getSettings: Response = await fetch("/home/get/selection");
+            const getSettings: Response = await fetch("/home/get/selection", sendJSON);
             const settingsJSON: string[] = await getSettings.json();
             setSettings(settingsJSON);
         } catch (error: unknown) {
