@@ -16,12 +16,12 @@
     "@types/express": "^5.0.6",
     "cors": "^2.8.6",
     "express": "^5.2.1",
-    "next": "16.2.2",
+    "next": "^16.2.6",
     "react": "^19",
     "react-dom": "^19",
     "safetytest": "file:",
     "sass": "^1.99.0",
-    "tsx": "^4.21.0"
+    "tsx": "^4.22.0"
   },
   "devDependencies": {
     "@types/node": "^25",
@@ -29,7 +29,7 @@
     "@types/react-dom": "^19",
     "cz-conventional-changelog": "^3.3.0",
     "eslint": "^10",
-    "eslint-config-next": "16.2.2",
+    "eslint-config-next": "16.2.6",
     "typescript": "^6"
   },
   "config": {
